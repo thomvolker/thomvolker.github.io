@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CV | Thom Volker</title>
+    <link>https://thomvolker.github.io/cv2/</link>
+      <atom:link href="https://thomvolker.github.io/cv2/index.xml" rel="self" type="application/rss+xml" />
+    <description>CV</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thom Volker 2021</copyright>
+    <image>
+      <url>https://thomvolker.github.io/img/avatar.png</url>
+      <title>CV</title>
+      <link>https://thomvolker.github.io/cv2/</link>
+    </image>
+    
+  </channel>
+</rss>
