@@ -17,7 +17,47 @@
       <link>https://thomvolker.github.io/project/bes/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       <guid>https://thomvolker.github.io/project/bes/</guid>
-      <description>&lt;p&gt;Update text on Bayesian Evidence synthesis.&lt;/p&gt;
+      <description>
+
+
+&lt;p&gt;In recent years, the importance of replications has received considerable attention &lt;span class=&#34;citation&#34;&gt;(e.g., Open Science Collaboration, 2015; Baker, 2016; Brandt et al., 2014)&lt;/span&gt;. However, emphasis has been placed primarily on exact, direct or close replication studies. These studies employ an identical methodology and research design as the initial study, and are thus merely concerned with the statistical reliability of the results. If these results depend on methodological flaws, inferences from all studies will lead to suboptimal or invalid conclusions &lt;span class=&#34;citation&#34;&gt;(Munafò &amp;amp; Smith, 2018)&lt;/span&gt;. To overcome these limitations, the use of conceptual replications has been advocated &lt;span class=&#34;citation&#34;&gt;(e.g., Munafò &amp;amp; Smith, 2018; Lawlor, Tilling, &amp;amp; Davey Smith, 2017)&lt;/span&gt;. Specifically, conceptual replications scrutinize the extent to which the initial conclusions hold under different conditions, using varying instruments or operationalizations.&lt;/p&gt;
+&lt;p&gt;However, established methods such as (Bayesian) meta-analysis and Bayesian updating are not applicable when studies differ conceptually. This is due to the fact that these methods require that the parameter estimates (i) share a common scale, and (ii) result from analyses with identical function forms &lt;span class=&#34;citation&#34;&gt;(Lipsey &amp;amp; Wilson, 2001; Schönbrodt, Wagenmakers, Zehetleitner, &amp;amp; Perugini, 2017; Sutton &amp;amp; Abrams, 2001)&lt;/span&gt;. Consequently, &lt;span class=&#34;citation&#34;&gt;Kuiper, Buskens, Raub, &amp;amp; Hoijtink (2013)&lt;/span&gt; proposed Bayesian Evidence Synthesis (BES), which is built upon the foundation of the Bayes Factor &lt;span class=&#34;citation&#34;&gt;(BF; Kass &amp;amp; Raftery, 1995)&lt;/span&gt;. This method allows researchers to pool evidence for a specific hypothesis over multiple studies, even if the studies have seemingly incompatible designs.&lt;/p&gt;
+&lt;p&gt;In the current project, Irene Klugkist and I aim to reveal under which circumstances BES performs inadequately. Additionally, we hope to propose adjustments to the method that improve its performance, so that an increasing number of researchers can benefit from BES.&lt;/p&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level4 unnumbered&#34;&gt;
+&lt;h4&gt;References&lt;/h4&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-baker_reproducibility_2016&#34;&gt;
+&lt;p&gt;Baker, M. (2016). Reproducibility crisis. &lt;em&gt;Nature&lt;/em&gt;, &lt;em&gt;533&lt;/em&gt;(26), 353–366. &lt;a href=&#34;https://doi.org/10.1038/533452a&#34;&gt;https://doi.org/10.1038/533452a&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-brandt_et_al_replication_2014&#34;&gt;
+&lt;p&gt;Brandt, M. J., IJzerman, H., Dijksterhuis, A., Farach, F. J., Geller, J., Giner-Sorolla, R., … Van’t Veer, A. (2014). The replication recipe: What makes for a convincing replication? &lt;em&gt;Journal of Experimental Social Psychology&lt;/em&gt;, &lt;em&gt;50&lt;/em&gt;, 217–224. &lt;a href=&#34;https://doi.org/10.1016/j.jesp.2013.10.005&#34;&gt;https://doi.org/10.1016/j.jesp.2013.10.005&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-kass_raftery_bayes_factors_1995&#34;&gt;
+&lt;p&gt;Kass, R. E., &amp;amp; Raftery, A. E. (1995). Bayes factors. &lt;em&gt;Journal of the American Statistical Association&lt;/em&gt;, &lt;em&gt;90&lt;/em&gt;(430), 773–795.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-kuiper_combining_2013&#34;&gt;
+&lt;p&gt;Kuiper, R. M., Buskens, V., Raub, W., &amp;amp; Hoijtink, H. (2013). Combining statistical evidence from several studies: A method using bayesian updating and an example from research on trust problems in social and economic exchange. &lt;em&gt;Sociological Methods &amp;amp; Research&lt;/em&gt;, &lt;em&gt;42&lt;/em&gt;(1), 60–81.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-lawlor_triangulation_2017&#34;&gt;
+&lt;p&gt;Lawlor, D. A., Tilling, K., &amp;amp; Davey Smith, G. (2017). Triangulation in aetiological epidemiology. &lt;em&gt;International Journal of Epidemiology&lt;/em&gt;, dyw314. &lt;a href=&#34;https://doi.org/10.1093/ije/dyw314&#34;&gt;https://doi.org/10.1093/ije/dyw314&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-lipsey_wilson_2001&#34;&gt;
+&lt;p&gt;Lipsey, M. W., &amp;amp; Wilson, D. B. (2001). &lt;em&gt;Practical meta-analysis.&lt;/em&gt; SAGE publications, Inc.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-munafo_robust_2018&#34;&gt;
+&lt;p&gt;Munafò, M. R., &amp;amp; Smith, G. D. (2018). Robust research needs many lines of evidence. &lt;em&gt;Nature&lt;/em&gt;, &lt;em&gt;553&lt;/em&gt;(7689), 399–401. &lt;a href=&#34;https://doi.org/10.1038/d41586-018-01023-3&#34;&gt;https://doi.org/10.1038/d41586-018-01023-3&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-open_science_collab_2015&#34;&gt;
+&lt;p&gt;Open Science Collaboration. (2015). Estimating the reproducibility of psychological science. &lt;em&gt;Science&lt;/em&gt;, &lt;em&gt;349&lt;/em&gt;(6251). &lt;a href=&#34;https://doi.org/10.1126/science.aac4716&#34;&gt;https://doi.org/10.1126/science.aac4716&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-schonbrodt_sequential_2017&#34;&gt;
+&lt;p&gt;Schönbrodt, F. D., Wagenmakers, E.-J., Zehetleitner, M., &amp;amp; Perugini, M. (2017). Sequential hypothesis testing with bayes factors: Efficiently testing mean differences. &lt;em&gt;Psychological Methods&lt;/em&gt;, &lt;em&gt;22&lt;/em&gt;(2), 322.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-sutton_bayesian_meta2001&#34;&gt;
+&lt;p&gt;Sutton, A. J., &amp;amp; Abrams, K. R. (2001). Bayesian methods in meta-analysis and evidence synthesis. &lt;em&gt;Statistical Methods in Medical Research&lt;/em&gt;, &lt;em&gt;10&lt;/em&gt;(4), 277–303. &lt;a href=&#34;https://doi.org/10.1177/096228020101000404&#34;&gt;https://doi.org/10.1177/096228020101000404&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
     </item>
     
