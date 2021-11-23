@@ -30,7 +30,8 @@
 %\setlength{\makecvtitlenamewidth}{10cm}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
 
 \usepackage{import}
-
+\usepackage{apacite}
+\newcommand*{\doi}[1]{\href{http://dx.doi.org/#1}{#1}}
 % personal data
 \name{Thom Benjamin}{Volker}
 % \title{Curriculum Vitae}                               % optional, remove / comment the line if not wanted
@@ -266,9 +267,9 @@
 % Publications from a BibTeX file without multibib
 %  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
 %  to redefine the heading string ("Publications"): \renewcommand{\refname}{Articles}
-%\nocite{*}
-%\bibliographystyle{plain}
-%\bibliography{publications}                        % 'publications' is the name of a BibTeX file
+\nocite{*}
+\bibliographystyle{apacite}
+\bibliography{static/files/cv/thom}                        % 'publications' is the name of a BibTeX file
 
 % Publications from a BibTeX file using the multibib package
 %\section{Publications}

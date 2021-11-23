@@ -1,38 +1,38 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.9.21)  25 SEP 2021 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.11.20)  22 NOV 2021 12:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **cv.tex
 (./cv.tex
-LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-08-27>
+LaTeX2e <2021-11-15>
+L3 programming layer <2021-11-12>
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/moderncv/moderncv.cls
 Document Class: moderncv 2021-07-28 v2.2.0 modern curriculum vitae and letter d
 ocument class
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/base/size11.clo
-File: size11.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+File: size11.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count182
+\etb@tempcnta=\count183
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Driver file: pdftex.def on input line 227.
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ) (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \col@sep=\dimen138
 \ar@mcellbox=\box50
 \extrarowheight=\dimen139
@@ -44,16 +44,16 @@ Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
 \everycr=\toks17
 \minrowclearance=\skip49
 )
-\rownum=\count183
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
-Package xcolor Info: Model `RGB' extended on input line 1364.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+\rownum=\count184
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1356.
+Package xcolor Info: Model `RGB' extended on input line 1368.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1370.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
 Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
@@ -112,7 +112,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
@@ -122,7 +122,7 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.c
 fg
@@ -149,43 +149,45 @@ rs
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/moderncv/tweaklist.sty)
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count184
-\calc@Bcount=\count185
+\calc@Acount=\count185
+\calc@Bcount=\count186
 \calc@Adimen=\dimen142
 \calc@Bdimen=\dimen143
 \calc@Askip=\skip59
 \calc@Bskip=\skip60
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count186
+\calc@Ccount=\count187
 \calc@Cskip=\skip61
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xpars
 e.sty
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2021-08-27 L3 programming layer (loader) 
+Package: expl3 2021-11-12 L3 programming layer (loader) 
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdf
 tex.def
-File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count187
+File: l3backend-pdftex.def 2021-10-18 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count188
 \l__pdf_internal_box=\box52
 ))
-Package: xparse 2021-08-27 L3 Experimental document command parser
+Package: xparse 2021-11-12 L3 Experimental document command parser
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
-Package: microtype 2021/03/14 v2.8c Micro-typographical refinements (RS)
+Package: microtype 2021/10/31 v3.0 Micro-typographical refinements (RS)
 \MT@toks=\toks21
-\MT@count=\count188
-LaTeX Info: Redefining \textls on input line 790.
-\MT@outer@kern=\dimen144
-LaTeX Info: Redefining \textmicrotypecontext on input line 1374.
-\MT@listname@count=\count189
+\MT@count=\count189
+\MT@tempbox=\box53
+\MT@leftmarginkern=\dimen144
+\MT@rightmarginkern=\dimen145
+LaTeX Info: Redefining \textls on input line 1114.
+\MT@outer@kern=\dimen146
+LaTeX Info: Redefining \textmicrotypecontext on input line 1700.
+\MT@listname@count=\count190
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype-pdf
 tex.def
-File: microtype-pdftex.def 2021/03/14 v2.8c Definitions specific to pdftex (RS)
-
+File: microtype-pdftex.def 2021/10/31 v3.0 Definitions specific to pdftex (RS)
 LaTeX Info: Redefining \lsstyle on input line 915.
 LaTeX Info: Redefining \lslig on input line 915.
 \MT@outer@space=\skip62
@@ -193,23 +195,23 @@ LaTeX Info: Redefining \lslig on input line 915.
 Package microtype Info: Loading configuration file microtype.cfg.
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
-File: microtype.cfg 2021/03/14 v2.8c microtype main configuration file (RS)
+File: microtype.cfg 2021/10/31 v3.0 microtype main configuration file (RS)
 ))
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/moderncv/moderncvcollec
 tion.sty
 Package: moderncvcollection 2021-07-28 v2.2.0 moderncv collections
-\c@collection@iterator=\count190
+\c@collection@iterator=\count191
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/moderncv/moderncvcompat
 ibility.sty
 Package: moderncvcompatibility 2021-07-28 v2.2.0 modern curriculum vitae and le
 tter compatibility patches
 )
-\c@collection@phones@count=\count191
-\c@collection@socials@count=\count192
-\c@cvcolumnscounter=\count193
-\c@cvcolumnsautowidthcounter=\count194
-\c@tmpiteratorcounter=\count195
+\c@collection@phones@count=\count192
+\c@collection@socials@count=\count193
+\c@cvcolumnscounter=\count194
+\c@cvcolumnsautowidthcounter=\count195
+\c@tmpiteratorcounter=\count196
 \cvcolumnsdummywidth=\skip63
 \cvcolumnswidth=\skip64
 \cvcolumnsautowidth=\skip65
@@ -234,14 +236,14 @@ y
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil
 -common.tex
 \pgfutil@everybye=\toks22
-\pgfutil@tempdima=\dimen145
-\pgfutil@tempdimb=\dimen146
+\pgfutil@tempdima=\dimen147
+\pgfutil@tempdimb=\dimen148
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil
 -common-lists.tex))
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil
 -latex.def
-\pgfutil@abb=\box53
+\pgfutil@abb=\box54
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfrcs.
 code.tex
@@ -267,26 +269,26 @@ Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
 filtered.code.tex
 \pgfkeys@tmptoks=\toks25
 ))
-\pgf@x=\dimen147
-\pgf@y=\dimen148
-\pgf@xa=\dimen149
-\pgf@ya=\dimen150
-\pgf@xb=\dimen151
-\pgf@yb=\dimen152
-\pgf@xc=\dimen153
-\pgf@yc=\dimen154
-\pgf@xd=\dimen155
-\pgf@yd=\dimen156
+\pgf@x=\dimen149
+\pgf@y=\dimen150
+\pgf@xa=\dimen151
+\pgf@ya=\dimen152
+\pgf@xb=\dimen153
+\pgf@yb=\dimen154
+\pgf@xc=\dimen155
+\pgf@yc=\dimen156
+\pgf@xd=\dimen157
+\pgf@yd=\dimen158
 \w@pgf@writea=\write3
 \r@pgf@reada=\read2
-\c@pgf@counta=\count196
-\c@pgf@countb=\count197
-\c@pgf@countc=\count198
-\c@pgf@countd=\count199
+\c@pgf@counta=\count197
+\c@pgf@countb=\count198
+\c@pgf@countc=\count199
+\c@pgf@countd=\count266
 \t@pgf@toka=\toks26
 \t@pgf@tokb=\toks27
 \t@pgf@tokc=\toks28
-\pgf@sys@id@count=\count266
+\pgf@sys@id@count=\count267
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.c
 fg
@@ -305,8 +307,8 @@ File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsy
 ssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfsyssoftpath@smallbuffer@items=\count267
-\pgfsyssoftpath@bigbuffer@items=\count268
+\pgfsyssoftpath@smallbuffer@items=\count268
+\pgfsyssoftpath@bigbuffer@items=\count269
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsy
 sprotocol.code.tex
@@ -324,9 +326,9 @@ code.tex
 code.tex)
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathparse
 r.code.tex
-\pgfmath@dimen=\dimen157
-\pgfmath@count=\count269
-\pgfmath@box=\box54
+\pgfmath@dimen=\dimen159
+\pgfmath@count=\count270
+\pgfmath@box=\box55
 \pgfmath@toks=\toks29
 \pgfmath@stack@operand=\toks30
 \pgfmath@stack@operation=\toks31
@@ -351,59 +353,59 @@ ions.misc.code.tex)
 ions.integerarithmetics.code.tex)))
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat
 .code.tex
-\c@pgfmathroundto@lastzeros=\count270
+\c@pgfmathroundto@lastzeros=\count271
 ))
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.
 tex)
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 epoints.code.tex
 File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@picminx=\dimen158
-\pgf@picmaxx=\dimen159
-\pgf@picminy=\dimen160
-\pgf@picmaxy=\dimen161
-\pgf@pathminx=\dimen162
-\pgf@pathmaxx=\dimen163
-\pgf@pathminy=\dimen164
-\pgf@pathmaxy=\dimen165
-\pgf@xx=\dimen166
-\pgf@xy=\dimen167
-\pgf@yx=\dimen168
-\pgf@yy=\dimen169
-\pgf@zx=\dimen170
-\pgf@zy=\dimen171
+\pgf@picminx=\dimen160
+\pgf@picmaxx=\dimen161
+\pgf@picminy=\dimen162
+\pgf@picmaxy=\dimen163
+\pgf@pathminx=\dimen164
+\pgf@pathmaxx=\dimen165
+\pgf@pathminy=\dimen166
+\pgf@pathmaxy=\dimen167
+\pgf@xx=\dimen168
+\pgf@xy=\dimen169
+\pgf@yx=\dimen170
+\pgf@yy=\dimen171
+\pgf@zx=\dimen172
+\pgf@zy=\dimen173
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 epathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@path@lastx=\dimen172
-\pgf@path@lasty=\dimen173
+\pgf@path@lastx=\dimen174
+\pgf@path@lasty=\dimen175
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 epathusage.code.tex
 File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@shorten@end@additional=\dimen174
-\pgf@shorten@start@additional=\dimen175
+\pgf@shorten@end@additional=\dimen176
+\pgf@shorten@start@additional=\dimen177
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 escopes.code.tex
 File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfpic=\box55
-\pgf@hbox=\box56
-\pgf@layerbox@main=\box57
-\pgf@picture@serial@count=\count271
+\pgfpic=\box56
+\pgf@hbox=\box57
+\pgf@layerbox@main=\box58
+\pgf@picture@serial@count=\count272
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 egraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgflinewidth=\dimen176
+\pgflinewidth=\dimen178
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 etransformations.code.tex
 File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@pt@x=\dimen177
-\pgf@pt@y=\dimen178
-\pgf@pt@temp=\dimen179
+\pgf@pt@x=\dimen179
+\pgf@pt@y=\dimen180
+\pgf@pt@temp=\dimen181
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 equick.code.tex
@@ -420,14 +422,14 @@ File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 earrows.code.tex
 File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfarrowsep=\dimen180
+\pgfarrowsep=\dimen182
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 eshade.code.tex
 File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@max=\dimen181
-\pgf@sys@shading@range@num=\count272
-\pgf@shadingcount=\count273
+\pgf@max=\dimen183
+\pgf@sys@shading@range@num=\count273
+\pgf@shadingcount=\count274
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 eimage.code.tex
@@ -436,7 +438,7 @@ File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 eexternal.code.tex
 File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfexternal@startupbox=\box58
+\pgfexternal@startupbox=\box59
 ))
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcor
 elayers.code.tex
@@ -457,7 +459,7 @@ File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodule
 shapes.code.tex
 File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfnodeparttextbox=\box59
+\pgfnodeparttextbox=\box60
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodule
 plot.code.tex
@@ -466,8 +468,8 @@ File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfco
 mp-version-0-65.sty
 Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@nodesepstart=\dimen182
-\pgf@nodesepend=\dimen183
+\pgf@nodesepstart=\dimen184
+\pgf@nodesepend=\dimen185
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfco
 mp-version-1-18.sty
@@ -488,8 +490,8 @@ Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code
 .tex)
-\pgffor@iter=\dimen184
-\pgffor@skip=\dimen185
+\pgffor@iter=\dimen186
+\pgffor@skip=\dimen187
 \pgffor@stack=\toks32
 \pgffor@toks=\toks33
 ))
@@ -500,34 +502,34 @@ Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibr
 aryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@plot@mark@count=\count274
-\pgfplotmarksize=\dimen186
+\pgf@plot@mark@count=\count275
+\pgfplotmarksize=\dimen188
 )
-\tikz@lastx=\dimen187
-\tikz@lasty=\dimen188
-\tikz@lastxsaved=\dimen189
-\tikz@lastysaved=\dimen190
-\tikz@lastmovetox=\dimen191
-\tikz@lastmovetoy=\dimen192
-\tikzleveldistance=\dimen193
-\tikzsiblingdistance=\dimen194
-\tikz@figbox=\box60
-\tikz@figbox@bg=\box61
-\tikz@tempbox=\box62
-\tikz@tempbox@bg=\box63
-\tikztreelevel=\count275
-\tikznumberofchildren=\count276
-\tikznumberofcurrentchild=\count277
-\tikz@fig@count=\count278
+\tikz@lastx=\dimen189
+\tikz@lasty=\dimen190
+\tikz@lastxsaved=\dimen191
+\tikz@lastysaved=\dimen192
+\tikz@lastmovetox=\dimen193
+\tikz@lastmovetoy=\dimen194
+\tikzleveldistance=\dimen195
+\tikzsiblingdistance=\dimen196
+\tikz@figbox=\box61
+\tikz@figbox@bg=\box62
+\tikz@tempbox=\box63
+\tikz@tempbox@bg=\box64
+\tikztreelevel=\count276
+\tikznumberofchildren=\count277
+\tikznumberofcurrentchild=\count278
+\tikz@fig@count=\count279
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodule
 matrix.code.tex
 File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfmatrixcurrentrow=\count279
-\pgfmatrixcurrentcolumn=\count280
-\pgf@matrix@numberofcolumns=\count281
+\pgfmatrixcurrentrow=\count280
+\pgfmatrixcurrentcolumn=\count281
+\pgf@matrix@numberofcolumns=\count282
 )
-\tikz@expandcount=\count282
+\tikz@expandcount=\count283
 
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tik
 z/libraries/tikzlibrarytopaths.code.tex
@@ -537,8 +539,8 @@ File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 i.sty
 Package: moderncvheadiii 2021-07-28 v2.2.0 modern curriculum vitae and letter h
 eader variant: 3
-\makeheaddetailsbox=\box64
-\makeheaddetailstempbox=\box65
+\makeheaddetailsbox=\box65
+\makeheaddetailstempbox=\box66
 \makeheaddetailswidth=\skip68
 \makeheaddetailsboxwidth=\skip69
 \quotewidth=\skip70
@@ -556,35 +558,35 @@ er skill matrix
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip71
-\multirow@cntb=\count283
+\multirow@cntb=\count284
 \multirow@dima=\skip72
-\bigstrutjot=\dimen195
+\bigstrutjot=\dimen197
 )
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/arydshln/arydshln.sty
 Package: arydshln 2019/02/21 v1.76 
-\dashlinedash=\dimen196
-\dashlinegap=\dimen197
-\adl@box=\box66
-\adl@height=\dimen198
-\adl@heightsave=\dimen199
-\adl@depth=\dimen256
-\adl@depthsave=\dimen257
-\adl@finaldepth=\dimen258
-\adl@columns=\count284
-\adl@ncol=\count285
-\adl@currentcolumn=\count286
-\adl@currentcolumnsave=\count287
-\adl@totalheight=\count288
-\adl@totalheightsave=\count289
-\adl@dash=\count290
-\adl@gap=\count291
-\adl@cla=\count292
-\adl@clb=\count293
+\dashlinedash=\dimen198
+\dashlinegap=\dimen199
+\adl@box=\box67
+\adl@height=\dimen256
+\adl@heightsave=\dimen257
+\adl@depth=\dimen258
+\adl@depthsave=\dimen259
+\adl@finaldepth=\dimen260
+\adl@columns=\count285
+\adl@ncol=\count286
+\adl@currentcolumn=\count287
+\adl@currentcolumnsave=\count288
+\adl@totalheight=\count289
+\adl@totalheightsave=\count290
+\adl@dash=\count291
+\adl@gap=\count292
+\adl@cla=\count293
+\adl@clb=\count294
 \adl@everyvbox=\toks34
-\adl@LTpagetotal=\dimen259
+\adl@LTpagetotal=\dimen261
 )
 \cvSkill@RectangleSize=\skip73
-\my@repeat@count=\count294
+\my@repeat@count=\count295
 \cvskill@width=\skip74
 \cvskill@descriptorwidth=\skip75
 \cvskill@experiencewidth=\skip76
@@ -610,7 +612,7 @@ LaTeX Font Info:    Trying to load font information for U+mvs on input line 87.
 (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/marvosym/umvs.fd)
 \listitemcolumnwidth=\skip93
 \listdoubleitemcolumnwidth=\skip94
-\cvitemwithcommentmainbox=\box67
+\cvitemwithcommentmainbox=\box68
 \cvitemwithcommentmainlength=\skip95
 \cvitemwithcommentcommentlength=\skip96
 ))
@@ -662,11 +664,11 @@ l.45 \msg_fatal:nn {fontspec} {cannot-use-pdftex}
 
  
 Here is how much of TeX's memory you used:
- 15934 strings out of 480559
- 312130 string characters out of 5902367
- 608882 words of memory out of 5000000
- 33298 multiletter control sequences out of 15000+600000
+ 16478 strings out of 480331
+ 330944 string characters out of 5896625
+ 619901 words of memory out of 5000000
+ 34072 multiletter control sequences out of 15000+600000
  404920 words of font info for 30 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 114i,1n,111p,533b,100s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 114i,1n,108p,533b,100s stack positions out of 5000i,500n,10000p,200000b,80000s
 !  ==> Fatal error occurred, no output PDF file produced!
