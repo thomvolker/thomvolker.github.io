@@ -5,12 +5,22 @@
     <link>https://thomvolker.github.io/tag/multiple-imputation/</link>
       <atom:link href="https://thomvolker.github.io/tag/multiple-imputation/index.xml" rel="self" type="application/rss+xml" />
     <description>Multiple Imputation</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thom Volker 2021</copyright>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thom Volker 2021</copyright><lastBuildDate>Tue, 23 Nov 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://thomvolker.github.io/img/avatar.png</url>
       <title>Multiple Imputation</title>
       <link>https://thomvolker.github.io/tag/multiple-imputation/</link>
     </image>
+    
+    <item>
+      <title>Anonymiced Shareable Data: Using mice to Create and Analyze Multiply Imputed Synthetic Datasets</title>
+      <link>https://thomvolker.github.io/publication/journal-article/</link>
+      <pubDate>Tue, 23 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>https://thomvolker.github.io/publication/journal-article/</guid>
+      <description>&lt;p&gt;All accompanying files and &lt;code&gt;R&lt;/code&gt;-code can be found on the project&amp;rsquo;s 
+&lt;a href=&#34;https://github.com/amices/Synthemice&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub page&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Multiple Imputation of Synthetic Data</title>

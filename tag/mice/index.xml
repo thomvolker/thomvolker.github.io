@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mice | Thom Volker</title>
+    <link>https://thomvolker.github.io/tag/mice/</link>
+      <atom:link href="https://thomvolker.github.io/tag/mice/index.xml" rel="self" type="application/rss+xml" />
+    <description>mice</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Thom Volker 2021</copyright><lastBuildDate>Tue, 23 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://thomvolker.github.io/img/avatar.png</url>
+      <title>mice</title>
+      <link>https://thomvolker.github.io/tag/mice/</link>
+    </image>
+    
+    <item>
+      <title>Anonymiced Shareable Data: Using mice to Create and Analyze Multiply Imputed Synthetic Datasets</title>
+      <link>https://thomvolker.github.io/publication/journal-article/</link>
+      <pubDate>Tue, 23 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>https://thomvolker.github.io/publication/journal-article/</guid>
+      <description>&lt;p&gt;All accompanying files and &lt;code&gt;R&lt;/code&gt;-code can be found on the project&amp;rsquo;s 
+&lt;a href=&#34;https://github.com/amices/Synthemice&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub page&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
