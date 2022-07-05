@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.24)  24 MAY 2022 10:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.24)  5 JUL 2022 12:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -403,31 +403,7 @@ LaTeX Font Info:    Trying to load font information for U+fontawesomefree0 on in
 \cvitemwithcommentcommentlength=\skip96
 )) (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/moderncv/moderncvcolorblack.sty
 Package: moderncvcolorblack 2022-02-21 v2.3.1 modern curriculum vitae and letter color scheme: black
-)
-
-! Package fontawesome5 Error: Incompatible version of Font Awesome already
-(fontawesome5)                loaded
-
-For immediate help type H <return>.
- ...                                              
-                                                  
-l.19 \usepackage
-                {fontspec}
-
-You tried to load the fontawesome5 package but there are already some icons
-from Font Awesome defined in your document. This probably means that a package
-for another version of Font Awesome (likely the fontawesome package for Font
-Awesome 4) is already loaded. Loading multiple versions is not supported.
-Please remove all but one version of Font Awesome from your document.
-
-
-(/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/fontawesome/fontawesome.sty
-Package: fontawesome 2016/05/15 v4.6.3.1 font awesome icons
- (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
-Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
-) (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifluatex.sty
-Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
-) (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/fontawesome/fontawesomesymbols-generic.tex) (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/fontawesome/fontawesomesymbols-pdftex.tex)) (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
+) (/Users/thomvolker/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
 
 
@@ -462,10 +438,10 @@ l.45 \msg_fatal:nn {fontspec} {cannot-use-pdftex}
 
  
 Here is how much of TeX's memory you used:
- 18892 strings out of 480260
- 393101 string characters out of 5893258
- 653455 words of memory out of 5000000
- 36544 multiletter control sequences out of 15000+600000
+ 17851 strings out of 480260
+ 376174 string characters out of 5893258
+ 642534 words of memory out of 5000000
+ 35517 multiletter control sequences out of 15000+600000
  470119 words of font info for 31 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  129i,1n,122p,557b,178s stack positions out of 10000i,1000n,20000p,200000b,200000s
