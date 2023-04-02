@@ -19,6 +19,7 @@
 \usepackage{fontspec}
 \usepackage{tabularx}
 \usepackage{ragged2e}
+\usepackage{url}
 
 % if you are not using xelatex ou lualatex, replace by the encoding you are using
 %\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
@@ -144,7 +145,7 @@
 
 \section{EXPERIENCE}
 
-{\customcventry{}{Utrecht University}{PhD candidate Synthetic data}{2020 - Current}{}
+{\customcventry{}{Utrecht University}{PhD candidate Synthetic data}{2022 - Current}{}
 {\begin{itemize}
   \item[$\circ$] Supervisor: Dr. Erik-Jan van Kesteren
   \item[$\circ$] I investigate how to optimize the creation of synthetic data in terms of the risk-utility trade-off. 
@@ -213,13 +214,27 @@
 %            VOLUNTARY WORK AND OTHER THINGS
 %----------------------------------------------------------------------------------
 
-
 \section{Other}
 
 {\customcventry{}{Utrecht University}{Debuut}{2019 - 2020}{}
 {\begin{itemize}
   \item[$\circ$] Buddy programme at Utrecht University to match potential first generation university student with actual students to get a flavour of what studying at a university entails.
   \end{itemize}
+  }
+}
+{\customcventry{}{PhD Representative}{IOPS}{2022 - Current}{}
+{\begin{itemize}
+  \item[$\circ$] Represent PhD candidates in the Interuniversity Graduate School of Psychometrics and Sociometrics.
+  \end{itemize}
+  }
+}
+
+\section{Received funding}
+
+{\customcventry{}{Project lead}{SynthEval}{2023-2024}{}
+{\begin{itemize}
+  \item[$\circ$] An R package for evaluating and improving the quality of synthetic data sets. For €15.000.
+\end{itemize}
   }
 }
 
@@ -242,41 +257,39 @@
 \end{minipage}}
 }
 
-% \section{Additional}
-% {\customcvproject{Languages}{}
-% {\begin{itemize}
-%   \item Began a group to create the first 36 hour student-run hackathon ever held at Illinois
-%   \item Led 50 staff to raise \$175,000 for HackIllinois, managing relationships with 60+ sponsors
-%   \item Plan events to increase social interaction among ACM members, as well as events to foster the spirit of computer science at Illinois
-% \end{itemize}
-% }
-% 
-% {\customcvproject{Amazing Project 3}{Jan 2015 – May 2015}
-% {\begin{itemize}
-%   \item Assist in recruiting potential and admitted students to the UIUC computer science program
-%   \item Attend information sessions, admitted student Q\&A’s, and student lunches to generate interest in the Illinois Computer Science department
-% \end{itemize}
-% }
-% }
-% 
-% \section{ADDITIONAL}
-% \begin{minipage}{\maincolumnwidth}%
-% 	\small{
-%     	\begin{itemize}
-%           \item Relevant Coursework: Data Structures and Algorithms, Natural Language Processing, Computer Systems, Databases, Computer Security, Abstract Algebra
-%           \item President of XYZ Club, Public Relations Manager of Swarthmore QWE Club
-%           \item Programming Languages: Python, C, C++, PHP, Java, HTML/CSS, Javascript, jQuery, NodeJS
-%           \item Fluent in Gibberish, conversational in Nonsense
-% 		\end{itemize}}%
-% \end{minipage}%
-%       
-% }
+\section{Invited presentations / workshops}
+
+\begin{itemize}
+
+\item[$\circ$] Fake it ‘till you make it: Generating synthetic data with high utility in \texttt{R} [with Erik-Jan van Kesteren], T{\"u}bingen Open Science Winter School, 13 February 2023, T{\"u}bingen, Germany.
+
+\item[$\circ$] Creating synthetic data with \texttt{mice} in \texttt{R} [with Gerko Vink], UMCU, 4 November
+2022, Utrecht, the Netherlands.
+
+\end{itemize}
+
 % Publications from a BibTeX file without multibib
 %  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
-\renewcommand{\refname}{Publications}
-\nocite{*}
-\bibliographystyle{apacite}
-\bibliography{static/files/cv/thom}                        % 'publications' is the name of a BibTeX file
+
+\section{Publications}
+
+\begin{itemize}
+
+\item[$\circ$]\textbf{Volker, T. B.} \& Klugkist, I. (\textit{Submitted}). Combining support for hypotheses over heterogeneous studies with Bayesian Evidence Synthesis: A simulation study. \href{https://github.com/thomvolker/bes_master_thesis_ms/blob/main/manuscript_VK/manuscript_VK.pdf}{Paper}.
+
+\item[$\circ$] Klugkist, I. \& \textbf{Volker, T. B.} (\textit{Submitted}). Bayesian Evidence Synthesis for Informative Hypotheses: An introduction. \href{https://github.com/thomvolker/bes-intro-paper/blob/main/bes_intro_paper.pdf}{Paper}.
+
+\item[$\circ$] Van Leeuwen, A., Bagheri, A., \textbf{Volker, T. B.} \& Van Brakel, Charlotte (\textit{In press}). Verkenning van de inzet van topic modelling bij het analyseren van schrijfopdrachten in de context van de flipped classroom. [Exploring the use of topic modelling for the analysis of written assignments in a flipped classroom context.] \textit{Tijdschrift voor Hoger Onderwijs}. 
+
+\item[$\circ$] \textbf{Volker, T. B.} \& Vink, G. (2021). Anony\textit{mice}d Shareable Data: Using \texttt{mice} to Create and Analyze Multiply Imputed Synthetic Datasets. \textit{psych, 3}, 703-716. \href{https://www.mdpi.com/2624-8611/3/4/45}{Paper}.
+
+\item[$\circ$] \textbf{Volker, T. B.}, Buskens, V. \& Raub, W. (In preparation). The future is made today: Concerns for reputation foster trust and cooperation. \href{https://github.com/thomvolker/bes_master_thesis_sasr/blob/main/thesis/thesis_volker.pdf}{Paper}.
+\end{itemize}
+
+% \renewcommand{\refname}{Publications}
+% \nocite{*}
+% \bibliographystyle{apacite}
+% \bibliography{thom}                        % 'publications' is the name of a BibTeX file
 
 % Publications from a BibTeX file using the multibib package
 %\section{Publications}
@@ -289,17 +302,17 @@
 
 \section{Software Vignettes}
 
-Volker, T. B. \& Vink, G. (2022). \texttt{futuremice}: The future starts today. \url{https://www.gerkovink.com/futuremice/Vignette_futuremice.html}
+\begin{itemize}
+\item[$\circ$] \textbf{Volker, T. B.} \& Vink, G. (2022). \texttt{futuremice}: The future starts today. \url{https://www.gerkovink.com/futuremice/Vignette_futuremice.html}
+\end{itemize}
 
 \section{Software development}
 
-{\begin{minipage}{\maincolumnwidth}%
-	\small{
-  \begin{itemize}
-    \item[$\circ$] \texttt{mice} [ctb] - Developed functionality to pool inferences from synthetic data and implemented \texttt{futuremice} to speed up imputation by using user-friendly parallel processing.
-    \item[$\circ$] \texttt{ggmice} [ctb] - Adjusted functionality to allow for visualization of synthetic data.
-  \end{itemize}}
-\end{minipage}}
+\begin{itemize}
+
+\item[$\circ$] \texttt{mice} [ctb] - Developed functionality to pool inferences from synthetic data and implemented \texttt{futuremice} to speed up imputation by using user-friendly parallel processing.
+\item[$\circ$] \texttt{ggmice} [ctb] - Adjusted functionality to allow for visualization of synthetic data.
+  \end{itemize}
 
 
 %-----       letter       ---------------------------------------------------------
