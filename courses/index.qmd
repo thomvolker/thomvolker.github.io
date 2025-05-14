@@ -1,0 +1,21 @@
+---
+title: "Blogposts"
+author: Thom Benjamin Volker
+toc: true
+---
+
+# Header 1
+
+This is currently just a placeholder. Please come back later!
+
+## Subheader 1
+
+Some text and some `inlide code style`
+
+# Header 2
+
+```{r}
+some_r_code <- rnorm(10)
+
+plot(some_r_code)
+```
