@@ -1,0 +1,48 @@
+/*-- scss:defaults --*/
+
+// Import Google font-size:
+@import url('https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Birthstone&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Fira+Code:wght@300..700&family=Lugrasimo&display=swap');// Colors
+$cream: #fffbf2;
+$light-blue: #c0d6df;
+$darker-blue: #121021;
+$main-blue: #27548a;
+$dark-blue: #171733;
+$sand: #dda853;
+$neon-green: #00ee00;
+$lilac: #f6f2ff;
+
+// Main Colors
+$body-bg: $darker-blue;
+$body-color: $lilac;
+$link-color: $light-blue;
+$navbar-bg: $darker-blue;
+$navbar-fg: $cream;
+$navbar-hl: $light-blue;
+
+// Inline code
+$code-bg: $darker-blue;
+$code-color: $neon-green;
+$code-block-bg: $dark-blue;
+$code-block-color: $neon-green;
+
+// fonts
+h1, h2, h3, h4, h5, h6, p {
+  font-family: "Cormorant Garamond", cursive;
+  font-size: 100;
+}
+// font for Code
+code, pre {
+  font-family: "Fira Code", monospace;
+  font-size: 100;
+}
+
+// navbar font
+.navbar-brand {
+  font-family: "Cormorant Garamond", cursive;
+  font-size: 100;
+}
+// navbar body font
+.navbar-nav .nav-link {
+  font-family: "Cormorant Garamond", cursive;
+  font-size: 100;
+}

@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: _site
+website:
+  title: "Thom Volker"
+  navbar:
+    left:
+      - href: posts.qmd
+        text: posts
+      - href: software.qmd
+        text: software
+      - href: courses/index.qmd
+        text: courses
+      # - href: pubs.qmd
+      #   text: publications
+    right:
+      - text: CV
+        href: files/cv/cv.pdf
+        target: _blank
+      - icon: strava
+        href: https://www.strava.com/athletes/34188992
+      - icon: github
+        href: https://github.com/thomvolker
+format:
+  html:
+    theme:
+      light:
+        - flatly
+        - styles-light.scss
+      dark:
+      #   - solar
+        - styles-dark.scss
+    highlight-style: dracula
+    css: styles.css
+    toc: true
+
+
+
