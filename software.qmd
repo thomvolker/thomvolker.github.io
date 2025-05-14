@@ -1,0 +1,17 @@
+---
+title: "Software"
+listing:
+  type: grid
+  grid-columns: 2
+  sort: "date desc"
+  categories: true
+  contents: 
+    - path: https://thomvolker.github.io/densityratio/
+      title: densityratio
+      description: "An R package for density ratio estimation"
+      image: https://thomvolker.github.io/densityratio/reference/figures/README-densities-1.png
+    # - path: https://amices.org/mice/
+    #   title: mice
+    #   description: "An R package for multivariate imputation by chained equations"
+    #   image: https://amices.org/mice/logo.png
+---
