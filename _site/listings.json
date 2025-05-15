@@ -4,6 +4,12 @@
     "items": []
   },
   {
+    "listing": "/blog.html",
+    "items": [
+      "/blog/2505_new_website/index.html"
+    ]
+  },
+  {
     "listing": "/posts.html",
     "items": [
       "/posts/new_website/index.html"

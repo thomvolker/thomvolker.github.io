@@ -1,0 +1,25 @@
+---
+title: "Talks"
+format: html
+---
+
+Below, you can find a list of talks I have given. The list is not exhaustive, but I will try to keep it up to date. I try to make all materials openly available. Please reach out if you have any questions or if you want to collaborate on any of the topics.
+
+### Invited talks
+
+|      |                                    |
+|------|:-----------------------------------|
+| 2024 | [Evaluating the quality of synthetic data: A density ratio approach](https://thomvolker.github.io/synth-utility/){target="_blank"} <br> *At the Leiden Computational Network Science group* |
+| 2024 | [Measuring utility of synthetic data (in Dutch)](https://thomvolker.github.io/utiliteit/){target="_blank"} <br> *At the Dutch Expert Meeting on Synthetic Data* |
+
+: {tbl-colwidths="[10,70]" .hover}
+
+### Conference presentations
+
+|      |                                    |
+|------|:-----------------------------------|
+| 2023 | [Density ratios to evaluate and improve the utility of synthetic data](https://thomvolker.github.io/iops23/){target="_blank"} <br> *At the IOPS Conference 2023* |
+| 2023 | [Assessing the utility of synthetic data: A density ratio perspective](https://unece.org/sites/default/files/2023-09/SDC2023_S4_1_Utrecht%20Univ_Volker_P.pdf){target="_blank"} ([paper](https://doi.org/10.5281/zenodo.8315053){target="_blank"}) <br> *At the United Nations Economic Commission for Europe Expert Meeting on Statistical Data Confidentiality* |
+
+: {tbl-colwidths="[10,70]" .hover}
+

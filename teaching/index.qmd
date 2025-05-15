@@ -1,0 +1,26 @@
+---
+title: "Teaching"
+format: html
+---
+
+I fully support open educational materials, and I intend to make all teaching resources I developed available online. All materials below are licensed liberally. If the GitHub link is not there, there is probably exam material included in the GitHub repo, which prevents me from sharing it publicly. If you are interested in any of the source files, please [drop me a line](mailto:t.b.volker@uu.nl).
+
+### Workshops
+
+|      |                                    |
+|------|:-----------------------------------|
+| 2023 | [Fake it 'till you make it: Generating synthetic data with high utility in `R`](https://thomvolker.github.io/OSWS_Synthetic/){target="_blank"} <br> *Half-day course on synthetic data; developed with [Erik-Jan van Kesteren](https://erikjanvankesteren.nl/){target="_blank"}* ([{{< iconify mdi github >}} GitHub](https://github.com/thomvolker/OSWS_Synthetic){target="_blank"}) |
+
+: {tbl-colwidths="[10,70]" .hover}
+
+### University courses
+
+|      |                                    |
+|------|:-----------------------------------|
+| 2022-2025 | [Battling the curse of dimensionality](https://infomda2.nl){target="_blank"} (*MSc. Course*) |
+| 2021-2026 | [Data wrangling and data analysis](https://infomdwr.nl){target="_blank"} (*MSc. Course*) |
+| 2024 | [Machine Learning with Python](http://giachanou.com/machine-learning/#quick-overview){target="_blank"} (*Summer School Course*) |
+| 2019-2022 | [Multiple Imputation in Practice](https://www.gerkovink.com/mimp/){target="_blank"} (*Summer School Course*) |
+
+: {tbl-colwidths="[10,70]" .hover}
+

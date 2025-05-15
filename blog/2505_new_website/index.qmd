@@ -1,0 +1,12 @@
+---
+title: "New website"
+toc: false
+date: today
+image: "../../figs/me_bike.jpg"
+image-alt: "Just a selfie of me on a bike"
+word-count: true
+reading-time: true
+categories: [other, personal]
+---
+
+Since today, I have a new personal website! The site mainly serves as a repository to host some of my research projects and developed course materials. I may also write an occasional blogpost!
