@@ -1,7 +1,7 @@
 ---
 title: "New website"
 toc: false
-date: 16-05-2025
+date: 2025-05-16
 image: "../../figs/me_bike.jpg"
 image-alt: "Just a selfie of me on a bike"
 word-count: true
