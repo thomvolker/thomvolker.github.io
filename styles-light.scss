@@ -28,23 +28,23 @@ $code-block-bg: $dark-blue;
 $code-block-color: $dark-orange;
 
 // fonts
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, a, span, div {
   font-family: "Cormorant Garamond", cursive;
-  font-size: 100;
+  font-size: 105%;
 }
 // font for Code
 code, pre {
   font-family: "Fira Code", monospace;
-  font-size: 100;
+  font-size: 105%;
 }
 
 // navbar font
 .navbar-brand {
   font-family: "Cormorant Garamond", cursive;
-  font-size: 100;
+  font-size: 110%;
 }
 // navbar body font
 .navbar-nav .nav-link {
   font-family: "Cormorant Garamond", cursive;
-  font-size: 100;
+  font-size: 110%;
 }

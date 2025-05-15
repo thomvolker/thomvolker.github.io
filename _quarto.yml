@@ -5,22 +5,26 @@ website:
   title: "Thom Volker"
   navbar:
     left:
-      - href: posts.qmd
-        text: posts
+      - href: blog.qmd
+        text: blog
       - href: software.qmd
         text: software
       - href: teaching/index.qmd
         text: teaching
-      # - href: pubs.qmd
-      #   text: publications
+      - href: talks/index.qmd
+        text: talks
+      - href: https://github.com/thomvolker
+        text: code
+        target: _blank
     right:
-      - text: CV
+      - text: about
+        href: about.qmd
+      - text: "{{< iconify academicons cv-square >}}"
         href: files/cv/cv.pdf
         target: _blank
       - icon: strava
         href: https://www.strava.com/athletes/34188992
-      - icon: github
-        href: https://github.com/thomvolker
+        target: _blank
 format:
   html:
     theme:
@@ -28,11 +32,12 @@ format:
         - flatly
         - styles-light.scss
       dark:
-      #   - solar
         - styles-dark.scss
     highlight-style: dracula
     css: styles.css
     toc: true
+execute:
+  freeze: auto
 
 
 

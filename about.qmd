@@ -1,5 +1,49 @@
 ---
-title: "About"
+title: "Thom Benjamin Volker"
+toc: false
+about: 
+  template: jolla
+  image: "figs/me_bike.jpg"
 ---
 
-About this site
+###
+
+:::{#hero-heading}
+
+:::
+
+###
+
+I am a PhD candidate at the Methodology and Statistics department of
+Utrecht University. My main research interests are privacy-preserving
+statistics (including synthetic data) and Bayesian methods for data
+analysis. I developed an `R`-package
+[`densityratio`](https://thomvolker.github.io/densityratio){target="_blank"} for density
+ratio estimation, and contribute to the open source software packages
+[`mice`](https://amices.org/mice) and [`JASP`](https://jasp-stats.org/){target="_blank"}.
+Besides, I teach statistics and data science courses to Bachelor and
+Master students.
+
+For an extensive overview of my education and work experience, 
+please see my [cv](files/cv/cv.pdf){target="_blank"}.
+
+## Education
+
+|      |                                    |
+|------|:-----------------------------------|
+| 2022 | MSc. Methodology and Statistics *cum laude* |
+| 2022 | MSc. Sociology and Social Research *cum laude* |
+| 2019 | Liberal Arts & Sciences            |
+
+: {tbl-colwidths="[10,40]" .hover}
+
+
+## Selected publications
+
+|                                      |                                
+|:-------------------------------------|
+| Klugkist, I., & Volker, T. B. (2023). Bayesian evidence synthesis for informative hypotheses: An introduction. Psychological Methods. Advance online publication. [link](https://doi.org/10.1037/met0000602){target="_blank"} |
+| Volker, T. B., de Wolf, P. P., & van Kesteren, E. J. (2024). A density ratio framework for evaluating the utility of synthetic data. arXiv:2408.13167 [link](https://arxiv.org/abs/2408.13167){target="_blank"}. |
+| Volker, T. B., & Vink, G. (2021). Anony*mice*d shareable data: Using mice to create and analyze multiply imputed synthetic datasets. Psych, 3(4), 703-716. [link](https://doi.org/10.3390/psych3040045){target="_blank"}. |
+
+: For a full overview, please check my [Google Scholar](https://scholar.google.nl/citations?user=DePxNDMAAAAJ&hl=en&oi=ao){target="_blank"} profile. {.hover}

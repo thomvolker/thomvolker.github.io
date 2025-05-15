@@ -5,13 +5,14 @@ listing:
   grid-columns: 2
   sort: "date desc"
   categories: true
+  image-height: "200px"
   contents: 
     - path: https://thomvolker.github.io/densityratio/
       title: densityratio
-      description: "An R package for density ratio estimation"
-      image: https://thomvolker.github.io/densityratio/reference/figures/README-densities-1.png
-    # - path: https://amices.org/mice/
-    #   title: mice
-    #   description: "An R package for multivariate imputation by chained equations"
-    #   image: https://amices.org/mice/logo.png
+      description: "An `R`-package for distribution comparison through density ratio estimation. The package is actively being developed and suggestions are very welcome!"
+      image: figs/densityratio-postcard.svg
+    - path: https://amices.org/mice/
+      title: mice
+      description: "I am a contributor to the `mice` package for multiple imputation. Among other things, we are currently developing a `mice` implementation for the software `JASP`."
+      image: figs/mice-postcard.svg
 ---

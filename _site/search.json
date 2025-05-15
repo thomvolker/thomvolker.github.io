@@ -11,7 +11,7 @@
     "href": "software.html",
     "title": "Software",
     "section": "",
-    "text": "densityratio\n\n\nAn R package for density ratio estimation\n\n\n\n\n\nNo matching items"
+    "text": "densityratio\n\n\nAn R-package for distribution comparison through density ratio estimation. The package is actively being developed and suggestions are very welcome!\n\n\n\n\n\n\n\n\n\n\n\n\nmice\n\n\nI am a contributor to the mice package for multiple imputation. Among other things, we are currently developing a mice implementation for the software JASP.\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/new_website/index.html",
@@ -21,18 +21,11 @@
     "text": "Since today, I have a new website! It is mainly a repository to host some of my research projects and course materials I developed, but I might also occasionally write a blogpost!"
   },
   {
-    "objectID": "courses/index.html",
-    "href": "courses/index.html",
+    "objectID": "blog.html",
+    "href": "blog.html",
     "title": "Blogposts",
     "section": "",
-    "text": "This is currently just a placeholder. Please come back later!\n\n\nSome text and some inlide code style"
-  },
-  {
-    "objectID": "courses/index.html#subheader-1",
-    "href": "courses/index.html#subheader-1",
-    "title": "Blogposts",
-    "section": "",
-    "text": "Some text and some inlide code style"
+    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nMay 15, 2025\n\n\nNew website\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nMay 15, 2025\n\n\nTest post for executing code\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/2505_new_website/index.html",
@@ -42,18 +35,25 @@
     "text": "Since today, I have a new personal website! The site mainly serves as a repository to host some of my research projects and developed course materials. I may also write an occasional blogpost!"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Thom Benjamin Volker",
+    "section": "Education",
+    "text": "Education\n\n\n\n\n\n\n\n2022\nMSc. Methodology and Statistics cum laude\n\n\n2022\nMSc. Sociology and Social Research cum laude\n\n\n2019\nLiberal Arts & Sciences"
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blogposts",
+    "objectID": "about.html#selected-publications",
+    "href": "about.html#selected-publications",
+    "title": "Thom Benjamin Volker",
+    "section": "Selected publications",
+    "text": "Selected publications\n\nFor a full overview, please check my Google Scholar profile.\n\n\nKlugkist, I., & Volker, T. B. (2023). Bayesian evidence synthesis for informative hypotheses: An introduction. Psychological Methods. Advance online publication. link\n\n\nVolker, T. B., de Wolf, P. P., & van Kesteren, E. J. (2024). A density ratio framework for evaluating the utility of synthetic data. arXiv:2408.13167 link.\n\n\nVolker, T. B., & Vink, G. (2021). Anonymiced shareable data: Using mice to create and analyze multiply imputed synthetic datasets. Psych, 3(4), 703-716. link."
+  },
+  {
+    "objectID": "blog/2505_test_post/index.html",
+    "href": "blog/2505_test_post/index.html",
+    "title": "Test post for executing code",
     "section": "",
-    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nMay 15, 2025\n\n\nNew website\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nNo matching items"
+    "text": "This is just a test for executing code!\n\n1 + 1\n\n[1] 2"
   },
   {
     "objectID": "index.html",
