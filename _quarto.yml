@@ -9,8 +9,8 @@ website:
         text: posts
       - href: software.qmd
         text: software
-      - href: courses/index.qmd
-        text: courses
+      - href: teaching/index.qmd
+        text: teaching
       # - href: pubs.qmd
       #   text: publications
     right:
