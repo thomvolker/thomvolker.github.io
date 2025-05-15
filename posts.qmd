@@ -1,9 +1,0 @@
----
-title: "Blogposts"
-listing:
-  contents: posts
-  type: table
-  sort: "date desc"
-  categories: true
----
-

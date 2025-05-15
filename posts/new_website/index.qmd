@@ -1,8 +1,0 @@
----
-title: "New website"
-author: Thom Benjamin Volker
-toc: false
-date: 10-05-2025
----
-
-Since today, I have a new website! It is mainly a repository to host some of my research projects and course materials I developed, but I might also occasionally write a blogpost!
