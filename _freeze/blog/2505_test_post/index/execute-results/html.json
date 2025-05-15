@@ -1,0 +1,17 @@
+{
+  "hash": "d6b19777b6a129a720d93daf6925d302",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Test post for executing code\"\ndate: today\nformat: html\n---\n\nThis is just a test for executing code!\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2\n```\n\n\n:::\n:::\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
