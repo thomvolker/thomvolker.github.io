@@ -1,47 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://thomvolker.github.io/posts/new_website/index.html</loc>
-    <lastmod>2025-05-15T21:17:56.581Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/software/densityratio.html</loc>
-    <lastmod>2025-05-15T21:17:56.581Z</lastmod>
+    <loc>https://thomvolker.github.io/software/mice.html</loc>
+    <lastmod>2025-05-15T21:49:39.692Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/software.html</loc>
-    <lastmod>2025-05-15T21:17:56.581Z</lastmod>
+    <lastmod>2025-05-15T21:49:39.692Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/blog.html</loc>
-    <lastmod>2025-05-15T21:17:56.572Z</lastmod>
+    <lastmod>2025-05-15T21:49:39.682Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/talks/index.html</loc>
-    <lastmod>2025-05-15T21:17:56.581Z</lastmod>
+    <lastmod>2025-05-15T21:49:39.692Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/blog/2505_test_post/index.html</loc>
+    <lastmod>2025-05-15T21:49:39.682Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/blog/2505_new_website/index.html</loc>
-    <lastmod>2025-05-15T21:17:56.572Z</lastmod>
+    <lastmod>2025-05-15T21:49:39.682Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/about.html</loc>
-    <lastmod>2025-05-15T21:17:56.572Z</lastmod>
+    <lastmod>2025-05-15T21:49:39.682Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/index.html</loc>
-    <lastmod>2025-05-15T21:17:56.581Z</lastmod>
+    <lastmod>2025-05-15T21:49:39.692Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/teaching/index.html</loc>
-    <lastmod>2025-05-15T21:17:56.582Z</lastmod>
+    <lastmod>2025-05-15T21:49:39.692Z</lastmod>
   </url>
   <url>
-    <loc>https://thomvolker.github.io/posts.html</loc>
-    <lastmod>2025-05-15T21:17:56.581Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/software/mice.html</loc>
-    <lastmod>2025-05-15T21:17:56.581Z</lastmod>
+    <loc>https://thomvolker.github.io/software/densityratio.html</loc>
+    <lastmod>2025-05-15T21:49:39.692Z</lastmod>
   </url>
 </urlset>

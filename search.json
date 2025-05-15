@@ -1,24 +1,17 @@
 [
   {
-    "objectID": "posts/new_website/index.html",
-    "href": "posts/new_website/index.html",
-    "title": "New website",
-    "section": "",
-    "text": "Since today, I have a new website! It is mainly a repository to host some of my research projects and course materials I developed, but I might also occasionally write a blogpost!"
-  },
-  {
     "objectID": "software.html",
     "href": "software.html",
     "title": "Software",
     "section": "",
-    "text": "densityratio\n\n\nAn R package for density ratio estimation\n\n\n\n\n\nNo matching items"
+    "text": "densityratio\n\n\nAn R-package for distribution comparison through density ratio estimation. The package is actively being developed and suggestions are very welcome!\n\n\n\n\n\n\n\n\n\n\n\n\nmice\n\n\nI am a contributor to the mice package for multiple imputation. Among other things, we are currently developing a mice implementation for the software JASP.\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Blogposts",
     "section": "",
-    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nMay 15, 2025\n\n\nNew website\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nNo matching items"
+    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nMay 15, 2025\n\n\nNew website\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nMay 15, 2025\n\n\nTest post for executing code\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "talks/index.html",
@@ -28,6 +21,13 @@
     "text": "Below, you can find a list of talks I have given. The list is not exhaustive, but I will try to keep it up to date. I try to make all materials openly available. Please reach out if you have any questions or if you want to collaborate on any of the topics.\n\nInvited talks\n\n\n\n\n\n\n\n2024\nEvaluating the quality of synthetic data: A density ratio approach  At the Leiden Computational Network Science group\n\n\n2024\nMeasuring utility of synthetic data (in Dutch)  At the Dutch Expert Meeting on Synthetic Data\n\n\n\n\n\nConference presentations\n\n\n\n\n\n\n\n2023\nDensity ratios to evaluate and improve the utility of synthetic data  At the IOPS Conference 2023\n\n\n2023\nAssessing the utility of synthetic data: A density ratio perspective (paper)  At the United Nations Economic Commission for Europe Expert Meeting on Statistical Data Confidentiality"
   },
   {
+    "objectID": "blog/2505_test_post/index.html",
+    "href": "blog/2505_test_post/index.html",
+    "title": "Test post for executing code",
+    "section": "",
+    "text": "This is just a test for executing code!\n\n1 + 1\n\n[1] 2"
+  },
+  {
     "objectID": "blog/2505_new_website/index.html",
     "href": "blog/2505_new_website/index.html",
     "title": "New website",
@@ -35,11 +35,18 @@
     "text": "Since today, I have a new personal website! The site mainly serves as a repository to host some of my research projects and developed course materials. I may also write an occasional blogpost!"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Thom Benjamin Volker",
+    "section": "Education",
+    "text": "Education\n\n\n\n\n\n\n\n2022\nMSc. Methodology and Statistics cum laude\n\n\n2022\nMSc. Sociology and Social Research cum laude\n\n\n2019\nLiberal Arts & Sciences"
+  },
+  {
+    "objectID": "about.html#selected-publications",
+    "href": "about.html#selected-publications",
+    "title": "Thom Benjamin Volker",
+    "section": "Selected publications",
+    "text": "Selected publications\n\nFor a full overview, please check my Google Scholar profile.\n\n\nKlugkist, I., & Volker, T. B. (2023). Bayesian evidence synthesis for informative hypotheses: An introduction. Psychological Methods. Advance online publication. link\n\n\nVolker, T. B., de Wolf, P. P., & van Kesteren, E. J. (2024). A density ratio framework for evaluating the utility of synthetic data. arXiv:2408.13167 link.\n\n\nVolker, T. B., & Vink, G. (2021). Anonymiced shareable data: Using mice to create and analyze multiply imputed synthetic datasets. Psych, 3(4), 703-716. link."
   },
   {
     "objectID": "index.html",
@@ -61,12 +68,5 @@
     "title": "Teaching",
     "section": "",
     "text": "I fully support open educational materials, and I intend to make all teaching resources I developed available online. All materials below are licensed liberally. If the GitHub link is not there, there is probably exam material included in the GitHub repo, which prevents me from sharing it publicly. If you are interested in any of the source files, please drop me a line.\n\nWorkshops\n\n\n\n\n\n\n\n2023\nFake it ’till you make it: Generating synthetic data with high utility in R  Half-day course on synthetic data; developed with Erik-Jan van Kesteren ( GitHub)\n\n\n\n\n\nUniversity courses\n\n\n\n\n\n\n\n2022-2025\nBattling the curse of dimensionality (MSc. Course)\n\n\n2021-2026\nData wrangling and data analysis (MSc. Course)\n\n\n2024\nMachine Learning with Python (Summer School Course)\n\n\n2019-2022\nMultiple Imputation in Practice (Summer School Course)"
-  },
-  {
-    "objectID": "posts.html",
-    "href": "posts.html",
-    "title": "Blogposts",
-    "section": "",
-    "text": "Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nOct 5, 2025\n\n\nNew website\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nNo matching items"
   }
 ]
