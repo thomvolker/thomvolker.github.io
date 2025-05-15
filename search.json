@@ -11,7 +11,7 @@
     "href": "blog.html",
     "title": "Blogposts",
     "section": "",
-    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nMay 15, 2025\n\n\nNew website\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nMay 15, 2025\n\n\nTest post for executing code\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nNo matching items"
+    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nMay 15, 2025\n\n\nNew website\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "talks/index.html",
@@ -19,13 +19,6 @@
     "title": "Talks",
     "section": "",
     "text": "Below, you can find a list of talks I have given. The list is not exhaustive, but I will try to keep it up to date. I try to make all materials openly available. Please reach out if you have any questions or if you want to collaborate on any of the topics.\n\nInvited talks\n\n\n\n\n\n\n\n2024\nEvaluating the quality of synthetic data: A density ratio approach  At the Leiden Computational Network Science group\n\n\n2024\nMeasuring utility of synthetic data (in Dutch)  At the Dutch Expert Meeting on Synthetic Data\n\n\n\n\n\nConference presentations\n\n\n\n\n\n\n\n2023\nDensity ratios to evaluate and improve the utility of synthetic data  At the IOPS Conference 2023\n\n\n2023\nAssessing the utility of synthetic data: A density ratio perspective (paper)  At the United Nations Economic Commission for Europe Expert Meeting on Statistical Data Confidentiality"
-  },
-  {
-    "objectID": "blog/2505_test_post/index.html",
-    "href": "blog/2505_test_post/index.html",
-    "title": "Test post for executing code",
-    "section": "",
-    "text": "This is just a test for executing code!\n\n1 + 1\n\n[1] 2"
   },
   {
     "objectID": "blog/2505_new_website/index.html",
