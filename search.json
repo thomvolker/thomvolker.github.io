@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "teaching/index.html",
-    "href": "teaching/index.html",
-    "title": "Teaching",
-    "section": "",
-    "text": "I fully support open educational materials, and I intend to make all teaching resources I developed available online. All materials below are licensed liberally. If the GitHub link is not there, there is probably exam material included in the GitHub repo, which prevents me from sharing it publicly. If you are interested in any of the source files, please drop me a line.\n\nWorkshops\n\n\n\n\n\n\n\n2023\nFake it ’till you make it: Generating synthetic data with high utility in R  Half-day course on synthetic data; developed with Erik-Jan van Kesteren ( GitHub)\n\n\n\n\n\nUniversity courses\n\n\n\n\n\n\n\n2022-2025\nBattling the curse of dimensionality (MSc. Course)\n\n\n2021-2026\nData wrangling and data analysis (MSc. Course)\n\n\n2024\nMachine Learning with Python (Summer School Course)\n\n\n2019-2022\nMultiple Imputation in Practice (Summer School Course)"
-  },
-  {
     "objectID": "software.html",
     "href": "software.html",
     "title": "Software",
@@ -19,6 +12,13 @@
     "title": "Blogposts",
     "section": "",
     "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow does glmnet perform ridge regression?\n\n\n\nmachine learning\n\nregression\n\n\n\n\n\n\n\n\n\nMay 23, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nNew website\n\n\n\nother\n\npersonal\n\n\n\n\n\n\n\n\n\nMay 16, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/index.html",
+    "href": "talks/index.html",
+    "title": "Talks",
+    "section": "",
+    "text": "Below, you can find a list of talks I have given. The list is not exhaustive, but I will try to keep it up to date. I try to make all materials openly available. Please reach out if you have any questions or if you want to collaborate on any of the topics.\n\nInvited talks\n\n\n\n\n\n\n\n2024\nEvaluating the quality of synthetic data: A density ratio approach  At the Leiden Computational Network Science group\n\n\n2024\nMeasuring utility of synthetic data (in Dutch)  At the Dutch Expert Meeting on Synthetic Data\n\n\n\n\n\nConference presentations\n\n\n\n\n\n\n\n2023\nDensity ratios to evaluate and improve the utility of synthetic data  At the IOPS Conference 2023\n\n\n2023\nAssessing the utility of synthetic data: A density ratio perspective (paper)  At the United Nations Economic Commission for Europe Expert Meeting on Statistical Data Confidentiality"
   },
   {
     "objectID": "blog/2505_glmnet_ridge/index.html",
@@ -35,6 +35,13 @@
     "text": "Footnotes\n\n\nBy default, glmnet fits a lasso regression model, which is fairly similar but uses an \\(\\ell_1\\) penalty for the coefficients, which results in some coefficients estimated to be precisely zero. Changing the alpha parameter yields a mixture between 1-alpha times the ridge penalty and alpha times the lasso penalty.↩︎"
   },
   {
+    "objectID": "blog/2505_new_website/index.html",
+    "href": "blog/2505_new_website/index.html",
+    "title": "New website",
+    "section": "",
+    "text": "Since today, I have a new personal website! The site mainly serves as a repository to host some of my research projects and developed course materials. I may also write an occasional blogpost!\nDeveloping the website was really a breeze, thanks to the quarto software and the materials by Samantha Shanny-Csik."
+  },
+  {
     "objectID": "about.html#education",
     "href": "about.html#education",
     "title": "Thom Benjamin Volker",
@@ -47,13 +54,6 @@
     "title": "Thom Benjamin Volker",
     "section": "Selected publications",
     "text": "Selected publications\n\nFor a full overview, please check my Google Scholar profile.\n\n\nKlugkist, I., & Volker, T. B. (2023). Bayesian evidence synthesis for informative hypotheses: An introduction. Psychological Methods. Advance online publication. (link)\n\n\nVolker, T. B., de Wolf, P. P., & van Kesteren, E. J. (2024). A density ratio framework for evaluating the utility of synthetic data. arXiv:2408.13167. (link)\n\n\nVolker, T. B., & Vink, G. (2021). Anonymiced shareable data: Using mice to create and analyze multiply imputed synthetic datasets. Psych, 3(4), 703-716. (link)"
-  },
-  {
-    "objectID": "blog/2505_new_website/index.html",
-    "href": "blog/2505_new_website/index.html",
-    "title": "New website",
-    "section": "",
-    "text": "Since today, I have a new personal website! The site mainly serves as a repository to host some of my research projects and developed course materials. I may also write an occasional blogpost!\nDeveloping the website was really a breeze, thanks to the quarto software and the materials by Samantha Shanny-Csik."
   },
   {
     "objectID": "index.html",
@@ -70,10 +70,10 @@
     "text": "I’m doing a PhD on synthetic data and privacy-preserving statistics, which is just a fancy way of saying I make fake data that looks real. Besides, I procrastinate by reading on Bayesian methods, marginally improving my R packages or giving workshops on any these topics.\nIf you want to collaborate, check out my GitHub for active projects. I work, among other things, on synthetic data, differential privacy, missing data imputation, Bayesian hypothesis testing (here and here) and density ratio estimation. If I don’t answer your email, I’m probably riding my bike. Sorry!"
   },
   {
-    "objectID": "talks/index.html",
-    "href": "talks/index.html",
-    "title": "Talks",
+    "objectID": "teaching/index.html",
+    "href": "teaching/index.html",
+    "title": "Teaching",
     "section": "",
-    "text": "Below, you can find a list of talks I have given. The list is not exhaustive, but I will try to keep it up to date. I try to make all materials openly available. Please reach out if you have any questions or if you want to collaborate on any of the topics.\n\nInvited talks\n\n\n\n\n\n\n\n2024\nEvaluating the quality of synthetic data: A density ratio approach  At the Leiden Computational Network Science group\n\n\n2024\nMeasuring utility of synthetic data (in Dutch)  At the Dutch Expert Meeting on Synthetic Data\n\n\n\n\n\nConference presentations\n\n\n\n\n\n\n\n2023\nDensity ratios to evaluate and improve the utility of synthetic data  At the IOPS Conference 2023\n\n\n2023\nAssessing the utility of synthetic data: A density ratio perspective (paper)  At the United Nations Economic Commission for Europe Expert Meeting on Statistical Data Confidentiality"
+    "text": "I fully support open educational materials, and I intend to make all teaching resources I developed available online. All materials below are licensed liberally. If the GitHub link is not there, there is probably exam material included in the GitHub repo, which prevents me from sharing it publicly. If you are interested in any of the source files, please drop me a line.\n\nWorkshops\n\n\n\n\n\n\n\n2023\nFake it ’till you make it: Generating synthetic data with high utility in R  Half-day course on synthetic data; developed with Erik-Jan van Kesteren ( GitHub)\n\n\n\n\n\nUniversity courses\n\n\n\n\n\n\n\n2022-2025\nBattling the curse of dimensionality (MSc. Course)\n\n\n2021-2026\nData wrangling and data analysis (MSc. Course)\n\n\n2024\nMachine Learning with Python (Summer School Course)\n\n\n2019-2022\nMultiple Imputation in Practice (Summer School Course)"
   }
 ]
