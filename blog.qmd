@@ -2,11 +2,11 @@
 title: "Blogposts"
 listing: 
   contents: blog
-  type: table
+  type: default
   sort: "date desc"
   categories: true
-  max-description-length: 100
-  image-height: "200px"
+  max-description-length: 150
+  image-height: "150px"
 ---
 
 Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!
