@@ -43,9 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-92db3e19313b947c65540ea92fddb1a2.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-efbcc2cb89a73ce7f06479ecad77d635.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-2007c5e1f9d79cd480fa60f00924545f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-efbcc2cb89a73ce7f06479ecad77d635.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4cb43183ee443c4d8e086bad049bc848.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-1ee38565b1f0fdab6f91e644424c6525.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-4cb43183ee443c4d8e086bad049bc848.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -84,9 +84,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -364,7 +364,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="b3RoZXI=">other <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGVyc29uYWw=">personal <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bWFjaGluZSUyMGxlYXJuaW5n">machine learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="b3RoZXI=">other <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGVyc29uYWw=">personal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVncmVzc2lvbg==">regression <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -393,67 +393,73 @@ window.Quarto = {
 
 
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-      <option value="" disabled="" selected="" hidden="">Order By</option>
-      <option value="index" data-direction="asc">Default</option>
-      <option value="listing-date-sort" data-direction="asc">
-        Date - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Date - Newest
-      </option>
-      <option value="listing-title-sort" data-direction="asc">
-        Title
-      </option>
-      <option value="listing-author" data-direction="asc">
-        Author
-      </option>
-    </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="bWFjaGluZSUyMGxlYXJuaW5nJTJDcmVncmVzc2lvbg==" data-listing-date-sort="1747951200000" data-listing-file-modified-sort="1748037211746" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1568">
+<div class="thumbnail"><a href="./blog/2505_glmnet_ridge/index.html" class="no-external">
+
+<p class="card-img-top"><img src="blog\2505_glmnet_ridge\index_files\figure-html\unnamed-chunk-1-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./blog/2505_glmnet_ridge/index.html" class="no-external">How does <code>glmnet</code> perform ridge regression?</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZSUyMGxlYXJuaW5n'); return false;">machine learning</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('cmVncmVzc2lvbg=='); return false;">regression</div>
+
 </div>
-<table class="quarto-listing-table table">
-<thead>
-<tr>
+<div class="delink listing-description"><a href="./blog/2505_glmnet_ridge/index.html" class="no-external">
+Today, I was doing some programming for the <code>R</code> software <code>mice</code>, and it turns out I needed to calculate the residual degrees of freedom after performing…<code></code><code></code><code></code>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./blog/2505_glmnet_ridge/index.html" class="no-external">
+<div class="listing-date">
+May 23, 2025
+</div>
+<div class="listing-author">
+Thom Benjamin Volker
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="b3RoZXIlMkNwZXJzb25hbA==" data-listing-date-sort="1747346400000" data-listing-file-modified-sort="1748026314621" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="66">
+<div class="thumbnail"><a href="./blog/2505_new_website/index.html" class="no-external">
 
-<th>
-<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
-</th>
+<p class="card-img-top"><img src="figs\me_cake_cropped.jpg" alt="A figure of me with cake" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 
-<th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
-</th>
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./blog/2505_new_website/index.html" class="no-external">New website</a>
+</h3>
+<div class="listing-categories">
 
-<th>
-<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Author</a>
-</th>
+<div class="listing-category" onclick="window.quartoListingCategory('b3RoZXI='); return false;">other</div>
 
-</tr>
-</thead>
-<tbody class="list">
+<div class="listing-category" onclick="window.quartoListingCategory('cGVyc29uYWw='); return false;">personal</div>
 
-<tr data-index="0" data-categories="b3RoZXIlMkNwZXJzb25hbA==" data-listing-date-sort="1747346400000" data-listing-file-modified-sort="1747347598164" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="50" data-listing-title-sort="New website" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 16, 2025</span>
-</td>
-<td>
-<a href="./blog/2505_new_website/index.html" class="title listing-title">New website</a>
-</td>
-<td>
-<span class="listing-author">Thom Benjamin Volker</span>
-</td>
-
-</tr>
-
-</tbody>
-</table>
+</div>
+<div class="delink listing-description"><a href="./blog/2505_new_website/index.html" class="no-external">
+Since today, I have a new personal website! The site mainly serves as a repository to host some of my research projects and developed course…
+</a></div>
+</div>
+<div class="metadata">
+<a href="./blog/2505_new_website/index.html" class="no-external">
+<div class="listing-date">
+May 16, 2025
+</div>
+<div class="listing-author">
+Thom Benjamin Volker
+</div>
+</a>
+</div>
+</div>
+</div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -18,7 +18,21 @@
     "href": "blog.html",
     "title": "Blogposts",
     "section": "",
-    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nMay 16, 2025\n\n\nNew website\n\n\nThom Benjamin Volker\n\n\n\n\n\n\nNo matching items"
+    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow does glmnet perform ridge regression?\n\n\n\nmachine learning\n\nregression\n\n\n\n\n\n\n\n\n\nMay 23, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nNew website\n\n\n\nother\n\npersonal\n\n\n\n\n\n\n\n\n\nMay 16, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog/2505_glmnet_ridge/index.html",
+    "href": "blog/2505_glmnet_ridge/index.html",
+    "title": "How does glmnet perform ridge regression?",
+    "section": "",
+    "text": "Today, I was doing some programming for the R software mice, and it turns out I needed to calculate the residual degrees of freedom after performing regression with a ridge penalty to improve numerical stability. Perhaps, I thought, the glmnet package might provide any help, and at least may serve to verify my understanding. Although I love the glmnet package, I should’ve known better. That is, the package is great for estimation, but makes some design choices that are buried somewhere deep in the documentation, which can make it hard to find what is actually going on under the hood. In the end, I found out how glmnet performs ridge regression, so all good, I suppose."
+  },
+  {
+    "objectID": "blog/2505_glmnet_ridge/index.html#footnotes",
+    "href": "blog/2505_glmnet_ridge/index.html#footnotes",
+    "title": "How does glmnet perform ridge regression?",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nBy default, glmnet fits a lasso regression model, which is fairly similar but uses an \\(\\ell_1\\) penalty for the coefficients, which results in some coefficients estimated to be precisely zero. Changing the alpha parameter yields a mixture between 1-alpha times the ridge penalty and alpha times the lasso penalty.↩︎"
   },
   {
     "objectID": "about.html#education",
@@ -32,7 +46,7 @@
     "href": "about.html#selected-publications",
     "title": "Thom Benjamin Volker",
     "section": "Selected publications",
-    "text": "Selected publications\n\nFor a full overview, please check my Google Scholar profile.\n\n\nKlugkist, I., & Volker, T. B. (2023). Bayesian evidence synthesis for informative hypotheses: An introduction. Psychological Methods. Advance online publication. (link)\n\n\nVolker, T. B., de Wolf, P. P., & van Kesteren, E. J. (2024). A density ratio framework for evaluating the utility of synthetic data. arXiv:2408.13167. (link)\n\n\nVolker, T. B., & Vink, G. (2021). Anonymiced shareable data: Using mice to create and analyze multiply imputed synthetic datasets. Psych, 3(4), 703-716. (*link)"
+    "text": "Selected publications\n\nFor a full overview, please check my Google Scholar profile.\n\n\nKlugkist, I., & Volker, T. B. (2023). Bayesian evidence synthesis for informative hypotheses: An introduction. Psychological Methods. Advance online publication. (link)\n\n\nVolker, T. B., de Wolf, P. P., & van Kesteren, E. J. (2024). A density ratio framework for evaluating the utility of synthetic data. arXiv:2408.13167. (link)\n\n\nVolker, T. B., & Vink, G. (2021). Anonymiced shareable data: Using mice to create and analyze multiply imputed synthetic datasets. Psych, 3(4), 703-716. (link)"
   },
   {
     "objectID": "blog/2505_new_website/index.html",

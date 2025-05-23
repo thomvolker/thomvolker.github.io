@@ -44,6 +44,6 @@ please see my [cv](files/cv/cv.pdf){target="_blank"}.
 |:-------------------------------------|
 | Klugkist, I., & Volker, T. B. (2023). Bayesian evidence synthesis for informative hypotheses: An introduction. Psychological Methods. Advance online publication. ([*link*](https://doi.org/10.1037/met0000602){target="_blank"}) |
 | Volker, T. B., de Wolf, P. P., & van Kesteren, E. J. (2024). A density ratio framework for evaluating the utility of synthetic data. arXiv:2408.13167. ([*link*](https://arxiv.org/abs/2408.13167){target="_blank"}) |
-| Volker, T. B., & Vink, G. (2021). Anony*mice*d shareable data: Using mice to create and analyze multiply imputed synthetic datasets. Psych, 3(4), 703-716. ([*link](https://doi.org/10.3390/psych3040045){target="_blank"}) |
+| Volker, T. B., & Vink, G. (2021). Anony*mice*d shareable data: Using mice to create and analyze multiply imputed synthetic datasets. Psych, 3(4), 703-716. ([*link*](https://doi.org/10.3390/psych3040045){target="_blank"}) |
 
 : For a full overview, please check my [Google Scholar](https://scholar.google.nl/citations?user=DePxNDMAAAAJ&hl=en&oi=ao){target="_blank"} profile. {.hover}
