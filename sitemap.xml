@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://thomvolker.github.io/teaching/index.html</loc>
+    <lastmod>2025-05-15T21:54:45.524Z</lastmod>
+  </url>
+  <url>
     <loc>https://thomvolker.github.io/software.html</loc>
-    <lastmod>2025-05-15T22:39:48.891Z</lastmod>
+    <lastmod>2025-05-15T21:59:33.724Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/blog.html</loc>
-    <lastmod>2025-05-15T22:39:48.881Z</lastmod>
+    <lastmod>2025-05-23T18:25:23.061Z</lastmod>
   </url>
   <url>
-    <loc>https://thomvolker.github.io/talks/index.html</loc>
-    <lastmod>2025-05-15T22:39:48.891Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/blog/2505_new_website/index.html</loc>
-    <lastmod>2025-05-15T22:39:48.881Z</lastmod>
+    <loc>https://thomvolker.github.io/blog/2505_glmnet_ridge/index.html</loc>
+    <lastmod>2025-05-23T21:53:31.746Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/about.html</loc>
-    <lastmod>2025-05-15T22:39:48.881Z</lastmod>
+    <lastmod>2025-05-23T22:05:15.586Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/blog/2505_new_website/index.html</loc>
+    <lastmod>2025-05-23T18:51:54.621Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/index.html</loc>
-    <lastmod>2025-05-15T22:39:48.891Z</lastmod>
+    <lastmod>2025-05-23T17:55:00.001Z</lastmod>
   </url>
   <url>
-    <loc>https://thomvolker.github.io/teaching/index.html</loc>
-    <lastmod>2025-05-15T22:39:48.891Z</lastmod>
+    <loc>https://thomvolker.github.io/talks/index.html</loc>
+    <lastmod>2025-05-15T21:24:17.125Z</lastmod>
   </url>
 </urlset>
