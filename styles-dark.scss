@@ -25,15 +25,15 @@ $code-color: $neon-green;
 $code-block-bg: $dark-blue;
 $code-block-color: $neon-green;
 
+
 // fonts
-h1, h2, h3, h4, h5, h6, p, a, span, div {
+h1, h2, h3, h4, h5, h6, p, a {
   font-family: "Cormorant Garamond", cursive;
-  font-size: 105%;
+  font-size: 110% !important;
 }
 // font for Code
-code, pre {
-  font-family: "Fira Code", monospace;
-  font-size: 105%;
+pre, code, .sourceCode pre, .sourceCode code, .highlight code {
+  font-family: "Fira Code", monospace !important;
 }
 
 // navbar font
@@ -42,7 +42,7 @@ code, pre {
   font-size: 110%;
 }
 // navbar body font
-.navbar-nav .nav-link {
+nav.navbar .navbar-nav .nav-link {
   font-family: "Cormorant Garamond", cursive;
-  font-size: 110%;
+  font-size: 120% !important;
 }
