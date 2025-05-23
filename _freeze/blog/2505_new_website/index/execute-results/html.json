@@ -1,0 +1,15 @@
+{
+  "hash": "fed58418e93a50177971f8b5cc1a709f",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"New website\"\ntoc: false\ndate: 2025-05-16\nword-count: true\nreading-time: true\ncategories: [other, personal]\n---\n\n\n::: {.cell}\n\n:::\n\n\n![](../../figs/me_cake_cropped.jpg){width=40% fig-align=\"center\" fig-alt=\"A figure of me with cake\"}\n\nSince today, I have a new personal website! The site mainly serves as a repository to host some of my research projects and developed course materials. I may also write an occasional blogpost!\n\n\nDeveloping the website was really a breeze, thanks to the [`quarto`](https://quarto.org/docs/websites/) software and the [materials by Samantha Shanny-Csik](https://samanthacsik.github.io/talks_workshops/2022-08-05-creating-your-personal-website-using-quarto/){target=\"_blank\"}.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
