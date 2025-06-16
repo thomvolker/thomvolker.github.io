@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Thom Benjamin Volker">
-<meta name="dcterms.date" content="2025-06-04">
+<meta name="dcterms.date" content="2025-06-16">
 <meta name="description" content="Many different ways of calculating OLS regression coefficients exist, but some ways are more efficient than others. In this post we discuss some of the most common ways of calculating OLS regression coefficients, and how they relate to each other. Throughout, I assume some knowledge of linear algebra (i.e., the ability to multiply matrices), but other than that, I tried to simplify everything as much as possible.">
 
 <title>Different ways of calculating OLS regression coefficients (in R) – Thom Volker</title>
@@ -402,7 +402,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 4, 2025</p>
+        <p class="date">June 16, 2025</p>
       </div>
     </div>
     
@@ -1077,51 +1077,51 @@ Table&nbsp;1: Benchmarking different ways of calculating OLS regression coeffici
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">lm()</td>
-<td style="text-align: right;">233.1µs</td>
-<td style="text-align: right;">290.5µs</td>
-<td style="text-align: right;">3237.027</td>
+<td style="text-align: right;">250.4µs</td>
+<td style="text-align: right;">310.5µs</td>
+<td style="text-align: right;">3044.244</td>
 <td style="text-align: right;">48.9KB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">.lm.fit()</td>
-<td style="text-align: right;">4.3µs</td>
-<td style="text-align: right;">6.5µs</td>
-<td style="text-align: right;">143554.685</td>
+<td style="text-align: right;">4.7µs</td>
+<td style="text-align: right;">6.9µs</td>
+<td style="text-align: right;">137200.767</td>
 <td style="text-align: right;">10.8KB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">solve(t(X)%*%X)%*%t(X)%*%y</td>
-<td style="text-align: right;">16.2µs</td>
-<td style="text-align: right;">21.2µs</td>
-<td style="text-align: right;">45716.680</td>
+<td style="text-align: right;">17.1µs</td>
+<td style="text-align: right;">22µs</td>
+<td style="text-align: right;">44016.581</td>
 <td style="text-align: right;">14.2KB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">solve(crossprod(X), crossprod(X, y))</td>
-<td style="text-align: right;">6.2µs</td>
-<td style="text-align: right;">7.7µs</td>
-<td style="text-align: right;">123737.194</td>
+<td style="text-align: right;">6.8µs</td>
+<td style="text-align: right;">8.1µs</td>
+<td style="text-align: right;">114003.875</td>
 <td style="text-align: right;">0B</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">qr.solve(X, y)</td>
-<td style="text-align: right;">23.4µs</td>
-<td style="text-align: right;">28.8µs</td>
-<td style="text-align: right;">32405.536</td>
+<td style="text-align: right;">22.4µs</td>
+<td style="text-align: right;">29.3µs</td>
+<td style="text-align: right;">32504.222</td>
 <td style="text-align: right;">22.2KB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">svd</td>
 <td style="text-align: right;">19µs</td>
-<td style="text-align: right;">26.4µs</td>
-<td style="text-align: right;">36269.001</td>
+<td style="text-align: right;">27.2µs</td>
+<td style="text-align: right;">36001.372</td>
 <td style="text-align: right;">20.7KB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">chol</td>
 <td style="text-align: right;">12.4µs</td>
-<td style="text-align: right;">15.1µs</td>
-<td style="text-align: right;">63341.722</td>
+<td style="text-align: right;">15µs</td>
+<td style="text-align: right;">63417.286</td>
 <td style="text-align: right;">22.2KB</td>
 </tr>
 </tbody>
@@ -1157,51 +1157,51 @@ Table&nbsp;2: Benchmarking different ways of calculating OLS regression coeffici
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">lm()</td>
-<td style="text-align: right;">23.9ms</td>
-<td style="text-align: right;">25.2ms</td>
-<td style="text-align: right;">38.96523</td>
+<td style="text-align: right;">22.6ms</td>
+<td style="text-align: right;">24.1ms</td>
+<td style="text-align: right;">41.38545</td>
 <td style="text-align: right;">23.58MB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">.lm.fit()</td>
-<td style="text-align: right;">16.9ms</td>
-<td style="text-align: right;">19ms</td>
-<td style="text-align: right;">52.58523</td>
+<td style="text-align: right;">17.1ms</td>
+<td style="text-align: right;">18.6ms</td>
+<td style="text-align: right;">53.07588</td>
 <td style="text-align: right;">3.93MB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">solve(t(X)%*%X)%*%t(X)%*%y</td>
-<td style="text-align: right;">38.9ms</td>
-<td style="text-align: right;">40.7ms</td>
-<td style="text-align: right;">24.22159</td>
+<td style="text-align: right;">39.3ms</td>
+<td style="text-align: right;">41.4ms</td>
+<td style="text-align: right;">23.52300</td>
 <td style="text-align: right;">11.88MB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">solve(crossprod(X), crossprod(X, y))</td>
-<td style="text-align: right;">11.3ms</td>
-<td style="text-align: right;">12.6ms</td>
-<td style="text-align: right;">78.41920</td>
+<td style="text-align: right;">11.8ms</td>
+<td style="text-align: right;">12.3ms</td>
+<td style="text-align: right;">78.91230</td>
 <td style="text-align: right;">164.82KB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">qr.solve(X, y)</td>
-<td style="text-align: right;">19.2ms</td>
-<td style="text-align: right;">21.6ms</td>
-<td style="text-align: right;">46.04778</td>
+<td style="text-align: right;">18.9ms</td>
+<td style="text-align: right;">21ms</td>
+<td style="text-align: right;">47.40981</td>
 <td style="text-align: right;">15.5MB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">svd</td>
-<td style="text-align: right;">65.2ms</td>
-<td style="text-align: right;">69.4ms</td>
-<td style="text-align: right;">14.24711</td>
+<td style="text-align: right;">63.6ms</td>
+<td style="text-align: right;">65.9ms</td>
+<td style="text-align: right;">14.97805</td>
 <td style="text-align: right;">15.89MB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">chol</td>
-<td style="text-align: right;">11.9ms</td>
-<td style="text-align: right;">13.3ms</td>
-<td style="text-align: right;">74.23876</td>
+<td style="text-align: right;">12.1ms</td>
+<td style="text-align: right;">13.6ms</td>
+<td style="text-align: right;">71.12533</td>
 <td style="text-align: right;">241.73KB</td>
 </tr>
 </tbody>
