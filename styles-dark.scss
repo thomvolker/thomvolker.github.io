@@ -25,11 +25,16 @@ $code-color: $neon-green;
 $code-block-bg: $dark-blue;
 $code-block-color: $neon-green;
 
-
 // fonts
 h1, h2, h3, h4, h5, h6, p, a {
   font-family: "Cormorant Garamond", cursive;
   font-size: 110% !important;
+}
+
+// div font
+div {
+  font-family: "Cormorant Garamond", cursive;
+  font-size: 100%;
 }
 
 // table font
