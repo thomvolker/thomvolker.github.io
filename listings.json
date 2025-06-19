@@ -1,14 +1,14 @@
 [
   {
-    "listing": "/software.html",
-    "items": []
-  },
-  {
     "listing": "/blog.html",
     "items": [
       "/blog/2506_regression/index.html",
       "/blog/2505_glmnet_ridge/index.html",
       "/blog/2505_new_website/index.html"
     ]
+  },
+  {
+    "listing": "/software.html",
+    "items": []
   }
 ]
