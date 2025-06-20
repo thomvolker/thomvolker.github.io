@@ -609,10 +609,13 @@ In this benchmark, we also include the fastest in-built `R` function to perform 
 
 ### Small data benchmark
 
+We first benchmark the different methods with the data used throughout. Hence, we have two variables and an additional intercept for $N = 200$ observations. 
+
 ```{r}
 #| label: tbl-benchmark
 #| tbl-cap: "Benchmarking different ways of calculating OLS regression coefficients with the example data."
-#| echo: false
+#| code-fold: true
+#| code-summary: "Click to the R-code used for benchmarking."
 
 check_func <- function(target, current) {
   all.equal(target, current, check.class = FALSE, check.attributes = FALSE)
@@ -638,12 +641,13 @@ So, `.lm.fit()` is super fast, followed by `solve(crossprod(X), crossprod(X, y))
 
 ### Larger data benchmark
 
-When we increase the size of the data, we see what we expect to see.
+When we increase the size of the data to 100 variables and an additional intercept for $N = 5000$ observations, we see what we expect to see.
 
 ```{r}
 #| label: tbl-benchmark-large
 #| tbl-cap: "Benchmarking different ways of calculating OLS regression coefficients with a somewhat larger dataset."
-#| echo: false
+#| code-fold: true
+#| code-summary: "Click to see the R-code used for benchmarking."
 
 N <- 5000
 P <- 100

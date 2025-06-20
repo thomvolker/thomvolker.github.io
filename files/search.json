@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blogposts",
+    "section": "",
+    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifferent ways of calculating OLS regression coefficients (in R)\n\n\n\nregression\n\nqr decomposition\n\nsingular value decomposition\n\ngradient descent\n\nmachine learning\n\n\n\nMany different ways of calculating OLS regression coefficients exist, but some ways are more efficient than others. In this post we discuss some of…\n\n\n\n\n\nJun 16, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nHow does glmnet perform ridge regression?\n\n\n\nmachine learning\n\nregression\n\n\n\n\n\n\n\n\n\nMay 23, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nNew website\n\n\n\nother\n\npersonal\n\n\n\n\n\n\n\n\n\nMay 16, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\nNo matching items"
+  }
+]
