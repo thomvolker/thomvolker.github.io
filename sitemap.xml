@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://thomvolker.github.io/blog.html</loc>
-    <lastmod>2025-06-20T11:09:22.121Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/index.html</loc>
-    <lastmod>2025-06-20T11:09:22.150Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/blog/2505_new_website/index.html</loc>
-    <lastmod>2025-06-20T11:09:22.122Z</lastmod>
-  </url>
-  <url>
     <loc>https://thomvolker.github.io/teaching/index.html</loc>
-    <lastmod>2025-06-20T11:09:22.150Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/talks/index.html</loc>
-    <lastmod>2025-06-20T11:09:22.150Z</lastmod>
+    <lastmod>2025-05-15T21:54:45.524Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/software.html</loc>
-    <lastmod>2025-06-20T11:09:22.150Z</lastmod>
+    <lastmod>2025-05-15T21:59:33.724Z</lastmod>
   </url>
   <url>
-    <loc>https://thomvolker.github.io/blog/2506_regression/index.html</loc>
-    <lastmod>2025-06-20T11:09:22.133Z</lastmod>
+    <loc>https://thomvolker.github.io/blog.html</loc>
+    <lastmod>2025-05-23T18:25:23.061Z</lastmod>
   </url>
   <url>
-    <loc>https://thomvolker.github.io/blog/2505_glmnet_ridge/index.html</loc>
-    <lastmod>2025-06-20T11:09:22.122Z</lastmod>
+    <loc>https://thomvolker.github.io/blog/2505_new_website/index.html</loc>
+    <lastmod>2025-06-08T22:41:16.812Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/about.html</loc>
-    <lastmod>2025-06-20T11:09:22.121Z</lastmod>
+    <lastmod>2025-05-23T22:05:15.586Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/blog/2505_glmnet_ridge/index.html</loc>
+    <lastmod>2025-06-08T22:41:21.791Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/blog/2506_regression/index.html</loc>
+    <lastmod>2025-06-20T11:08:31.334Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/index.html</loc>
+    <lastmod>2025-05-23T17:55:00.001Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/talks/index.html</loc>
+    <lastmod>2025-05-15T21:24:17.125Z</lastmod>
   </url>
 </urlset>
