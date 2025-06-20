@@ -641,7 +641,7 @@ So, `.lm.fit()` is super fast, followed by `solve(crossprod(X), crossprod(X, y))
 
 ### Larger data benchmark
 
-When we increase the size of the data to 100 variables and an additional intercept for $N = 5000$ observations, we see what we expect to see.
+When we increase the size of the data to $P = 100$ variables and an additional intercept for $N = 5000$ observations, we see what we expect to see.
 
 ```{r}
 #| label: tbl-benchmark-large
