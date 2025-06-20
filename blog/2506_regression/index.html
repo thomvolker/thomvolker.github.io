@@ -1055,7 +1055,29 @@ l_{p2} &amp;= \left( a_{2p} - l_{21} \cdot l_{p1} \right)/l_{22},
 <p>Throughout, we displayed multiple ways of calculating the regression coefficients in <code>R</code>, and made some statements with respect to their efficiency. Here we very briefly benchmark the different ways of calculating the coefficients, to back up our earlier claims. In this benchmark, we also include the fastest in-built <code>R</code> function to perform linear regression (<code>.lm.fit()</code>) as a comparison.</p>
 <section id="small-data-benchmark" class="level3">
 <h3 class="anchored" data-anchor-id="small-data-benchmark">Small data benchmark</h3>
+<p>We first benchmark the different methods with the data used throughout. Hence, we have two variables and an additional intercept for <span class="math inline">\(N = 200\)</span> observations.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Click to the R-code used for benchmarking.</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>check_func <span class="ot">&lt;-</span> <span class="cf">function</span>(target, current) {</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all.equal</span>(target, current, <span class="at">check.class =</span> <span class="cn">FALSE</span>, <span class="at">check.attributes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">lm()</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> X)),</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">.lm.fit()</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">.lm.fit</span>(Xd, y)<span class="sc">$</span>coefficients,</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">solve(t(X)%*%X)%*%t(X)%*%y</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xd) <span class="sc">%*%</span> Xd) <span class="sc">%*%</span> <span class="fu">t</span>(Xd) <span class="sc">%*%</span> y,</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">solve(crossprod(X), crossprod(X, y))</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">solve</span>(<span class="fu">crossprod</span>(Xd), <span class="fu">crossprod</span>(Xd, y)),</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">qr.solve(X, y)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">qr.solve</span>(Xd, y),</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">svd =</span> {USV <span class="ot">&lt;-</span> <span class="fu">svd</span>(Xd); USV<span class="sc">$</span>v <span class="sc">%*%</span> (<span class="fu">crossprod</span>(USV<span class="sc">$</span>u, y)<span class="sc">/</span>USV<span class="sc">$</span>d)},</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">chol =</span> {cholX <span class="ot">&lt;-</span> <span class="fu">chol</span>(<span class="fu">crossprod</span>(Xd)); <span class="fu">backsolve</span>(cholX, <span class="fu">forwardsolve</span>(<span class="fu">t</span>(cholX), <span class="fu">crossprod</span>(Xd, y)))},</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> check_func,</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_iterations =</span> <span class="dv">100</span></span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(expression, min, median, <span class="st">`</span><span class="at">itr/sec</span><span class="st">`</span>, <span class="st">`</span><span class="at">mem_alloc</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div id="tbl-benchmark" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-benchmark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1076,51 +1098,51 @@ Table&nbsp;1: Benchmarking different ways of calculating OLS regression coeffici
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">lm()</td>
-<td style="text-align: right;">250.4µs</td>
-<td style="text-align: right;">310.5µs</td>
-<td style="text-align: right;">3044.244</td>
+<td style="text-align: right;">212.3µs</td>
+<td style="text-align: right;">270.8µs</td>
+<td style="text-align: right;">3585.796</td>
 <td style="text-align: right;">48.9KB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">.lm.fit()</td>
-<td style="text-align: right;">4.7µs</td>
-<td style="text-align: right;">6.9µs</td>
-<td style="text-align: right;">137200.767</td>
+<td style="text-align: right;">4µs</td>
+<td style="text-align: right;">5.6µs</td>
+<td style="text-align: right;">164173.467</td>
 <td style="text-align: right;">10.8KB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">solve(t(X)%*%X)%*%t(X)%*%y</td>
-<td style="text-align: right;">17.1µs</td>
-<td style="text-align: right;">22µs</td>
-<td style="text-align: right;">44016.581</td>
+<td style="text-align: right;">14.6µs</td>
+<td style="text-align: right;">18.1µs</td>
+<td style="text-align: right;">51499.307</td>
 <td style="text-align: right;">14.2KB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">solve(crossprod(X), crossprod(X, y))</td>
-<td style="text-align: right;">6.8µs</td>
-<td style="text-align: right;">8.1µs</td>
-<td style="text-align: right;">114003.875</td>
+<td style="text-align: right;">5.9µs</td>
+<td style="text-align: right;">6.5µs</td>
+<td style="text-align: right;">140420.644</td>
 <td style="text-align: right;">0B</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">qr.solve(X, y)</td>
-<td style="text-align: right;">22.4µs</td>
-<td style="text-align: right;">29.3µs</td>
-<td style="text-align: right;">32504.222</td>
+<td style="text-align: right;">21.2µs</td>
+<td style="text-align: right;">26.7µs</td>
+<td style="text-align: right;">34749.930</td>
 <td style="text-align: right;">22.2KB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">svd</td>
-<td style="text-align: right;">19µs</td>
-<td style="text-align: right;">27.2µs</td>
-<td style="text-align: right;">36001.372</td>
+<td style="text-align: right;">17.5µs</td>
+<td style="text-align: right;">23µs</td>
+<td style="text-align: right;">38883.652</td>
 <td style="text-align: right;">20.7KB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">chol</td>
-<td style="text-align: right;">12.4µs</td>
-<td style="text-align: right;">15µs</td>
-<td style="text-align: right;">63417.286</td>
+<td style="text-align: right;">11.5µs</td>
+<td style="text-align: right;">12.8µs</td>
+<td style="text-align: right;">74200.845</td>
 <td style="text-align: right;">22.2KB</td>
 </tr>
 </tbody>
@@ -1134,8 +1156,35 @@ Table&nbsp;1: Benchmarking different ways of calculating OLS regression coeffici
 </section>
 <section id="larger-data-benchmark" class="level3">
 <h3 class="anchored" data-anchor-id="larger-data-benchmark">Larger data benchmark</h3>
-<p>When we increase the size of the data, we see what we expect to see.</p>
+<p>When we increase the size of the data to 100 variables and an additional intercept for <span class="math inline">\(N = 5000\)</span> observations, we see what we expect to see.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Click to see the R-code used for benchmarking.</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  N,</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>(<span class="dv">0</span>, P),</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>(P)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>Xd <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, X)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">lm()</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> X)),</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">.lm.fit()</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">.lm.fit</span>(Xd, y)<span class="sc">$</span>coefficients,</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">solve(t(X)%*%X)%*%t(X)%*%y</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xd) <span class="sc">%*%</span> Xd) <span class="sc">%*%</span> <span class="fu">t</span>(Xd) <span class="sc">%*%</span> y,</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">solve(crossprod(X), crossprod(X, y))</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">solve</span>(<span class="fu">crossprod</span>(Xd), <span class="fu">crossprod</span>(Xd, y)),</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">qr.solve(X, y)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">qr.solve</span>(Xd, y),</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">svd =</span> {USV <span class="ot">&lt;-</span> <span class="fu">svd</span>(Xd); USV<span class="sc">$</span>v <span class="sc">%*%</span> (<span class="fu">crossprod</span>(USV<span class="sc">$</span>u, y)<span class="sc">/</span>USV<span class="sc">$</span>d)},</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">chol =</span> {cholX <span class="ot">&lt;-</span> <span class="fu">chol</span>(<span class="fu">crossprod</span>(Xd)); <span class="fu">backsolve</span>(cholX, <span class="fu">forwardsolve</span>(<span class="fu">t</span>(cholX), <span class="fu">crossprod</span>(Xd, y)))},</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> check_func,</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_iterations =</span> <span class="dv">100</span></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(expression, min, median, <span class="st">`</span><span class="at">itr/sec</span><span class="st">`</span>, <span class="st">`</span><span class="at">mem_alloc</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div id="tbl-benchmark-large" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-benchmark-large-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1156,51 +1205,51 @@ Table&nbsp;2: Benchmarking different ways of calculating OLS regression coeffici
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">lm()</td>
-<td style="text-align: right;">22.6ms</td>
-<td style="text-align: right;">24.1ms</td>
-<td style="text-align: right;">41.38545</td>
+<td style="text-align: right;">20ms</td>
+<td style="text-align: right;">21.4ms</td>
+<td style="text-align: right;">46.12598</td>
 <td style="text-align: right;">23.58MB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">.lm.fit()</td>
+<td style="text-align: right;">15ms</td>
 <td style="text-align: right;">17.1ms</td>
-<td style="text-align: right;">18.6ms</td>
-<td style="text-align: right;">53.07588</td>
+<td style="text-align: right;">57.55030</td>
 <td style="text-align: right;">3.93MB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">solve(t(X)%*%X)%*%t(X)%*%y</td>
-<td style="text-align: right;">39.3ms</td>
-<td style="text-align: right;">41.4ms</td>
-<td style="text-align: right;">23.52300</td>
+<td style="text-align: right;">34.9ms</td>
+<td style="text-align: right;">38.9ms</td>
+<td style="text-align: right;">25.73037</td>
 <td style="text-align: right;">11.88MB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">solve(crossprod(X), crossprod(X, y))</td>
-<td style="text-align: right;">11.8ms</td>
-<td style="text-align: right;">12.3ms</td>
-<td style="text-align: right;">78.91230</td>
+<td style="text-align: right;">10.3ms</td>
+<td style="text-align: right;">11.3ms</td>
+<td style="text-align: right;">88.71473</td>
 <td style="text-align: right;">164.82KB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">qr.solve(X, y)</td>
-<td style="text-align: right;">18.9ms</td>
-<td style="text-align: right;">21ms</td>
-<td style="text-align: right;">47.40981</td>
+<td style="text-align: right;">16.5ms</td>
+<td style="text-align: right;">19.6ms</td>
+<td style="text-align: right;">50.63235</td>
 <td style="text-align: right;">15.5MB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">svd</td>
-<td style="text-align: right;">63.6ms</td>
-<td style="text-align: right;">65.9ms</td>
-<td style="text-align: right;">14.97805</td>
+<td style="text-align: right;">56.8ms</td>
+<td style="text-align: right;">59.7ms</td>
+<td style="text-align: right;">16.65648</td>
 <td style="text-align: right;">15.89MB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">chol</td>
-<td style="text-align: right;">12.1ms</td>
-<td style="text-align: right;">13.6ms</td>
-<td style="text-align: right;">71.12533</td>
+<td style="text-align: right;">10.2ms</td>
+<td style="text-align: right;">10.9ms</td>
+<td style="text-align: right;">92.49951</td>
 <td style="text-align: right;">241.73KB</td>
 </tr>
 </tbody>
@@ -1218,14 +1267,14 @@ Table&nbsp;2: Benchmarking different ways of calculating OLS regression coeffici
 <p><a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPLv3</a></p>
 <section id="citation" class="level3">
 <h3 class="anchored" data-anchor-id="citation">Citation</h3>
-<div class="sourceCode" id="cb46"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{bib}</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="in">@online{</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="in">  author = {Volker, Thom Benjamin},</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="in">  title = {Different ways of calculating OLS regression coefficients (in R)},</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="in">  date = {2025-06-09},</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="in">  url = {https://thomvolker.github.io/blog/2506_regression/}</span></span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{bib}</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="in">@online{</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="in">  author = {Volker, Thom Benjamin},</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="in">  title = {Different ways of calculating OLS regression coefficients (in R)},</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="in">  date = {2025-06-09},</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="in">  url = {https://thomvolker.github.io/blog/2506_regression/}</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For attribution, please cite this blogpost as:</p>
 <blockquote class="blockquote">
 <p>Volker, T. B. (2025). Different ways of calculating OLS regression coefficients (in R). Achieved from <a href="https://thomvolker.github.io/blog/2506_regression/" class="uri">https://thomvolker.github.io/blog/2506_regression/</a></p>
