@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Thom Benjamin Volker">
+<meta name="dcterms.date" content="2025-06-16">
+<meta name="description" content="Many different ways of calculating OLS regression coefficients exist, but some ways are more efficient than others. In this post we discuss some of the most common ways of calculating OLS regression coefficients, and how they relate to each other. Throughout, I assume some knowledge of linear algebra (i.e., the ability to multiply matrices), but other than that, I tried to simplify everything as much as possible.">
+
+<title>Different ways of calculating OLS regression coefficients (in R) – Thom Volker</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ec89599f532f58f19b565cd12798c155.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-45a77a325ced1c072840e66489e29fb3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ec89599f532f58f19b565cd12798c155.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Thom Volker</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../software.html"> 
+<span class="menu-text">software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching/index.html"> 
+<span class="menu-text">teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks/index.html"> 
+<span class="menu-text">talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/thomvolker" target="_blank"> 
+<span class="menu-text">code</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">about</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../files/cv/cv.pdf" target="_blank"> 
+<span class="menu-text"><iconify-icon role="img" inline="" icon="academicons:cv-square" aria-label="Icon cv-square from academicons Iconify.design set." title="Icon cv-square from academicons Iconify.design set."></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.strava.com/athletes/34188992" target="_blank"> <i class="bi bi-strava" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Different ways of calculating OLS regression coefficients (in <code>R</code>)</h1>
+                  <div>
+        <div class="description">
+          Many different ways of calculating OLS regression coefficients exist, but some ways are more efficient than others. In this post we discuss some of the most common ways of calculating OLS regression coefficients, and how they relate to each other. Throughout, I assume some knowledge of linear algebra (i.e., the ability to multiply matrices), but other than that, I tried to simplify everything as much as possible.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">regression</div>
+                <div class="quarto-category">qr decomposition</div>
+                <div class="quarto-category">singular value decomposition</div>
+                <div class="quarto-category">gradient descent</div>
+                <div class="quarto-category">machine learning</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Thom Benjamin Volker </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 16, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#from-derivatives-to-estimates" id="toc-from-derivatives-to-estimates" class="nav-link active" data-scroll-target="#from-derivatives-to-estimates">From derivatives to estimates</a></li>
+  <li><a href="#solving-the-normal-equations-in-r" id="toc-solving-the-normal-equations-in-r" class="nav-link" data-scroll-target="#solving-the-normal-equations-in-r">Solving the normal equations in <code>R</code></a></li>
+  <li><a href="#solving-the-normal-equations-through-a-qr-decomposition" id="toc-solving-the-normal-equations-through-a-qr-decomposition" class="nav-link" data-scroll-target="#solving-the-normal-equations-through-a-qr-decomposition">Solving the normal equations through a QR decomposition</a></li>
+  <li><a href="#same-trick-different-singular-value-decomposition" id="toc-same-trick-different-singular-value-decomposition" class="nav-link" data-scroll-target="#same-trick-different-singular-value-decomposition">Same trick, different (singular value) decomposition</a></li>
+  <li><a href="#one-final-decomposition-cholesky" id="toc-one-final-decomposition-cholesky" class="nav-link" data-scroll-target="#one-final-decomposition-cholesky">One final decomposition (Cholesky)</a></li>
+  <li><a href="#a-note-on-computational-complexity" id="toc-a-note-on-computational-complexity" class="nav-link" data-scroll-target="#a-note-on-computational-complexity">A note on computational complexity</a></li>
+  <li><a href="#benchmarking" id="toc-benchmarking" class="nav-link" data-scroll-target="#benchmarking">Benchmarking</a>
+  <ul class="collapse">
+  <li><a href="#small-data-benchmark" id="toc-small-data-benchmark" class="nav-link" data-scroll-target="#small-data-benchmark">Small data benchmark</a></li>
+  <li><a href="#larger-data-benchmark" id="toc-larger-data-benchmark" class="nav-link" data-scroll-target="#larger-data-benchmark">Larger data benchmark</a></li>
+  </ul></li>
+  <li><a href="#reuse" id="toc-reuse" class="nav-link" data-scroll-target="#reuse">Reuse</a>
+  <ul class="collapse">
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<p>Linear regression is life. At age 17, Carl Friedrich Gauss, a German polymath, thought to himself: “You know what, we need to be able to determine the best linear fit through this cloud of points”, and the rest is history. The goal is to predict a target variable, <span class="math inline">\(y_i\)</span>, for observation <span class="math inline">\(i\)</span> from a set of predictors, <span class="math inline">\(x_{i,1}, x_{i,2}, \ldots, x_{i,p}\)</span>. The model is given by <span class="math display">\[
+y_i = \beta_0 + \beta_1 x_{i,1} + \beta_2 x_{i,2} + \ldots + \beta_p x_{i,p} + \varepsilon_i,
+\]</span> where <span class="math inline">\(\beta_0\)</span> denotes the intercept, <span class="math inline">\(\beta_1, \ldots, \beta_p\)</span> are the regression coefficients corresponding to predictors <span class="math inline">\(x_{i,1}, \dots, x_{i,p}\)</span>, and <span class="math inline">\(\varepsilon_i\)</span> is the error term. The intercept <span class="math inline">\(\beta_0\)</span> can be interpreted as the expected value of <span class="math inline">\(y\)</span> for an observation that scores zero on all predictor variables, and <span class="math inline">\(\beta_1, \ldots, \beta_p\)</span> represent the change in the expected value of <span class="math inline">\(y\)</span> for a one-unit increase in the corresponding predictor variable, holding all other predictors constant. It is often convenient to cast the model in matrix form: <span class="math display">\[
+y = X \beta + \varepsilon,
+\]</span> where <span class="math inline">\(y\)</span> is the <span class="math inline">\(n \times 1\)</span> response vector, <span class="math inline">\(X\)</span> is the <span class="math inline">\(n \times (p + 1)\)</span> design matrix containing the predictors, <span class="math inline">\(\beta\)</span> is the <span class="math inline">\((p + 1) \times 1\)</span> vector of coefficients, and <span class="math inline">\(\varepsilon\)</span> is the <span class="math inline">\(n \times 1\)</span> vector of errors. Note that the design matrix <span class="math inline">\(X\)</span> contains a column of ones for the intercept, which we denote throughout as the “zeroth” column so that it corresponds to <span class="math inline">\(\beta_0\)</span>, notation-wise. Hence, for each observation, we multiply each predictor score by the corresponding regression coefficient and sum the terms.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Intermezzo: Generating some example data">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Intermezzo: Generating some example data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before we continue, we generate some example data that we will use throughout. Our example data consists of two normally distributed predictor variables with means <span class="math inline">\(\mu_{X_1} = \mu_{X_2} = 0\)</span>, variances <span class="math inline">\(\sigma^2_{X_1} = \sigma^2_{X_2} = 1\)</span> and correlation <span class="math inline">\(\rho_{X_1, X_2} = 0.5\)</span>. Moreover, the outcome variable is also distributed normally, with mean <span class="math inline">\(\mu_Y = 0.2 \cdot X_1 + 0.5 \cdot X_2\)</span> and residual variance <span class="math inline">\(\sigma^2_\varepsilon = 1\)</span>. In matrix form, we have the following model: <span class="math display">\[
+X
+\sim
+\mathcal{N}
+\begin{pmatrix}
+\begin{bmatrix} 0 \\ 0 \end{bmatrix},
+\begin{bmatrix}1 &amp; .5 \\ .5 &amp; 1 \end{bmatrix}
+\end{pmatrix}, ~~~
+y \sim \mathcal{N}(X \beta, 1), ~~~
+\beta = \begin{bmatrix} 0.2 \\ 0.5 \end{bmatrix}.
+\]</span> From this model, we generate <span class="math inline">\(N = 200\)</span> observations. In <code>R</code>, this can be done as follows.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">200</span>                            <span class="co"># sample size</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="dv">2</span>                              <span class="co"># number of predictors</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>V <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">diag</span>(P)            <span class="co"># covariance matrix of predictors</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(N, <span class="at">sigma =</span> V) <span class="co"># generate predictors</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> X <span class="sc">%*%</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(N)   <span class="co"># generate response variable</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Throughout, we use an intercept in the estimation models, which we append to our <code>X</code> matrix.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Xd <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>The goal, of course, is to estimate the regression coefficients <span class="math inline">\(\beta\)</span> such that we can predict the response variable <span class="math inline">\(y\)</span> as good as it gets. You might want to do this by minimising the sum of squared errors: <span class="math display">\[
+\min_\beta \sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_{i,1} - \ldots - \beta_p x_{i,p})^2 = (y - X \beta)^T (y - X \beta).
+\]</span> The “best” estimate for this problem yields the smallest residuals (in a squared error sense). So, how do we choose the coefficients such that the residuals are as small as possible? One way would be to start with an initial guess for the regression coefficients and iteratively move in the direction where the errors decrease as fast as possible. If you look at the contour plot below, the residual sum of squares for some data <span class="math inline">\(X\)</span> and <span class="math inline">\(y\)</span> is displayed as a function of the two regression coefficients. At every location in the contour plot, the sum of squared errors slopes down in the direction of the minimum. So, if we knew how the sum of squares changes as a function of the regression coefficients, we could iteratively move our estimates of the regression coefficients in the direction where the residual sum of squares becomes smaller and smaller, until we end up at the minimum!</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show figure code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>bgrid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">b1 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.7</span>, <span class="at">length.out =</span> <span class="dv">100</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">b2 =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y<span class="sc">~</span>Xd<span class="dv">-1</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>rss <span class="ot">&lt;-</span> <span class="cf">function</span>(b, x, y, b0) {</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  yhat <span class="ot">&lt;-</span> b0 <span class="sc">+</span> X <span class="sc">%*%</span> b</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>((y <span class="sc">-</span> yhat)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>rss <span class="ot">&lt;-</span> <span class="fu">mutate</span>(bgrid, <span class="at">rss =</span> <span class="fu">apply</span>(bgrid, <span class="dv">1</span>, rss, <span class="at">x =</span> X, <span class="at">y =</span> y, <span class="at">b0 =</span> opt[<span class="dv">1</span>]))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rss, <span class="fu">aes</span>(b1, b2, <span class="at">z =</span> rss)) <span class="sc">+</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour_filled</span>() <span class="sc">+</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> opt[<span class="dv">2</span>], <span class="at">y =</span> opt[<span class="dv">3</span>]), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Residual sum of squares"</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Contours of residual sum of squares as a </span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="st">function of the regression coefficients"</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient for predictor 1"</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Coefficient for predictor 2"</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#fffbf2"</span>, <span class="at">colour =</span> <span class="st">"transparent"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-rss_contour" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rss_contour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-rss_contour-1.png" id="fig-rss_contour" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-rss_contour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>To know how the residual sum of squares changes as a function of the regression coefficient, we can make use of the derivatives of this function with respect to <span class="math inline">\(\beta\)</span>. Loosely speaking, the derivatives quantify how fast the sum of squares changes when we change each of the coefficients by a tiny amount. The collection of these rates of change, a vector called the <em>gradient</em>, tells us in what direction we need to move to get closer to the minimum. The gradient is commonly denoted by <span class="math inline">\(\nabla_\beta\)</span> (the <span class="math inline">\(\nabla\)</span> symbol is called <em>nabla</em> or <em>del</em>) and can be obtained by applying the chain rule for differentiation: <span class="math display">\[
+\begin{aligned}
+\nabla_\beta &amp;= \begin{bmatrix}
+\frac{\partial}{\partial \beta_0}
+\left(\sum_{i=1}^n (y_i - \beta_0 x_{i,0} - \beta_1 x_{i,1} - \dots - \beta_px_{i,p})^2 \right)\\
+\vdots \\
+\frac{\partial}{\partial \beta_p} \left(\sum_{i=1}^n (y_i - \beta_0 x_{i,0} - \beta_1 x_{i,1} - \dots - \beta_px_{i,p})^2 \right)
+\end{bmatrix} \\
+&amp;= \begin{bmatrix}
+\left( \sum_{i=1}^n -2 x_{i,0}(y_i - \beta_0 x_{i,0} - \beta_1 x_{i,1} - \dots -\beta_p x_{i,p}) \right) \\
+\vdots \\
+\left( \sum_{i=1}^n -2 x_{i,p}(y_i - \beta_0 x_{i,0} - \beta_1 x_{i,1} - \dots -\beta_p x_{i,p}) \right) \\
+\end{bmatrix}.
+\end{aligned}
+\]</span> Each partial derivative tells us how the total error would change if we nudged one coefficient while keeping the others fixed. We can update each regression coefficient repeatedly by a tiny amount in the direction of the minimum, until we ultimately reach this minimum. This process is known as <em>gradient descent</em>. A short and applied illustration of gradient descent is included below, but since I don’t want to focus this post on gradient descent too much, I hid the algorithm behind an expandable block.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Click here to learn more about gradient descent!">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Click here to learn more about gradient descent!
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Gradient descent attempts to find the optimal values of the regression coefficients iteratively. To do so, it starts at a given point, say, <span class="math inline">\(\beta_0^{(0)} = \beta_1^{(0)} = \beta_2^{(0)} = 0\)</span>. From here on, we can take a small step in the opposite direction of the gradient, as the gradient gives the direction of the fastest increase, while we want to decrease function values (i.e., the sum of squares) until we reach the minimum. So, in the first iteration, we move <span class="math inline">\(\alpha\)</span> steps in the direction of the gradient, towards the optimal <span class="math inline">\(\beta_0\)</span> value given the current values for <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span>, so that we have <span class="math display">\[
+\beta_0^{(1)} \leftarrow \beta_0^{(0)} + \alpha
+\left(
+\sum_{i=1}^n 2x_{i,0} (y_i - \beta_0^{(0)}x_{i,0} - \beta_1^{(0)} x_{i,1} - \beta_2^{(0)} x_{i,2})
+\right).
+\]</span> Note that the “minus” from the derivative cancels with the “minus” from moving in the opposite direction. Subsequently, we do the same for the other regression coefficients, such that <span class="math display">\[
+\begin{aligned}
+\beta_1^{(1)} &amp;\leftarrow \beta_1^{(0)} + \alpha
+\left(
+\sum_{i=1}^n 2x_{i,1} (y_i - \beta_0^{(0)}x_{i,0} - \beta_1^{(0)} x_{i,1} - \beta_2^{(0)} x_{i,2})
+\right), \\
+\beta_2^{(1)} &amp; \leftarrow \beta_2^{(0)} + \alpha
+\left(
+\sum_{i=1}^n 2x_{i,2} (y_i - \beta_0^{(0)}x_{i,0} - \beta_1^{(0)} x_{i,1} - \beta_2^{(0)} x_{i,2})
+\right),
+\end{aligned}
+\]</span> For all subsequent steps, we then have <span class="math display">\[
+\beta_j^{(k+1)} \leftarrow \beta_j^{(k)} + \alpha \left(
+\sum_{i=1}^n 2x_{i,j} (y_i - \beta_0^{(k)}x_{i,0} - \beta_1^{(k)} x_{i,1} - \beta_2^{(k)} x_{i,2}).
+\right),
+\]</span> We can repeat this procedure until the regression coefficients stop changing, at which point the algorithm is said to have converged. A very naive implementation of this algorithm is implemented below. Note that many computations can be performed in more efficient ways. Nowadays, many resources on gradient descent exist, most of which I did not find particularly instructive, but the <a href="https://d2l.ai/chapter_optimization/gd.html">section on Gradient Descent in Dive Into Deep Learning</a> combines the mathematics with simple examples and nice figures, and the paper by <a href="https://arxiv.org/pdf/1609.04747">Sebastian Ruder (2017)</a> covers many extensions.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>deriv_beta_j <span class="ot">&lt;-</span> <span class="cf">function</span>(X, y, beta, j) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">sum</span>(X[,j] <span class="sc">*</span> (y <span class="sc">-</span> X <span class="sc">%*%</span> beta))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.001</span>                       <span class="co"># set the set-size</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>tol   <span class="ot">&lt;-</span> <span class="fl">1e-8</span>                        <span class="co"># tolerance for convergence</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>iter  <span class="ot">&lt;-</span> <span class="dv">1</span>                           <span class="co"># initialize counter</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>maxit <span class="ot">&lt;-</span> <span class="dv">1000</span>                        <span class="co"># set maximum number of iterations</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>conv  <span class="ot">&lt;-</span> <span class="cn">FALSE</span>                       <span class="co"># state that we currently haven't converged</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>beta_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, maxit, P<span class="sc">+</span><span class="dv">1</span>) <span class="co"># initialize empty matrix for coefficients</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(<span class="sc">!</span>conv) {</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  iter <span class="ot">&lt;-</span> iter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Xd)) {</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    beta_matrix[iter, j] <span class="ot">&lt;-</span> beta_matrix[iter<span class="dv">-1</span>, j] <span class="sc">-</span> </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      alpha <span class="sc">*</span> <span class="fu">deriv_beta_j</span>(Xd, y, beta_matrix[iter<span class="dv">-1</span>, ], j)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">sum</span>(<span class="fu">abs</span>(beta_matrix[iter, ] <span class="sc">-</span> beta_matrix[iter <span class="sc">-</span> <span class="dv">1</span>, ])) <span class="sc">&lt;</span> tol) {</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    conv <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  } </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (iter <span class="sc">==</span> maxit) {</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"The algorithm didn't converge"</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The following figure shows how the algorithm moves from starting values to the optimum, and we can confirm that the solution is almost identical to the solution provided by simply running <code>lm()</code> in <code>R</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show figure code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>beta_matrix <span class="ot">&lt;-</span> beta_matrix[<span class="dv">1</span><span class="sc">:</span>iter, ]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rss, <span class="fu">aes</span>(b1, b2, <span class="at">z =</span> rss)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour_filled</span>() <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="cn">NULL</span>, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">c</span>(beta_matrix[,<span class="dv">2</span>], <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">10000</span> <span class="sc">-</span> <span class="fu">nrow</span>(beta_matrix))), </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">y =</span> <span class="fu">c</span>(beta_matrix[,<span class="dv">3</span>], <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">10000</span> <span class="sc">-</span> <span class="fu">nrow</span>(beta_matrix)))),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">"yellow"</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> opt[<span class="dv">2</span>], <span class="at">y =</span> opt[<span class="dv">3</span>]), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Residual sum of squares"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Contour plot of the residual sum of squares as a function of the regression coefficients"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient for predictor 1"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Coefficient for predictor 2"</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#fffbf2"</span>, <span class="at">colour =</span> <span class="st">"transparent"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/gradient-descent-figure-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This remarkably simple algorithm performs quite well in many situations, and can, with some modifications, even be the most efficient way to calculate linear regression coefficients (when the dataset is huge, in terms of sample size and number of variables).</p>
+</div>
+</div>
+</div>
+<p>We can also use the gradient directly, by noting that in the optimum, the derivatives are zero, because moving further in the direction of the minimum is not possible, and thus there is “zero” change in this direction. Setting each derivative equal to zero and solving the equations for the regression coefficients yields the optimal solution in one go. This is something that can be done with <em>linear algebra</em>!</p>
+<section id="from-derivatives-to-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="from-derivatives-to-estimates">From derivatives to estimates</h2>
+<p>In the previous section, we saw that the gradient is given by <span class="math display">\[
+\nabla_\beta = \begin{bmatrix}
+\left( \sum_{i=1}^n -2 x_{i,0}(y_i - \beta_0 x_{i,0} - \beta_1 x_{i,1} - \dots -\beta_p x_{i,p}) \right) \\
+\vdots \\
+\left( \sum_{i=1}^n -2 x_{i,p}(y_i - \beta_0 x_{i,0} - \beta_1 x_{i,1} - \dots -\beta_p x_{i,p}) \right) \\
+\end{bmatrix}.
+\]</span> In each row of this vector, the product term consistently multiplies the columns of our predictor matrix, <span class="math inline">\(X\)</span>, with the residuals <span class="math inline">\(y - X\beta\)</span>. The same operations can be encoded in terms of matrix, <span class="math display">\[
+\nabla_\beta = -2 X^T(y - X\beta),
+\]</span> which multiplies each column of <span class="math inline">\(X\)</span> with the vector of residuals and sums the elements. We can get rid of the parentheses, such that we obtain <span class="math display">\[
+\begin{aligned}
+\nabla_\beta &amp;= -2 X^T(y - X\beta) \\
+&amp;= -2X^Ty + 2X^TX\beta
+\end{aligned}
+\]</span> Setting the derivative equal to zero and dividing both terms by <span class="math inline">\(2\)</span> yields the set of equations <span class="math display">\[
+X^T X \beta = X^T y,
+\]</span> which are commonly called the <em>normal equations</em>. We can solve these equations for <span class="math inline">\(\beta\)</span> by pre-multiplying both sides with the inverse of <span class="math inline">\(X^T X\)</span>, and noting that <span class="math inline">\((X^T X)^{-1}(X^T X) = I\)</span>, the identity matrix. We then obtain <span class="math display">\[
+\begin{aligned}
+(X^T X)^{-1}(X^T X)\beta &amp;= (X^T X)^{-1} X^T y \\
+\beta &amp;= (X^T X)^{-1} X^T y.
+\end{aligned}
+\]</span> Hooray! With just a few steps, we get from the gradient to the solution of the regression problem.</p>
+</section>
+<section id="solving-the-normal-equations-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="solving-the-normal-equations-in-r">Solving the normal equations in <code>R</code></h2>
+<p>Coding the solution to our regression problem takes just a couple of operations. Recall that our design matrix <code>Xd</code> includes a column of ones for the intercept. The solution is given by</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(<span class="fu">t</span>(Xd) <span class="sc">%*%</span> Xd) <span class="sc">%*%</span> <span class="fu">t</span>(Xd) <span class="sc">%*%</span> y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            [,1]
+[1,] -0.05924251
+[2,]  0.12069667
+[3,]  0.52018686</code></pre>
+</div>
+</div>
+<p>We can verify whether our obtained solution equals the solution provided by the regression function in <code>R</code> by calling <code>lm()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> X)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)          X1          X2 
+-0.05924251  0.12069667  0.52018686 </code></pre>
+</div>
+</div>
+<p>Not very surprisingly, the coefficients are equal. However, I can directly disclose that our solution is correct, but can be improved in various ways. First, inverting a matrix is expensive, and calculating the cross products as <code>t(Xd) %*% Xd</code> and <code>t(Xd) %*% y</code> is also not very efficient. We can already achieve a speed-up by using the cross-product function <code>crossprod()</code>, which is typically more efficient than separately transposing and multiplying matrices. Moreover, we do not need to invert the matrix <span class="math inline">\(X^T X\)</span>, but we can solve the normal equations directly, which also yields a speed-up (<a href="#tbl-benchmark" class="quarto-xref">Table&nbsp;1</a> provides some evidence for these claims). In terms of code, this is achieved as follows, which again yields the same coefficients.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(<span class="fu">crossprod</span>(Xd), <span class="fu">crossprod</span>(Xd, y))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            [,1]
+[1,] -0.05924251
+[2,]  0.12069667
+[3,]  0.52018686</code></pre>
+</div>
+</div>
+<p>This is almost as efficient as it gets, computationally, because internally, <code>R</code> uses some clever tricks to solve this system of equations as efficiently as possible. However, there are other ways to obtaining the regression coefficients that have different advantages. In the next sections, we look into some of the most popular linear algebra tricks to compute the regression coefficients.</p>
+</section>
+<section id="solving-the-normal-equations-through-a-qr-decomposition" class="level2">
+<h2 class="anchored" data-anchor-id="solving-the-normal-equations-through-a-qr-decomposition">Solving the normal equations through a QR decomposition</h2>
+<p>An alternative way to solve the normal equations is by first performing a transformation of the design matrix <span class="math inline">\(X\)</span> that simplifies the subsequent calculations. To this end, we can decompose the design matrix <span class="math inline">\(X\)</span> into an <span class="math inline">\(n \times p+1\)</span> orthogonal unitary matrix <span class="math inline">\(Q\)</span> and an upper triangular matrix <span class="math inline">\(R\)</span> using a QR decomposition. This sounds really complicated, but it merely means that the matrix <span class="math inline">\(Q\)</span> contains <span class="math inline">\(p+1\)</span> uncorrelated (i.e., orthogonal) columns of length one (i.e., the sum of the squared elements of every column in <span class="math inline">\(Q\)</span> equals <span class="math inline">\(\sum_{i=1}^n Q_{(i,j)}^2 = ||Q_{.,j}||_2 = Q_{.,j}^TQ_{.,j} = 1\)</span>). The matrix <span class="math inline">\(R\)</span> is then chosen such that when multiplied with <span class="math inline">\(Q\)</span>, we obtain <span class="math inline">\(X\)</span> again. For those unfamiliar with QR decompositions, a simple algorithm for computing the QR decomposition is included below.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A simple algorithm for computing the QR decomposition (Gram-Schmidt)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Note that the algorithm below is included solely for explanatory purposes for those unaware of the QR decomposition. It is poor code from a computational point of view.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>qr_func <span class="ot">&lt;-</span> <span class="cf">function</span>(X) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># store dimensions of input matrix</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  dim <span class="ot">&lt;-</span> <span class="fu">dim</span>(X)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># initialize empty Q matrix</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  Q <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, dim[<span class="dv">1</span>], dim[<span class="dv">2</span>])</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># note the convenient feature of Q that the zero columns don't do anything</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># initialize the first column of Q as a scaled version of the first column of X</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  Q[,<span class="dv">1</span>] <span class="ot">&lt;-</span> X[,<span class="dv">1</span>] <span class="sc">/</span> <span class="fu">c</span>(<span class="fu">sqrt</span>(<span class="fu">crossprod</span>(X[,<span class="dv">1</span>])))</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>dim[<span class="dv">2</span>]) {</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate coefficients that produce X[,j] orthogonal to existing Q columns</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">crossprod</span>(X[,j], Q[,<span class="dv">1</span><span class="sc">:</span>(j<span class="dv">-1</span>)]) <span class="sc">/</span> <span class="fu">apply</span>(Q[,<span class="dv">1</span><span class="sc">:</span>(j<span class="dv">-1</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>], <span class="dv">2</span>, crossprod))</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># note that these coefficients are merely the unscaled covariances of X[,j] </span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># with the existing columns of Q, and by multiplying existing Q with these </span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># coefficients and subtracting these values from X, the new Q-column is </span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># uncorrelated to the existing Q-columns. </span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    Q[,j] <span class="ot">&lt;-</span> X[,j] <span class="sc">-</span> Q[,<span class="dv">1</span><span class="sc">:</span>(j<span class="dv">-1</span>), drop <span class="ot">=</span> <span class="cn">FALSE</span>] <span class="sc">%*%</span> b</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scale to unit length</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    Q[,j] <span class="ot">&lt;-</span> Q[,j] <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(Q[,j]<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate R by making sure that Q^T X = R, and thus X = QR</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we use here that Q is orthonormal, and thus Q^TQ = I</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  R <span class="ot">&lt;-</span> <span class="fu">t</span>(Q) <span class="sc">%*%</span> X</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">Q =</span> Q, <span class="at">R =</span> R)</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">sample</span>(<span class="dv">20</span>), <span class="dv">5</span>)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>(qr_own <span class="ot">&lt;-</span> <span class="fu">qr_func</span>(K))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Q
+           [,1]       [,2]        [,3]       [,4]
+[1,] 0.06696495  0.4354260 -0.11828785  0.3418044
+[2,] 0.20089486  0.7514209 -0.10300605  0.2878141
+[3,] 0.66964953  0.1928315  0.01205777 -0.7037544
+[4,] 0.53571962 -0.2341348  0.67174297  0.4547543
+[5,] 0.46875467 -0.3921322 -0.72388793  0.3134662
+
+$R
+              [,1]          [,2]         [,3]      [,4]
+[1,]  2.986637e+01  1.720999e+01 2.604937e+01 20.960030
+[2,]  1.776357e-15  1.802266e+01 7.528889e+00  8.005370
+[3,] -7.105427e-15 -5.995204e-15 8.645595e+00  1.010103
+[4,] -4.440892e-15 -9.547918e-15 2.442491e-15  6.524636</code></pre>
+</div>
+</div>
+<p>Note that the matrix <span class="math inline">\(R\)</span> is unique only up to multiplication by a diagonal matrix consisting of positive and negative ones. That is, if we multiply a column of <span class="math inline">\(Q\)</span> by <span class="math inline">\(-1\)</span> and perform the same operation to the row of <span class="math inline">\(R\)</span>, we obtain the same <span class="math inline">\(X\)</span> upon multiplication.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>qr_R <span class="ot">&lt;-</span> <span class="fu">qr</span>(K)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(qr_R)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">qr.R</span>(qr_R)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>sign_R <span class="ot">&lt;-</span> <span class="fu">sign</span>(<span class="fu">diag</span>(R))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(Q, qr_own<span class="sc">$</span>Q <span class="sc">%*%</span> <span class="fu">diag</span>(sign_R))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(R, <span class="fu">diag</span>(sign_R) <span class="sc">%*%</span> qr_own<span class="sc">$</span>R)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Using some convenient features of orthonormal and upper triangular matrices, it is actually quite easy to perform linear regression right now. Using the fact that <span class="math inline">\(X = QR\)</span>, we can rewrite our linear regression problem as <span class="math display">\[
+\begin{aligned}
+X^TX \beta &amp;= X^Ty \\
+(QR)^T(QR) \beta &amp;= (QR)^T y \\
+R^TQ^TQR \beta &amp;= R^TQ^T y. \\
+\end{aligned}
+\]</span> So far, it seems like we haven’t achieved much, other than rewriting some expression into a longer and not necessarily simpler expression. However, remember that <span class="math inline">\(Q\)</span> is orthonormal, and thus that <span class="math inline">\(Q^TQ = I\)</span>. So, now we have <span class="math display">\[
+R^TR \beta = R^TQ^Ty,
+\]</span> which is almost as simple as the expression we already had. We can again pre-multiply both sides with the inverse of <span class="math inline">\(R^T\)</span>, which results in two new identity matrices that we can ignore. We now obtain the final expression <span class="math display">\[
+R\beta = Q^T y,
+\]</span> and since <span class="math inline">\(R\)</span> is upper triangular, we can very efficiently solve this set of equations using back-substitution. In our case, we have only two predictors and an intercept, so <span class="math inline">\(R\)</span> is <span class="math inline">\(3 \times 3\)</span> with zeros below the diagonal, <span class="math inline">\(\beta\)</span> is a vector with three elements, and <span class="math inline">\(Q^Ty\)</span> is a vector with three elements. Hence, we have <span class="math display">\[
+\begin{aligned}
+R_{1,1}\beta_1 + R_{1,2}\beta_2 + R_{1,3}\beta_3 &amp;= (Q^T y)_1 \\
+R_{2,2}\beta_2 + R_{2,3}\beta_3 &amp;= (Q^T y)_2 \\
+R_{3,3}\beta_3 &amp;= (Q^Ty)_3.
+\end{aligned}
+\]</span> Starting from the bottom, <span class="math inline">\(\beta_3\)</span> is given by <span class="math inline">\((Q^Ty)_3 / R_{3,3}\)</span>. The value for <span class="math inline">\(\beta_2\)</span> is easily obtained once we have <span class="math inline">\(\beta_3\)</span>! The only thing we have to do is rewriting the equation above as <span class="math inline">\(\beta_2 = ((Q^T y)_{2} - R_{2,3} \beta_3)/R_{2,2}\)</span>. Doing the same thing for the intercept yields <span class="math inline">\(\beta_1 = ((Q^T y)_{1} - R_{1,2}\beta_2 -  R_{1,3} \beta_3)/R_{1,1}\)</span>. Yoo, this stuff is actually simpler than I thought!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>QR <span class="ot">&lt;-</span> <span class="fu">qr</span>(Xd)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>QTy <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">qr.Q</span>(QR)) <span class="sc">%*%</span> y</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">qr.R</span>(QR)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>b3 <span class="ot">&lt;-</span> QTy[<span class="dv">3</span>] <span class="sc">/</span> R[<span class="dv">3</span>,<span class="dv">3</span>]</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> (QTy[<span class="dv">2</span>] <span class="sc">-</span> R[<span class="dv">2</span>,<span class="dv">3</span>] <span class="sc">*</span> b3) <span class="sc">/</span> R[<span class="dv">2</span>,<span class="dv">2</span>]</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> (QTy[<span class="dv">1</span>] <span class="sc">-</span> R[<span class="dv">1</span>,<span class="dv">2</span>] <span class="sc">*</span> b2 <span class="sc">-</span> R[<span class="dv">1</span>,<span class="dv">3</span>] <span class="sc">*</span> b3) <span class="sc">/</span> R[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(b1, b2, b3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.05924251  0.12069667  0.52018686</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>We can do the same thing much more efficient, just watch!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qr.solve</span>(Xd, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            [,1]
+[1,] -0.05924251
+[2,]  0.12069667
+[3,]  0.52018686</code></pre>
+</div>
+</div>
+<p>Internally, <code>solve(crossprod(X), crossprod(X, y))</code> uses a similar trick (by decomposing <span class="math inline">\(X^TX = LU\)</span>), so we don’t necessarily expect a speed-up here.</p>
+</div>
+</div>
+<p>Using a <span class="math inline">\(QR\)</span> decomposition to solve the least-squares equations is computationally more stable (i.e., results in smaller approximation errors) than solving the normal equations directly. If <span class="math inline">\(X^TX\)</span> is far from singular, this does not matter much, but if some variables are highly correlated, the resulting approximation errors can be quite large. However, the computation is somewhat less efficient than solving the normal equations directly. We will come back to computational efficiency below.</p>
+</section>
+<section id="same-trick-different-singular-value-decomposition" class="level2">
+<h2 class="anchored" data-anchor-id="same-trick-different-singular-value-decomposition">Same trick, different (singular value) decomposition</h2>
+<p>If you get the gist of the previous method, the singular value decomposition will feel fairly easy. We again start from the setting that <span class="math inline">\(X^TX\beta = X^Ty\)</span>, but now we replace <span class="math inline">\(X\)</span> by its singular value decomposition <span class="math inline">\(U\Sigma V^T\)</span>, where both <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are orthonormal matrices and <span class="math inline">\(\Sigma\)</span> is a diagonal matrix containing the singular values of <span class="math inline">\(X\)</span>. We now obtain the following expression <span class="math display">\[
+V\Sigma^T U^T U \Sigma V^T \beta = V \Sigma^T U^T y.
+\]</span> We know from the previous section that the product of orthonormal matrices <span class="math inline">\(U^T U\)</span> can be ignored, and since <span class="math inline">\(\Sigma\)</span> is diagonal, <span class="math inline">\(\Sigma^T = \Sigma\)</span>. So we can rewrite the expression as <span class="math display">\[
+\begin{aligned}
+V\Sigma^T U^T U \Sigma V^T \beta &amp;= V \Sigma^T U^T y \\
+\Rightarrow V\Sigma\Sigma V^T \beta &amp;= V \Sigma U^T y \\
+\Rightarrow \Sigma\Sigma V^T \beta &amp;= \Sigma U^T y\\
+\Rightarrow V^T \beta &amp;= \Sigma^{-1} U^Ty \\
+\Rightarrow \beta &amp;= V \Sigma^{-1} U^T y,
+\end{aligned}
+\]</span> where we performed the following operations:</p>
+<ul>
+<li>On line 2: remove <span class="math inline">\(U^TU\)</span>, as it’s just cluttered notation for an identity matrix.</li>
+<li>On line 3: premultiply both sides by <span class="math inline">\(V^T\)</span> and note that <span class="math inline">\(V^TV\)</span> is also an identity matrix.</li>
+<li>On line 4: premultiply both sides by <span class="math inline">\(\Sigma^{-1}\Sigma^{-1}\)</span>.</li>
+<li>On line 5: premultiply both sides by <span class="math inline">\(V\)</span> (and use orthogonality of <span class="math inline">\(V\)</span>).</li>
+</ul>
+<p>In <code>R</code>, we thus have the following:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>USV <span class="ot">&lt;-</span> <span class="fu">svd</span>(Xd)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>USV<span class="sc">$</span>v <span class="sc">%*%</span> <span class="fu">diag</span>(<span class="dv">1</span><span class="sc">/</span>USV<span class="sc">$</span>d) <span class="sc">%*%</span> <span class="fu">t</span>(USV<span class="sc">$</span>u) <span class="sc">%*%</span> y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            [,1]
+[1,] -0.05924251
+[2,]  0.12069667
+[3,]  0.52018686</code></pre>
+</div>
+</div>
+<p>These calculations can be further simplified because we do not need to construct the diagonal matrix <span class="math inline">\(\Sigma^{-1}\)</span>. We can carry out these calculations element-wise on the <span class="math inline">\(U^Ty\)</span> vector, like so:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>USV<span class="sc">$</span>v <span class="sc">%*%</span> (<span class="fu">crossprod</span>(USV<span class="sc">$</span>u, y)<span class="sc">/</span>USV<span class="sc">$</span>d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            [,1]
+[1,] -0.05924251
+[2,]  0.12069667
+[3,]  0.52018686</code></pre>
+</div>
+</div>
+<p>The singular value decomposition is again slightly more expensive to compute than the <span class="math inline">\(QR\)</span> decomposition, and is also more stable computationally than solving the normal equations directly. Moreover, the singular value decomposition can be used even if <span class="math inline">\(X^TX\)</span> is rank-deficient, i.e., if some columns of <span class="math inline">\(X\)</span> are linearly dependent. In such instances, we use <span class="math display">\[
+\Sigma^+ = \begin{cases}
+\frac{1}{\sigma_i} &amp; \text{if } \sigma_i&gt;0 \\
+0 &amp; \text{otherwise}
+\end{cases},
+\]</span> which is the pseudo-inverse of the matrix <span class="math inline">\(\Sigma\)</span> that can be used to calculate the pseudo-inverse of a rank-deficient matrix <span class="math inline">\(X^TX\)</span>. This formulation can even be used if we have more variables than cases, which is sometimes called <em>minimum</em> <span class="math inline">\(\ell_2\)</span> norm regression (see, for example, <a href="https://www.stat.berkeley.edu/~ryantibs/statlearn-s24/lectures/ridgeless.pdf">Tibshirani, 2024</a> and <a href="https://www.jmlr.org/papers/volume21/19-844/19-844.pdf">Kobak et al., 2020</a>).</p>
+</section>
+<section id="one-final-decomposition-cholesky" class="level2">
+<h2 class="anchored" data-anchor-id="one-final-decomposition-cholesky">One final decomposition (Cholesky)</h2>
+<p>We circle back to our initial solution <span class="math display">\[
+X^TX\beta = X^Ty,
+\]</span> and introduce a final decomposition to solve the set of equations. By noting that <span class="math inline">\(X^TX\)</span> is symmetric and positive-definite, we can decompose it as <span class="math display">\[
+X^TX = LL^T,
+\]</span> where <span class="math inline">\(L\)</span> is a lower-triangular matrix. So, instead of decomposing the design matrix (i.e., the matrix with observed predictors), we decompose the (unscaled) covariance matrix <span class="math inline">\(X^TX\)</span>. Using this formulation, we can write <span class="math display">\[
+LL^T\beta = X^Ty.
+\]</span> Now, because <span class="math inline">\(L\)</span> is lower-triangular, and <span class="math inline">\(L^T\)</span> is upper-triangular, we can solve the set of equations efficiently as follows. First, we can solve <span class="math display">\[
+L g = X^Ty
+\]</span> for a newly introduced vector <span class="math inline">\(g\)</span>, which is easy because <span class="math inline">\(L\)</span> is lower-triangular. To do this, we use forward substitution, which implies nothing more than the following. Starting from the first row, we have <span class="math inline">\(L_{11}g_1 = (X^Ty)_1\)</span>. For the second row, we have <span class="math inline">\(L_{21} g_1 + L_{22}g_2 = (X^Ty)_2\)</span> for which we can plug in the previously calculated <span class="math inline">\(g_1\)</span>. We repeat the process until we solved for all elements of <span class="math inline">\(g\)</span>. Subsequently, we can solve <span class="math inline">\(L^T\beta = g\)</span>, which is also easy because we can make use of the fact that <span class="math inline">\(L^T\)</span> is upper triangular, which means we can use backward substitution. Here, starting from the last row, we have <span class="math inline">\((L^T)_{pp}\beta_p = g_p\)</span>, <span class="math inline">\((L^T)_{p-1}\beta_{p-1} = g_{p-1}\)</span>, and so on. To see why this works, we only have to rewrite the equation <span class="math display">\[
+\begin{aligned}
+LL^T\beta &amp;= X^Ty \\
+\Rightarrow ~~~~ LL^T\beta &amp;= Lg ~~~~~~ \text{rewrite } X^Ty \text{ as } Lg \\
+\Rightarrow ~~~~~~~ L^T\beta &amp;= g ~~~~~~~~ \text{premultiply with } L^{-1}.
+\end{aligned}
+\]</span> This is one of the most efficient ways to calculate the regression coefficients, but can be numerically unstable when <span class="math inline">\(X\)</span> is close to rank-deficient.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Computing the Cholesky decomposition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To compute the Cholesky decomposition, we need to find a lower-triangular matrix <span class="math inline">\(L\)</span> such that, when multiplied with its transpose, it produces the original matrix <span class="math inline">\(X^TX\)</span>. Let’s break this down into a set of equations, where we write <span class="math inline">\(X^TX = A = LL^T\)</span>: <span class="math display">\[
+\begin{aligned}
+A &amp;= LL^T \\
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1p} \\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{p1} &amp; a_{p2} &amp; \cdots &amp; a_{pp}
+\end{bmatrix} &amp;= \begin{bmatrix}
+l_{11} &amp; 0 &amp; \cdots &amp; 0 \\
+l_{21} &amp; l_{22} &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+l_{p1} &amp; l_{p2} &amp; \cdots &amp; l_{pp}
+\end{bmatrix} \begin{bmatrix}
+l_{11} &amp; l_{21} &amp; \cdots &amp; l_{p1} \\
+0 &amp; l_{22} &amp; \cdots &amp; l_{p2} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; l_{pp}
+\end{bmatrix}.
+\end{aligned}
+\]</span> From here, it follows that, for the first row of <span class="math inline">\(A\)</span>, we have <span class="math display">\[
+\begin{aligned}
+a_{11} &amp;= l_{11} \cdot l_{11} + 0 \cdot 0 + \cdots + 0 \cdot 0 = l_{11}^2 \\
+a_{12} &amp;= l_{11} \cdot l_{21} + 0 \cdot l_{22} + \cdots + 0 \cdot 0 = l_{11} \cdot l_{21} \\
+\vdots ~~ &amp;= ~~~~~~~~~~~~~~~~~~~~~~\vdots \\
+a_{1p} &amp;= l_{11} \cdot l_{p1} + 0 \cdot l_{p2} + \cdots + 0 \cdot l_{pp} = l_{11} \cdot l_{p1}.
+\end{aligned}
+\]</span> Thus, <span class="math inline">\(l_{11} = \sqrt{a_{11}}\)</span>, <span class="math inline">\(l_{21} = a_{12}/l_{11}\)</span>, using <span class="math inline">\(l_{11}\)</span> obtained in the previous step, and <span class="math inline">\(l_{p_1}=a_{1p}/l_{11}\)</span>, again using the previously obtained <span class="math inline">\(l_{11}\)</span>. Moving to the second row of <span class="math inline">\(A\)</span>, we have that <span class="math display">\[
+a_{21} = a_{12},
+\]</span> which we have obtained already. Continuing our journey, we get <span class="math display">\[
+\begin{aligned}
+a_{22} &amp;= l_{21} \cdot l_{21} + l_{22} \cdot l_{22} + 0 + \cdots + 0 = l_{21}^2 + l_{22}^2 \\
+\vdots ~~ &amp;= ~~~~~~~~~~~~~~~~~~~~~~\vdots \\
+a_{2p} &amp;= l_{21} \cdot l_{p1} + l_{22} \cdot l_{p2} + 0 + \cdots + 0 = l_{21} \cdot l_{p1} + l_{22} \cdot l_{p2},
+\end{aligned}
+\]</span> which we can again solve sequentially, <span class="math display">\[
+\begin{aligned}
+l_{22} &amp;= \sqrt{a_{22} - l_{21}} \\
+\vdots &amp;= ~~~~~~~~~~ \vdots \\
+l_{p2} &amp;= \left( a_{2p} - l_{21} \cdot l_{p1} \right)/l_{22},
+\end{aligned}
+\]</span> and noting that every required factor of <span class="math inline">\(L\)</span> has been calculated previously.</p>
+<p>Putting everything in a small algorithm, we obtain the following Cholesky-Crout algorithm (see <a href="https://en.wikipedia.org/wiki/Cholesky_decomposition#The_Cholesky%E2%80%93Banachiewicz_and_Cholesky%E2%80%93Crout_algorithms">Wikipedia</a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>cholesky <span class="ot">&lt;-</span> <span class="cf">function</span>(XTX) {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  dim <span class="ot">&lt;-</span> <span class="fu">dim</span>(XTX)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  L <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, dim[<span class="dv">1</span>], dim[<span class="dv">2</span>])</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  L[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(XTX[<span class="dv">1</span>,<span class="dv">1</span>])</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>dim[<span class="dv">1</span>]) {</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(i<span class="dv">-1</span>)) {</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>      L[i,j] <span class="ot">&lt;-</span> (XTX[i,j] <span class="sc">-</span> <span class="fu">sum</span>(L[i,<span class="dv">1</span><span class="sc">:</span>j]<span class="sc">*</span>L[j,<span class="dv">1</span><span class="sc">:</span>j]))<span class="sc">/</span>L[j,j] <span class="co"># </span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    L[i,i] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(XTX[i,i] <span class="sc">-</span> <span class="fu">sum</span>(L[i,<span class="dv">1</span><span class="sc">:</span>(i<span class="dv">-1</span>)]<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  L</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>XTX <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(Xd)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">cholesky</span>(XTX)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>XTX</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            [,1]       [,2]        [,3]
+[1,] 200.0000000  -3.838651  -0.1295953
+[2,]  -3.8386514 170.992962  71.4164806
+[3,]  -0.1295953  71.416481 176.1875449</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>L <span class="sc">%*%</span> <span class="fu">t</span>(L)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            [,1]       [,2]        [,3]
+[1,] 200.0000000  -3.838651  -0.1295953
+[2,]  -3.8386514 170.992962  71.4164806
+[3,]  -0.1295953  71.416481 176.1875449</code></pre>
+</div>
+</div>
+<p>Some of you might note that all this fuss is irrelevant, as we essentially already had the Cholesky decomposition of <span class="math inline">\(X^TX\)</span>. Remember that <span class="math inline">\(X^TX = R^TQ^TQR^T = R^TR\)</span>, so if we set <span class="math inline">\(L = R^T\)</span> we are fairly close to the solution.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>L</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             [,1]      [,2]     [,3]
+[1,] 14.142135624  0.000000  0.00000
+[2,] -0.271433644 13.073610  0.00000
+[3,] -0.009163773  5.462454 12.09748</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(R)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              [,1]       [,2]     [,3]
+[1,] -14.142135624   0.000000  0.00000
+[2,]   0.271433644 -13.073610  0.00000
+[3,]   0.009163773  -5.462454 12.09748</code></pre>
+</div>
+</div>
+<p>Remember that <span class="math inline">\(R\)</span> was unique only up to multiplication with a diagonal matrix consisting of ones and minus ones. If we impose the restriction that <span class="math inline">\(R\)</span> only has positive diagonal elements, we get the following.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(R) <span class="sc">%*%</span> <span class="fu">diag</span>(<span class="fu">sign</span>(<span class="fu">diag</span>(R)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             [,1]      [,2]     [,3]
+[1,] 14.142135624  0.000000  0.00000
+[2,] -0.271433644 13.073610  0.00000
+[3,] -0.009163773  5.462454 12.09748</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>L</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             [,1]      [,2]     [,3]
+[1,] 14.142135624  0.000000  0.00000
+[2,] -0.271433644 13.073610  0.00000
+[3,] -0.009163773  5.462454 12.09748</code></pre>
+</div>
+</div>
+<p>Which illustrates that we already had this solution. However, computing the <span class="math inline">\(QR\)</span> decomposition first requires more calculations than necessary (i.e., is less efficient).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-note-on-computational-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="a-note-on-computational-complexity">A note on computational complexity</h2>
+<p>So far, we have considered four methods for performing the calculations: solving the normal equations directly, using a Cholesky decomposition, and using a <span class="math inline">\(QR\)</span> or <span class="math inline">\(SVD\)</span> decomposition of the design matrix, and exploiting this structure to perform the calculations. Each of these methods requires a certain number of operations, leaving storage requirements aside. In it’s least optimized form, solving the normal equations directly requires approximately <span class="math inline">\(2np^2 + 2np + p^3\)</span> operations: <span class="math inline">\(2np^2\)</span> for computing <span class="math inline">\(X^TX\)</span>, <span class="math inline">\(2np\)</span> for computing <span class="math inline">\(X^Ty\)</span> and <span class="math inline">\(p^3\)</span> for computing the inverse of <span class="math inline">\(X^TX\)</span>. However, we can improve efficiency by noting that for calculating <span class="math inline">\(X^TX\)</span>, we only need to perform half of the computations, because <span class="math inline">\(X^TX\)</span> yields a symmetric matrix. Moreover, performing a Cholesky decomposition to solve the system yields an additional speed-up. Computing the Cholesky decomposition of <span class="math inline">\(X^TX\)</span> requires <span class="math inline">\(p^3/3\)</span> operations, and subsequently solving the system requires another <span class="math inline">\(2p^2\)</span>. Solving the normal equations by performing a <span class="math inline">\(QR\)</span> decomposition first requires approximately <span class="math inline">\(2(n-p/3)p^2\)</span> computations for performing the QR decomposition, <span class="math inline">\(2np\)</span> computations for computing <span class="math inline">\(Q^T y\)</span> and <span class="math inline">\(p^2\)</span> computations for solving the system. Computing the coefficients using a singular value decomposition does not yield an exact number of operations, but takes approximately <span class="math inline">\(2(n + 11/2 p)p^2\)</span> operations for computing the <span class="math inline">\(SVD\)</span>, and then some additional operations for performing the matrix multiplications (<span class="math inline">\(2np\)</span> for calculating <span class="math inline">\(U^Ty\)</span>, <span class="math inline">\(p\)</span> for multiplying with <span class="math inline">\(\Sigma^{-1}\)</span> and <span class="math inline">\(2p^2\)</span> for multiplying this vector with <span class="math inline">\(V\)</span>, if all done efficiently).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> P<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> N</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>n<span class="sc">*</span>p<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>n<span class="sc">*</span>p <span class="sc">+</span> p<span class="sc">^</span><span class="dv">3</span> <span class="co"># directly</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4827</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>n<span class="sc">*</span>p<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>n<span class="sc">*</span>p <span class="sc">+</span> p<span class="sc">^</span><span class="dv">3</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>p <span class="co"># optimized and with cholesky</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3015</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(n <span class="sc">-</span> p<span class="sc">/</span><span class="dv">3</span>)<span class="sc">*</span>p<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>n<span class="sc">*</span>p <span class="sc">+</span> p<span class="sc">^</span><span class="dv">2</span> <span class="co"># QR</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4791</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(n <span class="sc">+</span> <span class="dv">11</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">*</span> p)<span class="sc">*</span>p<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>p<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>n<span class="sc">*</span>p <span class="sc">+</span> p <span class="co"># SVD</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5127</code></pre>
+</div>
+</div>
+</section>
+<section id="benchmarking" class="level2">
+<h2 class="anchored" data-anchor-id="benchmarking">Benchmarking</h2>
+<p>Throughout, we displayed multiple ways of calculating the regression coefficients in <code>R</code>, and made some statements with respect to their efficiency. Here we very briefly benchmark the different ways of calculating the coefficients, to back up our earlier claims. In this benchmark, we also include the fastest in-built <code>R</code> function to perform linear regression (<code>.lm.fit()</code>) as a comparison.</p>
+<section id="small-data-benchmark" class="level3">
+<h3 class="anchored" data-anchor-id="small-data-benchmark">Small data benchmark</h3>
+<p>We first benchmark the different methods with the data used throughout. Hence, we have two variables and an additional intercept for <span class="math inline">\(N = 200\)</span> observations.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to the R-code used for benchmarking.</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>check_func <span class="ot">&lt;-</span> <span class="cf">function</span>(target, current) {</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all.equal</span>(target, current, <span class="at">check.class =</span> <span class="cn">FALSE</span>, <span class="at">check.attributes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">lm()</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> X)),</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">.lm.fit()</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">.lm.fit</span>(Xd, y)<span class="sc">$</span>coefficients,</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">solve(t(X)%*%X)%*%t(X)%*%y</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xd) <span class="sc">%*%</span> Xd) <span class="sc">%*%</span> <span class="fu">t</span>(Xd) <span class="sc">%*%</span> y,</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">solve(crossprod(X), crossprod(X, y))</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">solve</span>(<span class="fu">crossprod</span>(Xd), <span class="fu">crossprod</span>(Xd, y)),</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">qr.solve(X, y)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">qr.solve</span>(Xd, y),</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">svd =</span> {USV <span class="ot">&lt;-</span> <span class="fu">svd</span>(Xd); USV<span class="sc">$</span>v <span class="sc">%*%</span> (<span class="fu">crossprod</span>(USV<span class="sc">$</span>u, y)<span class="sc">/</span>USV<span class="sc">$</span>d)},</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">chol =</span> {cholX <span class="ot">&lt;-</span> <span class="fu">chol</span>(<span class="fu">crossprod</span>(Xd)); <span class="fu">backsolve</span>(cholX, <span class="fu">forwardsolve</span>(<span class="fu">t</span>(cholX), <span class="fu">crossprod</span>(Xd, y)))},</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> check_func,</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_iterations =</span> <span class="dv">100</span></span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(expression, min, median, <span class="st">`</span><span class="at">itr/sec</span><span class="st">`</span>, <span class="st">`</span><span class="at">mem_alloc</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-benchmark" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-benchmark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Benchmarking different ways of calculating OLS regression coefficients with the example data.
+</figcaption>
+<div aria-describedby="tbl-benchmark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table table-striped table-hover do-not-create-environment cell caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">expression</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">min</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">median</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">itr/sec</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mem_alloc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">lm()</td>
+<td style="text-align: right;">233.5µs</td>
+<td style="text-align: right;">300.4µs</td>
+<td style="text-align: right;">3224.212</td>
+<td style="text-align: right;">48.9KB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">.lm.fit()</td>
+<td style="text-align: right;">3.9µs</td>
+<td style="text-align: right;">5.8µs</td>
+<td style="text-align: right;">160760.998</td>
+<td style="text-align: right;">10.8KB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">solve(t(X)%*%X)%*%t(X)%*%y</td>
+<td style="text-align: right;">14.8µs</td>
+<td style="text-align: right;">19.5µs</td>
+<td style="text-align: right;">50010.657</td>
+<td style="text-align: right;">14.2KB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">solve(crossprod(X), crossprod(X, y))</td>
+<td style="text-align: right;">6.1µs</td>
+<td style="text-align: right;">7.8µs</td>
+<td style="text-align: right;">127308.815</td>
+<td style="text-align: right;">0B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">qr.solve(X, y)</td>
+<td style="text-align: right;">22µs</td>
+<td style="text-align: right;">29.5µs</td>
+<td style="text-align: right;">32971.782</td>
+<td style="text-align: right;">22.2KB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">svd</td>
+<td style="text-align: right;">18.6µs</td>
+<td style="text-align: right;">25.7µs</td>
+<td style="text-align: right;">37441.721</td>
+<td style="text-align: right;">20.7KB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">chol</td>
+<td style="text-align: right;">12.3µs</td>
+<td style="text-align: right;">15.4µs</td>
+<td style="text-align: right;">63867.639</td>
+<td style="text-align: right;">22.2KB</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>So, <code>.lm.fit()</code> is super fast, followed by <code>solve(crossprod(X), crossprod(X, y))</code>. Using the in-built <code>chol</code> function with forward and backward solving is also relatively fast, and even our inefficient <code>solve(t(X) %*% X) %*% t(X) %*% y</code> is not too slow.</p>
+</section>
+<section id="larger-data-benchmark" class="level3">
+<h3 class="anchored" data-anchor-id="larger-data-benchmark">Larger data benchmark</h3>
+<p>When we increase the size of the data to <span class="math inline">\(P = 100\)</span> variables and an additional intercept for <span class="math inline">\(N = 5000\)</span> observations, we see what we expect to see.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see the R-code used for benchmarking.</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  N,</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>(<span class="dv">0</span>, P),</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>(P)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>Xd <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, X)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>check_func <span class="ot">&lt;-</span> <span class="cf">function</span>(target, current) {</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all.equal</span>(target, current, <span class="at">check.class =</span> <span class="cn">FALSE</span>, <span class="at">check.attributes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">lm()</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> X)),</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">.lm.fit()</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">.lm.fit</span>(Xd, y)<span class="sc">$</span>coefficients,</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">RcppEigen =</span> RcppEigen<span class="sc">::</span><span class="fu">fastLmPure</span>(Xd, y)<span class="sc">$</span>coefficients,</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">RcppArmadillo =</span> RcppArmadillo<span class="sc">::</span><span class="fu">fastLmPure</span>(Xd, y)<span class="sc">$</span>coefficients,</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">solve(t(X)%*%X)%*%t(X)%*%y</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xd) <span class="sc">%*%</span> Xd) <span class="sc">%*%</span> <span class="fu">t</span>(Xd) <span class="sc">%*%</span> y,</span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">solve(crossprod(X), crossprod(X, y))</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">solve</span>(<span class="fu">crossprod</span>(Xd), <span class="fu">crossprod</span>(Xd, y)),</span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">qr.solve(X, y)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">qr.solve</span>(Xd, y),</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">svd =</span> {USV <span class="ot">&lt;-</span> <span class="fu">svd</span>(Xd); USV<span class="sc">$</span>v <span class="sc">%*%</span> (<span class="fu">crossprod</span>(USV<span class="sc">$</span>u, y)<span class="sc">/</span>USV<span class="sc">$</span>d)},</span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">chol =</span> {cholX <span class="ot">&lt;-</span> <span class="fu">chol</span>(<span class="fu">crossprod</span>(Xd)); <span class="fu">backsolve</span>(cholX, <span class="fu">forwardsolve</span>(<span class="fu">t</span>(cholX), <span class="fu">crossprod</span>(Xd, y)))},</span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> check_func,</span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_iterations =</span> <span class="dv">100</span></span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(expression, min, median, <span class="st">`</span><span class="at">itr/sec</span><span class="st">`</span>, <span class="st">`</span><span class="at">mem_alloc</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
+<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 methods overwritten by 'RcppArmadillo':
+  method               from     
+  predict.fastLm       RcppEigen
+  print.fastLm         RcppEigen
+  summary.fastLm       RcppEigen
+  print.summary.fastLm RcppEigen</code></pre>
+</div>
+<div id="tbl-benchmark-large" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-benchmark-large-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Benchmarking different ways of calculating OLS regression coefficients with a somewhat larger dataset.
+</figcaption>
+<div aria-describedby="tbl-benchmark-large-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table table-striped table-hover do-not-create-environment cell caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">expression</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">min</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">median</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">itr/sec</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mem_alloc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">lm()</td>
+<td style="text-align: right;">21.2ms</td>
+<td style="text-align: right;">23.7ms</td>
+<td style="text-align: right;">41.37815</td>
+<td style="text-align: right;">23.58MB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">.lm.fit()</td>
+<td style="text-align: right;">16.2ms</td>
+<td style="text-align: right;">18.3ms</td>
+<td style="text-align: right;">54.56578</td>
+<td style="text-align: right;">3.93MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RcppEigen</td>
+<td style="text-align: right;">10.4ms</td>
+<td style="text-align: right;">12.1ms</td>
+<td style="text-align: right;">83.19213</td>
+<td style="text-align: right;">5.08MB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RcppArmadillo</td>
+<td style="text-align: right;">31.2ms</td>
+<td style="text-align: right;">33.8ms</td>
+<td style="text-align: right;">29.34547</td>
+<td style="text-align: right;">258.66KB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">solve(t(X)%*%X)%*%t(X)%*%y</td>
+<td style="text-align: right;">41.4ms</td>
+<td style="text-align: right;">45ms</td>
+<td style="text-align: right;">21.71391</td>
+<td style="text-align: right;">11.88MB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">solve(crossprod(X), crossprod(X, y))</td>
+<td style="text-align: right;">10.6ms</td>
+<td style="text-align: right;">12.7ms</td>
+<td style="text-align: right;">77.73327</td>
+<td style="text-align: right;">164.82KB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">qr.solve(X, y)</td>
+<td style="text-align: right;">17.6ms</td>
+<td style="text-align: right;">21.1ms</td>
+<td style="text-align: right;">46.81972</td>
+<td style="text-align: right;">15.5MB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">svd</td>
+<td style="text-align: right;">61.3ms</td>
+<td style="text-align: right;">70.9ms</td>
+<td style="text-align: right;">13.81208</td>
+<td style="text-align: right;">15.89MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">chol</td>
+<td style="text-align: right;">11.5ms</td>
+<td style="text-align: right;">12.9ms</td>
+<td style="text-align: right;">76.71346</td>
+<td style="text-align: right;">241.73KB</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The function <code>solve(crossprod(X), crossprod(X, y))</code> is super fast because it uses a very efficient estimation routine that is highly optimized and performs barely any additional computations. The Cholesky decomposition <code>chol()</code> with forward and backward substitution is also really efficient. The functions <code>.lm.fit()</code> and <code>qr.solve()</code> are also rather fast. The singular value decomposition is slower than the other functions, but has some advantages not shared by the other functions.</p>
+</section>
+</section>
+<section id="reuse" class="level2">
+<h2 class="anchored" data-anchor-id="reuse">Reuse</h2>
+<p><a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPLv3</a></p>
+<section id="citation" class="level3">
+<h3 class="anchored" data-anchor-id="citation">Citation</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{bib}</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="in">@online{</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="in">  author = {Volker, Thom Benjamin},</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="in">  title = {Different ways of calculating OLS regression coefficients (in R)},</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="in">  date = {2025-06-09},</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="in">  url = {https://thomvolker.github.io/blog/2506_regression/}</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For attribution, please cite this blogpost as:</p>
+<blockquote class="blockquote">
+<p>Volker, T. B. (2025). Different ways of calculating OLS regression coefficients (in R). Obtained from <a href="https://thomvolker.github.io/blog/2506_regression/" class="uri">https://thomvolker.github.io/blog/2506_regression/</a></p>
+</blockquote>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
