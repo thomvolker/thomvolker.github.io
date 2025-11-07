@@ -1,24 +1,17 @@
 [
   {
-    "objectID": "teaching/index.html",
-    "href": "teaching/index.html",
-    "title": "Teaching",
+    "objectID": "talks/index.html",
+    "href": "talks/index.html",
+    "title": "Talks",
     "section": "",
-    "text": "I fully support open educational materials, and I intend to make all teaching resources I developed available online. All materials below are licensed liberally. If the GitHub link is not there, some of the materials are private. If you are interested in any of the source files, please drop me a line.\n\nWorkshops\n\n\n\n\n\n\n\n2025\nMissing data in medical research: From practical problems to flexible solutions  Half-day course for St. Antonius Hospital on missing data; developed with Hanne Oberman  Course page in Dutch, materials in English\n\n\n2023\nFake it ’till you make it: Generating synthetic data with high utility in R  Half-day course on synthetic data; developed with Erik-Jan van Kesteren ( GitHub)\n\n\n\n\n\nUniversity courses\n\n\n\n\n\n\n\n2022-2025\nBattling the curse of dimensionality (MSc. Course)\n\n\n2021-2026\nData wrangling and data analysis (MSc. Course)\n\n\n2024\nMachine Learning with Python (Summer School Course)\n\n\n2019-2022\nMultiple Imputation in Practice (Summer School Course)"
+    "text": "Below, you can find a list of talks I have given. The list is not exhaustive, but I will try to keep it up to date. I try to make all materials openly available. Please reach out if you have any questions or if you want to collaborate on any of the topics.\n\nInvited talks\n\n\n\n\n\n\n\n2025\nStatistical disclosure control  At the Vac4EU Consortium\n\n\n2024\nEvaluating the quality of synthetic data: A density ratio approach  At the Leiden Computational Network Science group\n\n\n2024\nMeasuring utility of synthetic data (in Dutch)  At the Dutch Expert Meeting on Synthetic Data\n\n\n\n\n\nConference presentations\n\n\n\n\n\n\n\n2025\nBeing certain about the uncertain: Prediction intervals with missing data  At the ODISSEI Conference 2025\n\n\n2025\nHow networks facilitate trust: A synthesis on control effects At the Trust and Social Networks Conference (joint with Werner Raub)\n\n\n2023\nDensity ratios to evaluate and improve the utility of synthetic data  At the IOPS Conference 2023\n\n\n2023\nAssessing the utility of synthetic data: A density ratio perspective (paper)  At the United Nations Economic Commission for Europe Expert Meeting on Statistical Data Confidentiality"
   },
   {
-    "objectID": "software.html",
-    "href": "software.html",
-    "title": "Software",
+    "objectID": "blog/2505_new_website/index.html",
+    "href": "blog/2505_new_website/index.html",
+    "title": "New website",
     "section": "",
-    "text": "densityratio\n\n\nAn R-package for distribution comparison through density ratio estimation. The package is actively being developed and suggestions are very welcome!\n\n\n\n\n\n\n\n\n\n\n\n\nmice\n\n\nI am a contributor to the mice package for multiple imputation. Among other things, we are currently developing a mice implementation for the software JASP.\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blogposts",
-    "section": "",
-    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegression assumptions for normal people\n\n\n\nstatistics\n\nregression\n\n\n\nThe assumptions of linear regression are widely documented, and how to recognize violations of these assumptions is contained in basically every…\n\n\n\n\n\nSep 30, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nIllustrative GANs for simple synthetic data with keras in R\n\n\n\nmachine learning\n\ngenerative adversarial networks\n\ndeep learning\n\n\n\nGANs can be hard to get your head around. In this blogpost, I explain GANs using some simple examples and show how to generate samples from these in…\n\n\n\n\n\nJul 14, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nDifferent ways of calculating OLS regression coefficients (in R)\n\n\n\nregression\n\nqr decomposition\n\nsingular value decomposition\n\ngradient descent\n\nmachine learning\n\n\n\nMany different ways of calculating OLS regression coefficients exist, but some ways are more efficient than others. In this post we discuss some of…\n\n\n\n\n\nJun 16, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nHow does glmnet perform ridge regression?\n\n\n\nmachine learning\n\nregression\n\n\n\n\n\n\n\n\n\nMay 23, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nNew website\n\n\n\nother\n\npersonal\n\n\n\n\n\n\n\n\n\nMay 16, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\nNo matching items"
+    "text": "Since today, I have a new personal website! The site mainly serves as a repository to host some of my research projects and developed course materials. I may also write an occasional blogpost!\nDeveloping the website was really a breeze, thanks to the quarto software and the materials by Samantha Shanny-Csik."
   },
   {
     "objectID": "blog/2506_regression/index.html",
@@ -84,34 +77,6 @@
     "text": "Reuse\nGNU GPLv3\n\nCitation\n```{bib}\n@online{\n  author = {Volker, Thom Benjamin},\n  title = {Different ways of calculating OLS regression coefficients (in R)},\n  date = {2025-06-09},\n  url = {https://thomvolker.github.io/blog/2506_regression/}\n}\n```\nFor attribution, please cite this blogpost as:\n\nVolker, T. B. (2025). Different ways of calculating OLS regression coefficients (in R). Obtained from https://thomvolker.github.io/blog/2506_regression/"
   },
   {
-    "objectID": "blog/2505_glmnet_ridge/index.html",
-    "href": "blog/2505_glmnet_ridge/index.html",
-    "title": "How does glmnet perform ridge regression?",
-    "section": "",
-    "text": "Today, I was doing some programming for the R software mice, and it turns out I needed to calculate the residual degrees of freedom after performing regression with a ridge penalty to improve numerical stability. Perhaps, I thought, the glmnet package might provide any help, and at least may serve to verify my understanding. Although I love the glmnet package, I should’ve known better. That is, the package is great for estimation, but makes some design choices that are buried somewhere deep in the documentation, which can make it hard to find what is actually going on under the hood. In the end, I found out how glmnet performs ridge regression, so all good, I suppose."
-  },
-  {
-    "objectID": "blog/2505_glmnet_ridge/index.html#footnotes",
-    "href": "blog/2505_glmnet_ridge/index.html#footnotes",
-    "title": "How does glmnet perform ridge regression?",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nBy default, glmnet fits a lasso regression model, which is fairly similar but uses an \\(\\ell_1\\) penalty for the coefficients, which results in some coefficients estimated to be precisely zero. Changing the alpha parameter yields a mixture between 1-alpha times the ridge penalty and alpha times the lasso penalty.↩︎"
-  },
-  {
-    "objectID": "about.html#education",
-    "href": "about.html#education",
-    "title": "Thom Benjamin Volker",
-    "section": "Education",
-    "text": "Education\n\n\n\n\n\n\n\n2022\nMSc. Methodology and Statistics cum laude\n\n\n2022\nMSc. Sociology and Social Research cum laude\n\n\n2019\nLiberal Arts & Sciences"
-  },
-  {
-    "objectID": "about.html#selected-publications",
-    "href": "about.html#selected-publications",
-    "title": "Thom Benjamin Volker",
-    "section": "Selected publications",
-    "text": "Selected publications\n\nFor a full overview, please check my Google Scholar profile.\n\n\nKlugkist, I., & Volker, T. B. (2023). Bayesian evidence synthesis for informative hypotheses: An introduction. Psychological Methods. Advance online publication. (link)\n\n\nVolker, T. B., de Wolf, P. P., & van Kesteren, E. J. (2024). A density ratio framework for evaluating the utility of synthetic data. arXiv:2408.13167. (link)\n\n\nVolker, T. B., & Vink, G. (2021). Anonymiced shareable data: Using mice to create and analyze multiply imputed synthetic datasets. Psych, 3(4), 703-716. (link)"
-  },
-  {
     "objectID": "blog/1407_gans_in_r/index.html",
     "href": "blog/1407_gans_in_r/index.html",
     "title": "Illustrative GANs for simple synthetic data with keras in R",
@@ -175,18 +140,11 @@
     "text": "Reuse\nGNU GPLv3\n\nCitation\n```{bib}\n@online{\n  author = {Volker, Thom Benjamin},\n  title = {Illustrative GANs for simple synthetic data with keras in R},\n  date = {2025-07-14},\n  url = {https://thomvolker.github.io/blog/1407_gans_in_r/}\n}\n```\nFor attribution, please cite this blogpost as:\n\nVolker, T. B. (2025). Illustrative GANs for simple synthetic data with keras in R. Obtained from https://thomvolker.github.io/blog/1407_gans_in_r/"
   },
   {
-    "objectID": "blog/2505_new_website/index.html",
-    "href": "blog/2505_new_website/index.html",
-    "title": "New website",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blogposts",
     "section": "",
-    "text": "Since today, I have a new personal website! The site mainly serves as a repository to host some of my research projects and developed course materials. I may also write an occasional blogpost!\nDeveloping the website was really a breeze, thanks to the quarto software and the materials by Samantha Shanny-Csik."
-  },
-  {
-    "objectID": "blog/2509_regression_assumptions/index.html",
-    "href": "blog/2509_regression_assumptions/index.html",
-    "title": "Regression assumptions for normal people",
-    "section": "",
-    "text": "L &lt;- 100\nx &lt;- numeric(L)\nfor (i in 2:L) x[i] &lt;- x[i-1] + rnorm(1, 0, 0.2)\n\ncor(x, dplyr::lag(x), use = \"complete.obs\")\n\n[1] 0.9824951\n\nsummary(lm(x ~ dplyr::lag(x, 1)))\n\n\nCall:\nlm(formula = x ~ dplyr::lag(x, 1))\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.67645 -0.12118  0.00309  0.11186  0.41306 \n\nCoefficients:\n                 Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)       0.03738    0.02898    1.29      0.2    \ndplyr::lag(x, 1)  0.99437    0.01914   51.94   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.1957 on 97 degrees of freedom\n  (1 observation deleted due to missingness)\nMultiple R-squared:  0.9653,    Adjusted R-squared:  0.9649 \nF-statistic:  2698 on 1 and 97 DF,  p-value: &lt; 2.2e-16"
+    "text": "Below you find some of my writings on a variety of topics, ranging from data privacy to Bayesian methodology. Feel free to reach out if you have any questions or comments!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegression assumptions for normal people\n\n\n\nstatistics\n\nregression\n\n\n\nThe assumptions of linear regression are widely documented, and how to recognize violations of these assumptions is contained in basically every…\n\n\n\n\n\nSep 30, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nIllustrative GANs for simple synthetic data with keras in R\n\n\n\nmachine learning\n\ngenerative adversarial networks\n\ndeep learning\n\n\n\nGANs can be hard to get your head around. In this blogpost, I explain GANs using some simple examples and show how to generate samples from these in…\n\n\n\n\n\nJul 14, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nDifferent ways of calculating OLS regression coefficients (in R)\n\n\n\nregression\n\nqr decomposition\n\nsingular value decomposition\n\ngradient descent\n\nmachine learning\n\n\n\nMany different ways of calculating OLS regression coefficients exist, but some ways are more efficient than others. In this post we discuss some of…\n\n\n\n\n\nJun 16, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nHow does glmnet perform ridge regression?\n\n\n\nmachine learning\n\nregression\n\n\n\n\n\n\n\n\n\nMay 23, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\n\n\n\n\n\n\n\nNew website\n\n\n\nother\n\npersonal\n\n\n\n\n\n\n\n\n\nMay 16, 2025\n\n\nThom Benjamin Volker\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -203,10 +161,52 @@
     "text": "I’m doing a PhD on synthetic data and privacy-preserving statistics, which is just a fancy way of saying I make fake data that looks real. Besides, I procrastinate by reading on Bayesian methods, marginally improving my R packages or giving workshops on any these topics.\nIf you want to collaborate, check out my GitHub for active projects. I work, among other things, on synthetic data, differential privacy, missing data imputation, Bayesian hypothesis testing (here and here) and density ratio estimation. If I don’t answer your email, I’m probably riding my bike. Sorry!"
   },
   {
-    "objectID": "talks/index.html",
-    "href": "talks/index.html",
-    "title": "Talks",
+    "objectID": "software.html",
+    "href": "software.html",
+    "title": "Software",
     "section": "",
-    "text": "Below, you can find a list of talks I have given. The list is not exhaustive, but I will try to keep it up to date. I try to make all materials openly available. Please reach out if you have any questions or if you want to collaborate on any of the topics.\n\nInvited talks\n\n\n\n\n\n\n\n2025\nStatistical disclosure control  At the Vac4EU Consortium\n\n\n2024\nEvaluating the quality of synthetic data: A density ratio approach  At the Leiden Computational Network Science group\n\n\n2024\nMeasuring utility of synthetic data (in Dutch)  At the Dutch Expert Meeting on Synthetic Data\n\n\n\n\n\nConference presentations\n\n\n\n\n\n\n\n2025\nBeing certain about the uncertain: Prediction intervals with missing data  At the ODISSEI Conference 2025\n\n\n2025\nHow networks facilitate trust: A synthesis on control effects At the Trust and Social Networks Conference (joint with Werner Raub)\n\n\n2023\nDensity ratios to evaluate and improve the utility of synthetic data  At the IOPS Conference 2023\n\n\n2023\nAssessing the utility of synthetic data: A density ratio perspective (paper)  At the United Nations Economic Commission for Europe Expert Meeting on Statistical Data Confidentiality"
+    "text": "densityratio\n\n\nAn R-package for distribution comparison through density ratio estimation. The package is actively being developed and suggestions are very welcome!\n\n\n\n\n\n\n\n\n\n\n\n\nmice\n\n\nI am a contributor to the mice package for multiple imputation. Among other things, we are currently developing a mice implementation for the software JASP.\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Thom Benjamin Volker",
+    "section": "Education",
+    "text": "Education\n\n\n\n\n\n\n\n2022\nMSc. Methodology and Statistics cum laude\n\n\n2022\nMSc. Sociology and Social Research cum laude\n\n\n2019\nLiberal Arts & Sciences"
+  },
+  {
+    "objectID": "about.html#selected-publications",
+    "href": "about.html#selected-publications",
+    "title": "Thom Benjamin Volker",
+    "section": "Selected publications",
+    "text": "Selected publications\n\nFor a full overview, please check my Google Scholar profile.\n\n\nKlugkist, I., & Volker, T. B. (2023). Bayesian evidence synthesis for informative hypotheses: An introduction. Psychological Methods. Advance online publication. (link)\n\n\nVolker, T. B., de Wolf, P. P., & van Kesteren, E. J. (2024). A density ratio framework for evaluating the utility of synthetic data. arXiv:2408.13167. (link)\n\n\nVolker, T. B., & Vink, G. (2021). Anonymiced shareable data: Using mice to create and analyze multiply imputed synthetic datasets. Psych, 3(4), 703-716. (link)"
+  },
+  {
+    "objectID": "blog/2505_glmnet_ridge/index.html",
+    "href": "blog/2505_glmnet_ridge/index.html",
+    "title": "How does glmnet perform ridge regression?",
+    "section": "",
+    "text": "Today, I was doing some programming for the R software mice, and it turns out I needed to calculate the residual degrees of freedom after performing regression with a ridge penalty to improve numerical stability. Perhaps, I thought, the glmnet package might provide any help, and at least may serve to verify my understanding. Although I love the glmnet package, I should’ve known better. That is, the package is great for estimation, but makes some design choices that are buried somewhere deep in the documentation, which can make it hard to find what is actually going on under the hood. In the end, I found out how glmnet performs ridge regression, so all good, I suppose."
+  },
+  {
+    "objectID": "blog/2505_glmnet_ridge/index.html#footnotes",
+    "href": "blog/2505_glmnet_ridge/index.html#footnotes",
+    "title": "How does glmnet perform ridge regression?",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nBy default, glmnet fits a lasso regression model, which is fairly similar but uses an \\(\\ell_1\\) penalty for the coefficients, which results in some coefficients estimated to be precisely zero. Changing the alpha parameter yields a mixture between 1-alpha times the ridge penalty and alpha times the lasso penalty.↩︎"
+  },
+  {
+    "objectID": "blog/2509_regression_assumptions/index.html",
+    "href": "blog/2509_regression_assumptions/index.html",
+    "title": "Regression assumptions for normal people",
+    "section": "",
+    "text": "L &lt;- 100\nx &lt;- numeric(L)\nfor (i in 2:L) x[i] &lt;- x[i-1] + rnorm(1, 0, 0.2)\n\ncor(x, dplyr::lag(x), use = \"complete.obs\")\n\n[1] 0.9824951\n\nsummary(lm(x ~ dplyr::lag(x, 1)))\n\n\nCall:\nlm(formula = x ~ dplyr::lag(x, 1))\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.67645 -0.12118  0.00309  0.11186  0.41306 \n\nCoefficients:\n                 Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)       0.03738    0.02898    1.29      0.2    \ndplyr::lag(x, 1)  0.99437    0.01914   51.94   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.1957 on 97 degrees of freedom\n  (1 observation deleted due to missingness)\nMultiple R-squared:  0.9653,    Adjusted R-squared:  0.9649 \nF-statistic:  2698 on 1 and 97 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "teaching/index.html",
+    "href": "teaching/index.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "I fully support open educational materials, and I intend to make all teaching resources I developed available online. All materials below are licensed liberally. If the GitHub link is not there, some of the materials are private. If you are interested in any of the source files, please drop me a line.\n\nWorkshops\n\n\n\n\n\n\n\n2025\nMissing data in medical research: From practical problems to flexible solutions  Half-day course for St. Antonius Hospital on missing data; developed with Hanne Oberman  Course page in Dutch, materials in English\n\n\n2023\nFake it ’till you make it: Generating synthetic data with high utility in R  Half-day course on synthetic data; developed with Erik-Jan van Kesteren ( GitHub)\n\n\n\n\n\nUniversity courses\n\n\n\n\n\n\n\n2022-2025\nBattling the curse of dimensionality (MSc. Course)\n\n\n2021-2026\nData wrangling and data analysis (MSc. Course)\n\n\n2024\nMachine Learning with Python (Summer School Course)\n\n\n2019-2022\nMultiple Imputation in Practice (Summer School Course)"
   }
 ]
