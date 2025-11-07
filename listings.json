@@ -1,0 +1,16 @@
+[
+  {
+    "listing": "/software.html",
+    "items": []
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/blog/2509_regression_assumptions/index.html",
+      "/blog/1407_gans_in_r/index.html",
+      "/blog/2506_regression/index.html",
+      "/blog/2505_glmnet_ridge/index.html",
+      "/blog/2505_new_website/index.html"
+    ]
+  }
+]
