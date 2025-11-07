@@ -3,12 +3,13 @@ title: "Teaching"
 format: html
 ---
 
-I fully support open educational materials, and I intend to make all teaching resources I developed available online. All materials below are licensed liberally. If the GitHub link is not there, there is probably exam material included in the GitHub repo, which prevents me from sharing it publicly. If you are interested in any of the source files, please [drop me a line](mailto:t.b.volker@uu.nl).
+I fully support open educational materials, and I intend to make all teaching resources I developed available online. All materials below are licensed liberally. If the GitHub link is not there, some of the materials are private. If you are interested in any of the source files, please [drop me a line](mailto:t.b.volker@uu.nl).
 
 ### Workshops
 
 |      |                                    |
 |------|:-----------------------------------|
+| 2025 | [Missing data in medical research: From practical problems to flexible solutions ](https://hanneoberman.github.io/antonius){target="_blank"} <br> *Half-day course for St. Antonius Hospital on missing data; developed with [Hanne Oberman](https://hanneoberman.github.io){target="_blank"}* <br> *Course page in Dutch, materials in English* |
 | 2023 | [Fake it 'till you make it: Generating synthetic data with high utility in `R`](https://thomvolker.github.io/OSWS_Synthetic/){target="_blank"} <br> *Half-day course on synthetic data; developed with [Erik-Jan van Kesteren](https://erikjanvankesteren.nl/){target="_blank"}* ([{{< iconify mdi github >}} GitHub](https://github.com/thomvolker/OSWS_Synthetic){target="_blank"}) |
 
 : {tbl-colwidths="[10,70]" .hover}

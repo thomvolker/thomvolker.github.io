@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -34,18 +34,19 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-92db3e19313b947c65540ea92fddb1a2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-92db3e19313b947c65540ea92fddb1a2.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-92db3e19313b947c65540ea92fddb1a2.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-eafec86e50b4061b8ea4c7509c83bb80.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-0756b7d921048135a5bfbd7404b3b7fc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-eafec86e50b4061b8ea4c7509c83bb80.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ec89599f532f58f19b565cd12798c155.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-45a77a325ced1c072840e66489e29fb3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ec89599f532f58f19b565cd12798c155.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -118,7 +119,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -291,6 +292,7 @@ window.Quarto = {
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -305,6 +307,8 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Thom Volker</span>
     </a>
@@ -364,7 +368,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Z3JhZGllbnQlMjBkZXNjZW50">gradient descent <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWFjaGluZSUyMGxlYXJuaW5n">machine learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="b3RoZXI=">other <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGVyc29uYWw=">personal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXIlMjBkZWNvbXBvc2l0aW9u">qr decomposition <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVncmVzc2lvbg==">regression <span class="quarto-category-count">(2)</span></div><div class="category" data-category="c2luZ3VsYXIlMjB2YWx1ZSUyMGRlY29tcG9zaXRpb24=">singular value decomposition <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="ZGVlcCUyMGxlYXJuaW5n">deep learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2VuZXJhdGl2ZSUyMGFkdmVyc2FyaWFsJTIwbmV0d29ya3M=">generative adversarial networks <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z3JhZGllbnQlMjBkZXNjZW50">gradient descent <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWFjaGluZSUyMGxlYXJuaW5n">machine learning <span class="quarto-category-count">(3)</span></div><div class="category" data-category="b3RoZXI=">other <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGVyc29uYWw=">personal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXIlMjBkZWNvbXBvc2l0aW9u">qr decomposition <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVncmVzc2lvbg==">regression <span class="quarto-category-count">(3)</span></div><div class="category" data-category="c2luZ3VsYXIlMjB2YWx1ZSUyMGRlY29tcG9zaXRpb24=">singular value decomposition <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3RhdGlzdGljcw==">statistics <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -395,7 +399,73 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="cmVncmVzc2lvbiUyQ3FyJTIwZGVjb21wb3NpdGlvbiUyQ3Npbmd1bGFyJTIwdmFsdWUlMjBkZWNvbXBvc2l0aW9uJTJDZ3JhZGllbnQlMjBkZXNjZW50JTJDbWFjaGluZSUyMGxlYXJuaW5n" data-listing-date-sort="1750024800000" data-listing-file-modified-sort="1750417862298" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5244">
+<div class="quarto-post image-right" data-index="0" data-categories="c3RhdGlzdGljcyUyQ3JlZ3Jlc3Npb24=" data-listing-date-sort="1759183200000" data-listing-file-modified-sort="1759416188000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="22">
+<div class="thumbnail"><a href="./blog/2509_regression_assumptions/index.html" class="no-external">
+
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./blog/2509_regression_assumptions/index.html" class="no-external">Regression assumptions for normal people</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljcw=='); return false;">statistics</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('cmVncmVzc2lvbg=='); return false;">regression</div>
+
+</div>
+<div class="delink listing-description"><a href="./blog/2509_regression_assumptions/index.html" class="no-external">
+<p>The assumptions of linear regression are widely documented, and how to recognize violations of these assumptions is contained in basically every…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./blog/2509_regression_assumptions/index.html" class="no-external">
+<div class="listing-date">
+Sep 30, 2025
+</div>
+<div class="listing-author">
+Thom Benjamin Volker
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="bWFjaGluZSUyMGxlYXJuaW5nJTJDZ2VuZXJhdGl2ZSUyMGFkdmVyc2FyaWFsJTIwbmV0d29ya3MlMkNkZWVwJTIwbGVhcm5pbmc=" data-listing-date-sort="1752444000000" data-listing-file-modified-sort="1759244473000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3626">
+<div class="thumbnail"><a href="./blog/1407_gans_in_r/index.html" class="no-external">
+
+<p class="card-img-top"><img src="blog\1407_gans_in_r\index_files\figure-html\fig-normal-density-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./blog/1407_gans_in_r/index.html" class="no-external">Illustrative GANs for simple synthetic data with <code>keras</code> in <code>R</code></a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZSUyMGxlYXJuaW5n'); return false;">machine learning</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Z2VuZXJhdGl2ZSUyMGFkdmVyc2FyaWFsJTIwbmV0d29ya3M='); return false;">generative adversarial networks</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('ZGVlcCUyMGxlYXJuaW5n'); return false;">deep learning</div>
+
+</div>
+<div class="delink listing-description"><a href="./blog/1407_gans_in_r/index.html" class="no-external">
+<p>GANs can be hard to get your head around. In this blogpost, I explain GANs using some simple examples and show how to generate samples from these in…</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./blog/1407_gans_in_r/index.html" class="no-external">
+<div class="listing-date">
+Jul 14, 2025
+</div>
+<div class="listing-author">
+Thom Benjamin Volker
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="cmVncmVzc2lvbiUyQ3FyJTIwZGVjb21wb3NpdGlvbiUyQ3Npbmd1bGFyJTIwdmFsdWUlMjBkZWNvbXBvc2l0aW9uJTJDZ3JhZGllbnQlMjBkZXNjZW50JTJDbWFjaGluZSUyMGxlYXJuaW5n" data-listing-date-sort="1750024800000" data-listing-file-modified-sort="1759416320000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5267">
 <div class="thumbnail"><a href="./blog/2506_regression/index.html" class="no-external">
 
 <p class="card-img-top"><img src="blog\2506_regression\index_files\figure-html\fig-rss_contour-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -433,7 +503,7 @@ Thom Benjamin Volker
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWFjaGluZSUyMGxlYXJuaW5nJTJDcmVncmVzc2lvbg==" data-listing-date-sort="1747951200000" data-listing-file-modified-sort="1749422481791" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1568">
+<div class="quarto-post image-right" data-index="3" data-categories="bWFjaGluZSUyMGxlYXJuaW5nJTJDcmVncmVzc2lvbg==" data-listing-date-sort="1747951200000" data-listing-file-modified-sort="1759416192000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1568">
 <div class="thumbnail"><a href="./blog/2505_glmnet_ridge/index.html" class="no-external">
 
 <p class="card-img-top"><img src="blog\2505_glmnet_ridge\index_files\figure-html\unnamed-chunk-1-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -465,7 +535,7 @@ Thom Benjamin Volker
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="b3RoZXIlMkNwZXJzb25hbA==" data-listing-date-sort="1747346400000" data-listing-file-modified-sort="1749422476812" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="66">
+<div class="quarto-post image-right" data-index="4" data-categories="b3RoZXIlMkNwZXJzb25hbA==" data-listing-date-sort="1747346400000" data-listing-file-modified-sort="1759416324000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="66">
 <div class="thumbnail"><a href="./blog/2505_new_website/index.html" class="no-external">
 
 <p class="card-img-top"><img src="figs\me_cake_cropped.jpg" alt="A figure of me with cake" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -564,13 +634,14 @@ Thom Benjamin Volker
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

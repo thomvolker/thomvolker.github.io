@@ -1,3 +1,3 @@
-freeze: auto
+freeze: true
 title-block-banner: true
 author: Thom Benjamin Volker

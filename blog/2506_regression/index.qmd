@@ -659,9 +659,15 @@ X <- mvtnorm::rmvnorm(
 y <- rnorm(N)
 Xd <- cbind(1, X)
 
+check_func <- function(target, current) {
+  all.equal(target, current, check.class = FALSE, check.attributes = FALSE)
+}
+
 bench::mark(
   `lm()` = coef(lm(y ~ X)),
   `.lm.fit()` = .lm.fit(Xd, y)$coefficients,
+  RcppEigen = RcppEigen::fastLmPure(Xd, y)$coefficients,
+  RcppArmadillo = RcppArmadillo::fastLmPure(Xd, y)$coefficients,
   `solve(t(X)%*%X)%*%t(X)%*%y` = solve(t(Xd) %*% Xd) %*% t(Xd) %*% y,
   `solve(crossprod(X), crossprod(X, y))` = solve(crossprod(Xd), crossprod(Xd, y)),
   `qr.solve(X, y)` = qr.solve(Xd, y),
@@ -697,7 +703,6 @@ The singular value decomposition is slower than the other functions, but has som
 
 For attribution, please cite this blogpost as:
 
-> Volker, T. B.
-> (2025).
+> Volker, T. B. (2025).
 > Different ways of calculating OLS regression coefficients (in R).
-> Achieved from <https://thomvolker.github.io/blog/2506_regression/>
+> Obtained from <https://thomvolker.github.io/blog/2506_regression/>

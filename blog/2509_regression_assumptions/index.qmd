@@ -1,0 +1,27 @@
+---
+title: "Regression assumptions for normal people"
+author: "Thom Benjamin Volker"
+description: "The assumptions of linear regression are widely documented, and how to recognize violations of these assumptions is contained in basically every textbook on regression. Yet, the problems that violations of these assumptions cause for the estimation of regression coefficients is less well documented. The goal of this post is to explain (mainly to myself) why regression assumptions are actually important."
+toc: true
+word-count: true
+date: 2025-09-30
+categories: [statistics, regression, ]
+editor: 
+  markdown:
+    wrap: sentence
+---
+
+
+```{r}
+L <- 100
+x <- numeric(L)
+for (i in 2:L) x[i] <- x[i-1] + rnorm(1, 0, 0.2)
+
+cor(x, dplyr::lag(x), use = "complete.obs")
+
+summary(lm(x ~ dplyr::lag(x, 1)))
+```
+
+
+
+

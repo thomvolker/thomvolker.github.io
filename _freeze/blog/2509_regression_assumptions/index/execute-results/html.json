@@ -1,0 +1,15 @@
+{
+  "hash": "274fca54f999d167d4cfb670e0cb4f1c",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Regression assumptions for normal people\"\nauthor: \"Thom Benjamin Volker\"\ndescription: \"The assumptions of linear regression are widely documented, and how to recognize violations of these assumptions is contained in basically every textbook on regression. Yet, the problems that violations of these assumptions cause for the estimation of regression coefficients is less well documented. The goal of this post is to explain (mainly to myself) why regression assumptions are actually important.\"\ntoc: true\nword-count: true\ndate: 2025-09-30\ncategories: [statistics, regression, ]\neditor: \n  markdown:\n    wrap: sentence\n---\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nL <- 100\nx <- numeric(L)\nfor (i in 2:L) x[i] <- x[i-1] + rnorm(1, 0, 0.2)\n\ncor(x, dplyr::lag(x), use = \"complete.obs\")\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 0.9824951\n```\n\n\n:::\n\n```{.r .cell-code}\nsummary(lm(x ~ dplyr::lag(x, 1)))\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n\nCall:\nlm(formula = x ~ dplyr::lag(x, 1))\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.67645 -0.12118  0.00309  0.11186  0.41306 \n\nCoefficients:\n                 Estimate Std. Error t value Pr(>|t|)    \n(Intercept)       0.03738    0.02898    1.29      0.2    \ndplyr::lag(x, 1)  0.99437    0.01914   51.94   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.1957 on 97 degrees of freedom\n  (1 observation deleted due to missingness)\nMultiple R-squared:  0.9653,\tAdjusted R-squared:  0.9649 \nF-statistic:  2698 on 1 and 97 DF,  p-value: < 2.2e-16\n```\n\n\n:::\n:::\n\n\n\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
