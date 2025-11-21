@@ -9,7 +9,7 @@ Below, you can find a list of talks I have given. The list is not exhaustive, bu
 
 |      |                                    |
 |------|:-----------------------------------|
-| 2025 | [A primer on synthetic data for governmental institutions](/../files/presentations/kvk_synthetic_data.pdf){target="_blank"} <br> *At the Dutch Chamber of Commerce* |
+| 2025 | [A primer on synthetic data for governmental institutions](presentations/kvk_synthetic_data.pdf){target="_blank"} <br> *At the Dutch Chamber of Commerce* |
 | 2025 | [Statistical disclosure control](https://thomvolker.github.io/sdc4vac4eu/){target="_blank"} <br> *At the Vac4EU Consortium* |
 | 2024 | [Evaluating the quality of synthetic data: A density ratio approach](https://thomvolker.github.io/synth-utility/){target="_blank"} <br> *At the Leiden Computational Network Science group* |
 | 2024 | [Measuring utility of synthetic data (in Dutch)](https://thomvolker.github.io/utiliteit/){target="_blank"} <br> *At the Dutch Expert Meeting on Synthetic Data* |
