@@ -18,7 +18,7 @@ I fully support open educational materials, and I intend to make all teaching re
 
 |      |                                    |
 |------|:-----------------------------------|
-| 2022-2025 | [Battling the curse of dimensionality](https://infomda2.nl){target="_blank"} (*MSc. Course*) |
+| 2022-2025 | [Battling the curse of dimensionality](https://vankesteren.github.io/INFOMDA2/){target="_blank"} (*MSc. Course*) |
 | 2021-2026 | [Data wrangling and data analysis](https://infomdwr.nl){target="_blank"} (*MSc. Course*) |
 | 2024 | [Machine Learning with Python](http://giachanou.com/machine-learning/#quick-overview){target="_blank"} (*Summer School Course*) |
 | 2019-2022 | [Multiple Imputation in Practice](https://www.gerkovink.com/mimp/){target="_blank"} (*Summer School Course*) |
