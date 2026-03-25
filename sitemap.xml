@@ -1,47 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://thomvolker.github.io/talks/index.html</loc>
-    <lastmod>2025-11-24T09:11:17.762Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/blog/2505_new_website/index.html</loc>
-    <lastmod>2025-11-24T09:11:17.725Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/blog/2506_regression/index.html</loc>
-    <lastmod>2025-11-24T09:11:17.739Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/blog/2505_glmnet_ridge/index.html</loc>
-    <lastmod>2025-11-24T09:11:17.725Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/blog.html</loc>
-    <lastmod>2025-11-24T09:11:17.725Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/index.html</loc>
-    <lastmod>2025-11-24T09:11:17.762Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/software.html</loc>
-    <lastmod>2025-11-24T09:11:17.762Z</lastmod>
-  </url>
-  <url>
     <loc>https://thomvolker.github.io/about.html</loc>
-    <lastmod>2025-11-24T09:11:17.725Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/blog/2507_gans_in_r/index.html</loc>
-    <lastmod>2025-11-24T09:11:17.739Z</lastmod>
-  </url>
-  <url>
-    <loc>https://thomvolker.github.io/blog/2509_regression_assumptions/index.html</loc>
-    <lastmod>2025-11-24T09:11:17.740Z</lastmod>
+    <lastmod>2026-03-25T10:37:15.167Z</lastmod>
   </url>
   <url>
     <loc>https://thomvolker.github.io/teaching/index.html</loc>
-    <lastmod>2025-11-24T09:11:17.769Z</lastmod>
+    <lastmod>2026-03-25T10:37:15.208Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/blog/2506_regression/index.html</loc>
+    <lastmod>2026-03-25T10:37:15.179Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/blog/2505_new_website/index.html</loc>
+    <lastmod>2026-03-25T10:37:15.168Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/blog.html</loc>
+    <lastmod>2026-03-25T10:37:15.167Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/index.html</loc>
+    <lastmod>2026-03-25T10:37:15.202Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/blog/2507_gans_in_r/index.html</loc>
+    <lastmod>2026-03-25T10:37:15.180Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/blog/2505_glmnet_ridge/index.html</loc>
+    <lastmod>2026-03-25T10:37:15.168Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/software.html</loc>
+    <lastmod>2026-03-25T10:37:15.202Z</lastmod>
+  </url>
+  <url>
+    <loc>https://thomvolker.github.io/talks/index.html</loc>
+    <lastmod>2026-03-25T10:37:15.202Z</lastmod>
   </url>
 </urlset>
