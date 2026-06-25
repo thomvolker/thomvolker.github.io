@@ -20,7 +20,7 @@ website:
       - text: about
         href: about.qmd
       - text: "{{< iconify academicons cv-square >}}"
-        href: files/cv/cv.pdf
+        href: files/cv/cv_thom_volker.pdf
         target: _blank
       - icon: strava
         href: https://www.strava.com/athletes/34188992
